@@ -1,0 +1,31 @@
+
+<div class="card-body">
+  <form [formGroup]="loginForm" (ngSubmit)="submitLogin()">
+    <div class="input-group mb-3" [ngClass]="loginInvalid ? 'border border-danger' : ''">
+      <span class="input-group-text label" id="login-addon" [ngClass]="loginInvalid ? 'text-danger' : ''">E-mail</span>
+      <input type="text" class="form-control" name="email" formControlName="email">
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text label" id="password-addon">Hasło</span>
+      <input type="password" class="form-control" name="password" formControlName="password">
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <button type="button submit" id="sendlogin" class="btn btn-primary">Zaloguj</button>
+      </div>
+      <div class="col-2">
+        <button type="button" class="btn btn-outline-primary" (click)="loginViaSocialMedia('Facebook')"><mdb-icon fab icon="facebook"></mdb-icon></button>
+      </div>
+      <div class="col-2">
+        <button type="button" class="btn btn-outline-danger" (click)="loginViaSocialMedia('Google')"><mdb-icon fab icon="google"></mdb-icon></button>
+      </div>
+      <div class="col-2">
+        <button type="button" class="btn btn-outline-secondary" disabled><i class="fab fa-twitter"></i></button>
+      </div>
+      <div class="col-2">
+        <button type="button" class="btn btn-outline-secondary" disabled><i class="fab fa-linkedin-in"></i></button>
+      </div>
+    </div>
+  </form>
+</div>
+

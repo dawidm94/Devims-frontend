@@ -8,19 +8,21 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {ReactiveFormsModule} from "@angular/forms";
 import { HomeComponent } from './home/home.component';
 import {HttpClientModule} from "@angular/common/http";
-import { OauthComponent } from './login/oauth/oauth.component';
 import {MDBBootstrapModule} from "angular-bootstrap-md";
 import {SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider} from 'angularx-social-login';
 import {GoogleLoginProvider} from 'angularx-social-login';
 import {AppConstants} from "./common/app.constants";
+import { RegistrationCardComponent } from './login/registration-card/registration-card.component';
+import { LoginCardComponent } from './login/login-card/login-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     HomeComponent,
-    OauthComponent
-  ],
+    RegistrationCardComponent,
+    LoginCardComponent
+    ],
   imports: [
     BrowserModule,
     AppRoutingModule,

@@ -1,0 +1,35 @@
+
+<div class="card-body">
+  <form [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="input-group mb-3">
+      <span class="input-group-text label" id="email">E-mail</span>
+      <input type="text" class="form-control" name="email" formControlName="email" (blur)="emailBlur=true">
+      <div class="alert" *ngIf="emailBlur && email && email.errors && email.errors.email">
+        Niepoprawny email
+      </div>
+      <div class="alert" *ngIf="emailBlur && email && email.errors && email.errors.required">
+        Pole wymagane
+      </div>
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text label" id="password">Hasło</span>
+      <input type="password" class="form-control" name="password" formControlName="password">
+    </div>
+    <div class="input-group mb-3">
+      <span class="input-group-text label" id="confirmPassword">Powtórz Hasło</span>
+      <input type="password" class="form-control" name="confirmPassword" formControlName="confirmPassword" (blur)="confirmPasswordBlur=true">
+      <div class="alert" *ngIf="confirmPasswordBlur && confirmPassword && confirmPassword.errors && confirmPassword.errors.required">
+        Pole wymagane
+      </div>
+      <div class="alert" *ngIf="confirmPasswordBlur && passwordMatches">
+        Hasło nie jest takie samo!
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-4">
+        <button type="button submit" id="sendlogin" class="btn btn-primary">Zarejestruj</button>
+      </div>
+    </div>
+  </form>
+</div>
+
