@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import {HttpClientModule} from "@angular/common/http";
 import { OauthComponent } from './login/oauth/oauth.component';
 import {MDBBootstrapModule} from "angular-bootstrap-md";
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+import {SocialLoginModule, SocialAuthServiceConfig, FacebookLoginProvider} from 'angularx-social-login';
 import {GoogleLoginProvider} from 'angularx-social-login';
 import {AppConstants} from "./common/app.constants";
 
@@ -41,6 +41,10 @@ import {AppConstants} from "./common/app.constants";
             provider: new GoogleLoginProvider(
               AppConstants.GOOGLE_CLIENT_ID
             )
+          },
+          {
+            id: FacebookLoginProvider.PROVIDER_ID,
+            provider: new FacebookLoginProvider(AppConstants.FACEBOOK_CLIENT_ID)
           }
         ]
       } as SocialAuthServiceConfig,

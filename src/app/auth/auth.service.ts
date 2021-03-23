@@ -12,6 +12,8 @@ export class AuthService {
 
   isAuthenticated(): Observable<boolean> {
     let token = String(sessionStorage.getItem('token'));
+    console.log('token')
+    console.log(token)
     let url = AppConstants.API_BASE_URL + 'isTokenValid?token=' + encodeURIComponent(token)
     return this.http.get<boolean>(url)
   }
