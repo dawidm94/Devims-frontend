@@ -1,0 +1,14 @@
+.person {
+  margin-left: 40px;
+}
+
+.accept-status-icon {
+  display: flex;
+  vertical-align: middle;
+}
+
+mat-icon {
+  font-size: 21px;
+  height: 21px ;
+  width: 21px;
+}

@@ -1,0 +1,25 @@
+<div *ngIf="!loggedIn"><button mat-raised-button color="primary" (click)="openLoginDialog()">Zaloguj się do esora</button></div>
+<div *ngIf="loggedIn">
+  <p>
+    <mat-toolbar color="primary">
+      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="home">
+        <mat-icon>sports_basketball</mat-icon>
+      </button>
+      <button mat-button routerLink="timetable">Mój terminarz</button>
+      <button mat-button [matMenuTriggerFor]="periods">Zajęte terminy</button>
+      <mat-menu #periods>
+        <button mat-menu-item routerLink="busy-times">Moje zajęte terminy</button>
+        <button mat-menu-item>Dodaj pojedynczy termin</button>
+        <button mat-menu-item routerLink="periodically">Uzupełnij cyklicznie przyszły miesiąc</button>
+        <button mat-menu-item routerLink="delete-all">Usuń wszystkie zajęte terminy</button>
+      </mat-menu>
+
+      <span class="example-spacer"></span>
+      <span>Cześć {{username}}!</span>
+      <button mat-button (click)="logout()">Wyloguj</button>
+    </mat-toolbar>
+  </p>
+  <router-outlet></router-outlet>
+</div>
+
+

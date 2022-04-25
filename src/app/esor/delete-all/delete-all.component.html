@@ -1,0 +1,17 @@
+<section>
+  <h1>Jak bardzo jesteś pewny/a, że chcesz usunąć wszystkie zajęte terminy?</h1>
+  <section>
+    <mat-slider
+    thumbLabel
+    [displayWith]="formatLabel"
+    step="1"
+    min="0"
+    max="100"
+    aria-label="units"
+    [color]="getSliderColor()"
+    [(ngModel)]="sliderValue">
+    </mat-slider>
+    <button (click)="deleteAllPeriods()" style="margin-left: 50px" *ngIf="sliderValue==100" mat-stroked-button color="warn">USUŃ WSZYSTKO</button>
+  </section>
+  <img *ngIf="deleted" style="width: 20%; height: 20%" src="https://i.imgflip.com/6d64wq.jpg"/>
+</section>

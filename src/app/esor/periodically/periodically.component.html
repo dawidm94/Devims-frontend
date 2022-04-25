@@ -1,0 +1,35 @@
+<section class="example-section">
+  <button mat-stroked-button (click)="checkAll()">Wszystko</button>
+  <button mat-stroked-button (click)="checkWorkingDay()">Dni robocze</button>
+  <button mat-stroked-button (click)="uncheckAll()">Wyczyść</button>
+  <span style="padding-left: 50px; text-transform:capitalize"><u>Uzupełniany miesiąc: <b>{{getNextMonthName()}}</b></u></span>
+</section>
+<section class="example-section">
+  <mat-checkbox class="example-margin" *ngFor="let day of dayCheckboxes" [color]="day.color" [(ngModel)]="day.checked">{{day.name}}</mat-checkbox>
+  <p *ngIf="showEmptyCheckboxesMessage" style="color: red">Zaznacz przynajmniej jeden dzień!</p>
+</section>
+<section>
+  <mat-form-field appearance="outline">
+    <mat-label>Od</mat-label>
+    <input type="time" matInput name="week" [(ngModel)]="fromTime">
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Do</mat-label>
+    <input type="time" matInput name="week" [(ngModel)]="toTime">
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Powód</mat-label>
+    <input matInput placeholder='Studia / Praca / Zajęte?' [(ngModel)]="reason">
+  </mat-form-field>
+  <p *ngIf="showEmptyHoursMessage" style="color: red">Wprowadź obie godziny!</p>
+  <p *ngIf="showEmptyReasonMessage" style="color: red">Musisz podać jakiś powód!</p>
+</section>
+<section style="padding-left: 300px">
+  <button (click)="send()" mat-raised-button color="primary" *ngIf="!sentSuccessfully && !sentWithError && !sentWith504" [disabled]="isSending && !sentWithError && !sentSuccessfully">
+    Wyślij <mat-icon *ngIf="isSending && !sentWithError && !sentSuccessfully && !sentWith504"><mat-spinner color="accent" diameter="20">
+  </mat-spinner></mat-icon>
+  </button>
+  <span style="color: red" *ngIf="sentWithError">Coś poszło nie tak :( Skontaktuj się z Simsem.</span>
+  <h1 style="color: green" *ngIf="sentWith504">Udało się!! To wszystko! :)</h1>
+  <h1 style="color: green" *ngIf="sentSuccessfully">Udało się :) To wszystko!</h1>
+</section>
