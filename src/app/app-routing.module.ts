@@ -7,6 +7,7 @@ import {PeriodicallyComponent} from "./esor/periodically/periodically.component"
 import {DeleteAllComponent} from "./esor/delete-all/delete-all.component";
 import {EsorHomeComponent} from "./esor/esor-home/esor-home.component";
 import {TimetableComponent} from "./esor/timetable/timetable.component";
+import {SinglePeriodComponent} from "./esor/single-period/single-period.component";
 
 const routes: Routes = [
   {
@@ -31,6 +32,9 @@ const routes: Routes = [
       },
       {
         path: 'home', component: EsorHomeComponent
+      },
+      {
+        path: 'period', component: SinglePeriodComponent
       }
     ]},
 ];

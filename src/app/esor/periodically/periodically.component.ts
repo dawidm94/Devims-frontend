@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ThemePalette} from "@angular/material/core";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {DateService, Period, PeriodRequest} from "../date.service";
+import {HttpService} from "../http.service";
 
 export interface DayCheckbox {
   name: string;
@@ -8,17 +10,6 @@ export interface DayCheckbox {
   color: ThemePalette;
   workingDay: boolean
   dayOfWeek: number
-}
-
-export interface Period {
-  dateFrom: string;
-  dateTo: string;
-  reason: string;
-}
-
-export interface PeriodRequest {
-  periods: Period[];
-  seasonId: string | null;
 }
 
 @Component({
@@ -51,7 +42,7 @@ export class PeriodicallyComponent implements OnInit {
   sentWithError = false;
   sentWith504 = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public dateService: DateService, public httpService: HttpService) { }
 
   ngOnInit(): void {
     this.getActualPeriods()
@@ -106,8 +97,8 @@ export class PeriodicallyComponent implements OnInit {
       }
     })
     toSend.forEach(day => {
-      let date = this.convertDate(day);
-      let period = {dateFrom: date + ' ' + this.fromTime, dateTo: date + ' ' + this.toTime, reason: this.reason}
+      let date = this.dateService.convertDate(day);
+      let period = this.dateService.getPeriodWithStringDate(date, this.fromTime, date, this.toTime, this.reason)
       periods.push(period)
     })
     let request = {periods: periods, seasonId: seasonId}
@@ -115,38 +106,12 @@ export class PeriodicallyComponent implements OnInit {
     this.actualPeriods.forEach(actualPeriod => {
       request.periods.push(actualPeriod);
     })
+
     this.sendPeriods(request)
   }
 
-  convertDate(date: Date) {
-    const year = date.getFullYear();
-    const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-based
-    const day = String(date.getDate()).padStart(2, '0');
-
-   return  year + "-" + month + "-" + day
-  }
-
-  getActualPeriods() {
-    let seasonId = sessionStorage.getItem('seasonId');
-    let esorToken = sessionStorage.getItem('esorToken') as string
-    let headers = new HttpHeaders({'Esor-Token': esorToken});
-
-    let params = new HttpParams();
-    if (seasonId != null) {
-      params = params.append('seasonId', seasonId);
-    }
-
-    this.http.get<any>('http://localhost:8080/esor/periods', {headers: headers, params: params}).subscribe({
-      next: value => this.actualPeriods = value.items,
-      error: err => console.log(err)
-    })
-  }
-
   private sendPeriods(request: PeriodRequest) {
-    let esorToken = sessionStorage.getItem('esorToken') as string
-    let headers = new HttpHeaders({'Esor-Token': esorToken});
-
-    this.http.post<any>('http://localhost:8080/esor/periods', request, {headers: headers}).subscribe({
+    this.http.post<any>('http://localhost:8080/esor/periods', request, this.httpService.getOptionWithEsorToken()).subscribe({
       next: () => {this.sentSuccessfully = true},
       error: err => {
         console.log(err);
@@ -177,6 +142,13 @@ export class PeriodicallyComponent implements OnInit {
 
     return errorCounter == 0;
 
+  }
+
+  getActualPeriods() {
+    this.http.get<any>('http://localhost:8080/esor/periods', this.httpService.getOptionsWithSeasonId()).subscribe({
+      next: value => this.actualPeriods = value.items,
+      error: err => console.log(err)
+    })
   }
 
   private clearValidateMessages() {

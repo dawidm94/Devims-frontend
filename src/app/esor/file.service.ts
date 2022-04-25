@@ -1,19 +1,17 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpService} from "./http.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private httpService: HttpService) {
   }
 
   downloadDelegation(matchId: number | undefined) {
-    let esorToken = sessionStorage.getItem('esorToken') as string
-    let headers = new HttpHeaders({'Esor-Token': esorToken });
-
-    this.http.get<any>('http://localhost:8080/esor/match/' + matchId, {headers: headers}).subscribe({
+    this.http.get<any>('http://localhost:8080/esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
       next: response => {
         let date = response.date
         let teamHome = response.teamHome
@@ -47,10 +45,7 @@ export class FileService {
   }
 
   downloadFile(url: string, filename: string) {
-    let esorToken = sessionStorage.getItem('esorToken') as string
-    let headers = new HttpHeaders({'Esor-Token': esorToken});
-
-    this.http.get<any>(url, {headers: headers, responseType: 'blob' as 'json'}).subscribe({
+    this.http.get<any>(url, this.httpService.getOptionWithEsorTokenWithBlobAsJsonResponseType()).subscribe({
       next: response => {
         let dataType = response.type;
         let binaryData = [];

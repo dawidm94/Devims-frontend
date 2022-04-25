@@ -4,6 +4,7 @@ import {FileService} from "../file.service";
 import {LogInDialogComponent} from "../log-in-dialog/log-in-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatchDetailsDialogComponent} from "../match-details-dialog/match-details-dialog.component";
+import {HttpService} from "../http.service";
 
 @Component({
   selector: 'app-timetable',
@@ -15,7 +16,8 @@ export class TimetableComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public dialog: MatDialog,
-    public fileService: FileService) { }
+    public fileService: FileService,
+    public httpService: HttpService) { }
 
   ngOnInit(): void {
     this.updateTimetable();
@@ -25,12 +27,7 @@ export class TimetableComponent implements OnInit {
   timetable: any | undefined;
 
   private updateTimetable() {
-    let esorToken = sessionStorage.getItem('esorToken') as string
-    let seasonId = sessionStorage.getItem('seasonId') as string
-
-    let headers = new HttpHeaders({'Esor-Token': esorToken });
-
-    this.http.get<any>('http://localhost:8080/esor/timetable/my?seasonId=' + seasonId, {headers: headers}).subscribe({
+    this.http.get<any>('http://localhost:8080/esor/timetable/my', this.httpService.getOptionsWithSeasonId()).subscribe({
       next: response => {
         this.timetable = response.items
       },

@@ -1,0 +1,9 @@
+.demo-inline-calendar-card {
+  width: 200px;
+}
+
+h2 {
+  display: inline;
+  padding-left: 10px;
+  padding-right: 10px
+}

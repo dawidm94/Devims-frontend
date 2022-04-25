@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpService} from "../http.service";
 
 @Component({
   selector: 'app-busy-times',
@@ -9,24 +10,13 @@ import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 export class BusyTimesComponent implements OnInit {
   periods: any | undefined;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public httpService: HttpService) { }
 
   ngOnInit(): void {
-    let seasonId =  sessionStorage.getItem('seasonId') as string;
-
-    let esorToken = sessionStorage.getItem('esorToken') as string
-
-    if (esorToken) {
-      let headers = new HttpHeaders({'Esor-Token': esorToken});
-
-      let params = new HttpParams();
-      params = params.append('seasonId', seasonId);
-
-      this.http.get<any>('http://localhost:8080/esor/periods', {headers: headers, params: params}).subscribe({
-        next: value => {console.log(value); this.periods = value.items; console.log(this.periods)},
-        error: err => console.log(err)
-      })
-    }
+    this.http.get<any>('http://localhost:8080/esor/periods', this.httpService.getOptionsWithSeasonId()).subscribe({
+      next: value => {console.log(value); this.periods = value.items},
+      error: err => console.log(err)
+    })
   }
 
   displayedColumns: string[] = ['position', 'dateFrom', 'dateTo', 'reason'];

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {ThemePalette} from "@angular/material/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {PeriodRequest} from "../periodically/periodically.component";
+import {HttpService} from "../http.service";
+import {PeriodRequest} from "../date.service";
 
 @Component({
   selector: 'app-delete-all',
@@ -12,7 +13,7 @@ export class DeleteAllComponent implements OnInit {
   sliderValue = 0;
   deleted = false;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, public httpService: HttpService) { }
 
   ngOnInit(): void {
   }
@@ -31,10 +32,8 @@ export class DeleteAllComponent implements OnInit {
   }
 
   private sendPeriods(request: PeriodRequest) {
-    let esorToken = sessionStorage.getItem('esorToken') as string
-    let headers = new HttpHeaders({'Esor-Token': esorToken});
 
-    this.http.post<any>('http://localhost:8080/esor/periods', request, {headers: headers}).subscribe({
+    this.http.post<any>('http://localhost:8080/esor/periods', request, this.httpService.getOptionWithEsorToken()).subscribe({
       next: () => {this.deleted = true},
       error: err => {console.log(err)}
     })

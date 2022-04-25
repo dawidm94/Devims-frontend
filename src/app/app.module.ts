@@ -17,7 +17,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { HomeComponent } from './home/home.component';
 import { EsorComponent } from './esor/esor.component';
 import { LogInDialogComponent } from './esor/log-in-dialog/log-in-dialog.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { BusyTimesComponent } from './esor/busy-times/busy-times.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from "@angular/material/table";
@@ -32,6 +32,11 @@ import { MatchDetailsDialogComponent } from './esor/match-details-dialog/match-d
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatMenuModule} from "@angular/material/menu";
 import { EsorHomeComponent } from './esor/esor-home/esor-home.component';
+import { SinglePeriodComponent } from './esor/single-period/single-period.component';
+import {MatDatepickerModule} from "@angular/material/datepicker";
+import {MatNativeDateModule} from "@angular/material/core";
+
+import { MAT_DATE_LOCALE } from '@angular/material/core'
 
 
 
@@ -46,7 +51,8 @@ import { EsorHomeComponent } from './esor/esor-home/esor-home.component';
     DeleteAllComponent,
     TimetableComponent,
     MatchDetailsDialogComponent,
-    EsorHomeComponent
+    EsorHomeComponent,
+    SinglePeriodComponent
   ],
   imports: [
     BrowserModule,
@@ -70,8 +76,11 @@ import { EsorHomeComponent } from './esor/esor-home/esor-home.component';
     MatProgressBarModule,
     MatToolbarModule,
     MatMenuModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
   ],
-  providers: [],
+  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pl-PL' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
