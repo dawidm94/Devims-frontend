@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {HttpClient, HttpClientModule, HttpHeaders} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-log-in-dialoge',
@@ -14,6 +15,7 @@ export class LogInDialogComponent {
   token: string | undefined;
   isEmptyInput = false;
   isLoginError = false;
+  baseUrl = environment.baseURL
 
   constructor(
     private http: HttpClient,
@@ -28,7 +30,7 @@ export class LogInDialogComponent {
       return;
     }
 
-    this.http.post('http://localhost:8080/esor/login', {login: this.username, password: this.password}, { responseType: 'text' as 'text' })
+    this.http.post(this.baseUrl + 'esor/login', {login: this.username, password: this.password}, { responseType: 'text' as 'text' })
       .subscribe({
         next: token => {
           sessionStorage.setItem('esorToken', token);

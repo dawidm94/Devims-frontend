@@ -5,6 +5,7 @@ import {LogInDialogComponent} from "../log-in-dialog/log-in-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatchDetailsDialogComponent} from "../match-details-dialog/match-details-dialog.component";
 import {HttpService} from "../http.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-timetable',
@@ -25,9 +26,10 @@ export class TimetableComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'date', 'matchInfo', 'matchTeams', 'actions'];
   timetable: any | undefined;
+  baseUrl = environment.baseURL
 
   private updateTimetable() {
-    this.http.get<any>('http://localhost:8080/esor/timetable/my', this.httpService.getOptionsWithSeasonId()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/timetable/my', this.httpService.getOptionsWithSeasonId()).subscribe({
       next: response => {
         this.timetable = response.items
       },

@@ -1,7 +1,20 @@
+
 <section>
-  <h1>Moje zajęte terminy</h1>
+  <h1 style="display: inline">Moje zajęte terminy</h1>
+  <span *ngIf="periods.length != 0 " class="right-button" style="text-align: center"><button mat-stroked-button color="warn" (click)="deleteSelections()">Usuń zaznaczone</button></span>
 </section>
 <table mat-table [dataSource]="periods" class="mat-elevation-z8">
+  <!-- Checkbox Column -->
+  <ng-container matColumnDef="select">
+    <th mat-header-cell *matHeaderCellDef></th>
+    <td mat-cell *matCellDef="let row">
+      <mat-checkbox (click)="$event.stopPropagation()"
+                    (change)="$event ? selection.toggle(row) : null"
+                    [checked]="selection.isSelected(row)" color="warn">
+      </mat-checkbox>
+    </td>
+  </ng-container>
+
   <!-- Position Column -->
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> Num. </th>

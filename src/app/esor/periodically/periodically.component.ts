@@ -3,6 +3,7 @@ import {ThemePalette} from "@angular/material/core";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {DateService, Period, PeriodRequest} from "../date.service";
 import {HttpService} from "../http.service";
+import {environment} from "../../../environments/environment";
 
 export interface DayCheckbox {
   name: string;
@@ -41,6 +42,7 @@ export class PeriodicallyComponent implements OnInit {
   sentSuccessfully = false;
   sentWithError = false;
   sentWith504 = false;
+  baseUrl = environment.baseURL
 
   constructor(private http: HttpClient, public dateService: DateService, public httpService: HttpService) { }
 
@@ -111,7 +113,7 @@ export class PeriodicallyComponent implements OnInit {
   }
 
   private sendPeriods(request: PeriodRequest) {
-    this.http.post<any>('http://localhost:8080/esor/periods', request, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.post<any>(this.baseUrl + 'esor/periods', request, this.httpService.getOptionWithEsorToken()).subscribe({
       next: () => {this.sentSuccessfully = true},
       error: err => {
         console.log(err);
@@ -145,7 +147,7 @@ export class PeriodicallyComponent implements OnInit {
   }
 
   getActualPeriods() {
-    this.http.get<any>('http://localhost:8080/esor/periods', this.httpService.getOptionsWithSeasonId()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/periods', this.httpService.getOptionsWithSeasonId()).subscribe({
       next: value => this.actualPeriods = value.items,
       error: err => console.log(err)
     })

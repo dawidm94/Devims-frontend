@@ -1,3 +1,15 @@
 table {
   width: 100%;
 }
+
+.right-button {
+  margin-left: auto;
+  margin-right: 20px;
+  margin-bottom: 5px;
+  float: right;
+}
+
+.mat-column-select {
+  width: 20px;
+  padding-right: 24px;
+}

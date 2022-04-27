@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {HttpService} from "../http.service";
+import {SelectionModel} from "@angular/cdk/collections";
+import {PeriodRequest} from "../date.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-busy-times',
@@ -9,16 +12,47 @@ import {HttpService} from "../http.service";
 })
 export class BusyTimesComponent implements OnInit {
   periods: any | undefined;
+  isSending = false;
+  sentSuccessfully = true;
+  sentWithError = true;
+  baseUrl = environment.baseURL
 
-  constructor(private http: HttpClient, public httpService: HttpService) { }
+  constructor(private http: HttpClient, public httpService: HttpService) {
+
+  }
 
   ngOnInit(): void {
-    this.http.get<any>('http://localhost:8080/esor/periods', this.httpService.getOptionsWithSeasonId()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/periods', this.httpService.getOptionsWithSeasonId()).subscribe({
       next: value => {console.log(value); this.periods = value.items},
       error: err => console.log(err)
     })
   }
 
-  displayedColumns: string[] = ['position', 'dateFrom', 'dateTo', 'reason'];
+  displayedColumns: string[] = ['select', 'position', 'dateFrom', 'dateTo', 'reason'];
+  selection = new SelectionModel<any>(true, []);
 
+  deleteSelections() {
+    this.periods = this.periods.filter((singlePeriod: any) => !this.selection.selected.includes(singlePeriod))
+
+    this.isSending = true;
+    let seasonId = sessionStorage.getItem('seasonId');
+    let request = {periods: this.periods, seasonId: seasonId}
+    this.sendPeriods(request)
+  }
+
+  private sendPeriods(request: PeriodRequest) {
+    this.http.post<any>(this.baseUrl + 'esor/periods', request, this.httpService.getOptionWithEsorToken()).subscribe({
+      next: () => {
+        this.sentSuccessfully = true;
+        this.isSending = false;
+      },
+      error: err => {
+        if (err.status == 504) {
+          this.sentSuccessfully = true;
+        } else {
+          this.sentWithError = true
+        }
+      }
+    })
+  }
 }

@@ -5,7 +5,7 @@ Zaloguj się do Esora: <br/><br/>
 </mat-form-field>
 <mat-form-field appearance="fill">
   <mat-label>Wprowadź hasło</mat-label>
-  <input matInput [type]="passwordHide ? 'password' : 'text'" [(ngModel)]="password">
+  <input (keyup.enter)="login()" matInput [type]="passwordHide ? 'password' : 'text'" [(ngModel)]="password">
   <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
     <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
   </button>

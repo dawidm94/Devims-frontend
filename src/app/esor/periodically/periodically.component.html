@@ -26,7 +26,7 @@
 </section>
 <section style="padding-left: 300px">
   <button (click)="send()" mat-raised-button color="primary" *ngIf="!sentSuccessfully && !sentWithError && !sentWith504" [disabled]="isSending && !sentWithError && !sentSuccessfully">
-    Wyślij <mat-icon *ngIf="isSending && !sentWithError && !sentSuccessfully && !sentWith504"><mat-spinner color="accent" diameter="20">
+    Wyślij <mat-icon *ngIf="isSending && !sentWithError && !sentSuccessfully && !sentWith504"><mat-spinner color="primary" diameter="20">
   </mat-spinner></mat-icon>
   </button>
   <span style="color: red" *ngIf="sentWithError">Coś poszło nie tak :( Skontaktuj się z Simsem.</span>

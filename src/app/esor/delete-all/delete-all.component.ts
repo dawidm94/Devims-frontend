@@ -3,6 +3,7 @@ import {ThemePalette} from "@angular/material/core";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {HttpService} from "../http.service";
 import {PeriodRequest} from "../date.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-delete-all',
@@ -12,6 +13,7 @@ import {PeriodRequest} from "../date.service";
 export class DeleteAllComponent implements OnInit {
   sliderValue = 0;
   deleted = false;
+  baseUrl = environment.baseURL
 
   constructor(private http: HttpClient, public httpService: HttpService) { }
 
@@ -33,7 +35,7 @@ export class DeleteAllComponent implements OnInit {
 
   private sendPeriods(request: PeriodRequest) {
 
-    this.http.post<any>('http://localhost:8080/esor/periods', request, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.post<any>(this.baseUrl + 'esor/periods', request, this.httpService.getOptionWithEsorToken()).subscribe({
       next: () => {this.deleted = true},
       error: err => {console.log(err)}
     })

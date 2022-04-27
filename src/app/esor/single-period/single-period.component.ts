@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {DateService, Period, PeriodRequest} from "../date.service";
 import {HttpClient} from "@angular/common/http";
 import {HttpService} from "../http.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-single-period',
@@ -21,6 +22,7 @@ export class SinglePeriodComponent implements OnInit {
   sentSuccessfully = false;
   sentWithError = false;
   actualPeriods: Period[] = [];
+  baseUrl = environment.baseURL
 
   constructor(public dateService: DateService, public http: HttpClient, public httpService: HttpService) {}
 
@@ -50,14 +52,14 @@ export class SinglePeriodComponent implements OnInit {
   }
 
   getActualPeriods() {
-    this.http.get<any>('http://localhost:8080/esor/periods', this.httpService.getOptionsWithSeasonId()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/periods', this.httpService.getOptionsWithSeasonId()).subscribe({
       next: value => this.actualPeriods = value.items,
       error: err => console.log(err)
     })
   }
 
   private sendPeriods(request: PeriodRequest) {
-    this.http.post<any>('http://localhost:8080/esor/periods', request, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.post<any>(this.baseUrl + 'esor/periods', request, this.httpService.getOptionWithEsorToken()).subscribe({
       next: () => {
         this.sentSuccessfully = true;
         this.isSending = false;

@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {HttpService} from "./http.service";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
+  baseUrl = environment.baseURL
 
   constructor(private http: HttpClient, private httpService: HttpService) {
   }
 
   downloadDelegation(matchId: number | undefined) {
-    this.http.get<any>('http://localhost:8080/esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
       next: response => {
         let date = response.date
         let teamHome = response.teamHome
@@ -30,7 +32,7 @@ export class FileService {
       return
     }
     let districtId = 7 //TODO: Change to read from api
-    let url = 'http://localhost:8080/esor/match/' + matchId + '/delegation/' + districtId;
+    let url = this.baseUrl + 'esor/match/' + matchId + '/delegation/' + districtId;
 
     this.downloadFile(url, filename);
   }
@@ -39,7 +41,7 @@ export class FileService {
     if (!matchId) {
       return
     }
-    let url = 'http://localhost:8080/esor/match/' + matchId + '/ical'
+    let url = this.baseUrl + 'esor/match/' + matchId + '/ical'
 
     this.downloadFile(url, "mecz-" + matchId);
   }

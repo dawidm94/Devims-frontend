@@ -4,6 +4,7 @@ import {MatDialog} from '@angular/material/dialog';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {FileService} from "./file.service";
 import {Router} from "@angular/router";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-esor',
@@ -17,6 +18,7 @@ export class EsorComponent implements OnInit {
   seasonId: number | undefined;
   upcomingMatch: any | undefined;
   upcomingMatchId: number | undefined;
+  baseUrl = environment.baseURL
 
   constructor(
     private http: HttpClient,
@@ -38,7 +40,7 @@ export class EsorComponent implements OnInit {
     if (esorToken) {
       let headers = new HttpHeaders({'Esor-Token': esorToken });
 
-      this.http.get<any>('http://localhost:8080/esor/me', {headers: headers}).subscribe({
+      this.http.get<any>(this.baseUrl + 'esor/me', {headers: headers}).subscribe({
         next: response => {
           this.loggedIn = true;
           this.username = response.username
@@ -55,7 +57,7 @@ export class EsorComponent implements OnInit {
 
   updateSeasonId(esorToken: string): void {
     let headers = new HttpHeaders({'Esor-Token': esorToken });
-    this.http.get<any>('http://localhost:8080/esor/seasons/current', {headers: headers}).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/seasons/current', {headers: headers}).subscribe({
       next: season => {sessionStorage.setItem('seasonId', season.id)},
       error: err => {console.log(err)}
     })

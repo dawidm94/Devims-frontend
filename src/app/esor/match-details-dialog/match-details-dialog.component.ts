@@ -2,6 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {HttpService} from "../http.service";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-match-details-dialog',
@@ -11,6 +12,7 @@ import {HttpService} from "../http.service";
 export class MatchDetailsDialogComponent implements OnInit {
 
   matchDetails: any = {};
+  baseUrl = environment.baseURL
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public matchId: number,
@@ -23,7 +25,7 @@ export class MatchDetailsDialogComponent implements OnInit {
   }
 
   showMatchDetails(matchId: number) {
-    this.http.get<any>('http://localhost:8080/esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
       next: response => {
         console.log(response)
         this.matchDetails = response
