@@ -78,4 +78,8 @@ export class EsorComponent implements OnInit {
     this.router.navigate((['/esor']))
     window.location.reload();
   }
+
+  gotToLink(url: string) {
+    window.open(url, "_blank");
+  }
 }
