@@ -34,7 +34,31 @@ export class FileService {
     let districtId = 7 //TODO: Change to read from api
     let url = this.baseUrl + 'esor/match/' + matchId + '/delegation/' + districtId;
 
-    this.downloadFile(url, filename);
+    this.downloadFile(url, 'Delegacja-' + filename);
+  }
+
+  downloadMetric(matchId: number | undefined) {
+    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
+      next: response => {
+        let date = response.date
+        let teamHome = response.teamHome
+        let fileName = date + '-' + teamHome
+        this.downloadMetricWithFilename(matchId, fileName);
+      },
+      error: err => {
+        console.log(err)
+        this.downloadMetricWithFilename(matchId, 'Metryczka');
+      }
+    })
+  }
+
+  downloadMetricWithFilename(matchId: number | undefined, filename: string) {
+    if (!matchId) {
+      return
+    }
+    let url = this.baseUrl + 'esor/match/' + matchId + '/metric'
+
+    this.downloadFile(url, 'Metryczka-' + filename);
   }
 
   downloadIcal(matchId: number | undefined) {
