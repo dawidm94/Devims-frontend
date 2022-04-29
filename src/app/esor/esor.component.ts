@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {FileService} from "./file.service";
 import {Router} from "@angular/router";
 import {environment} from "../../environments/environment";
+import {HttpService} from "./http.service";
 
 @Component({
   selector: 'app-esor',
@@ -19,12 +20,14 @@ export class EsorComponent implements OnInit {
   upcomingMatch: any | undefined;
   upcomingMatchId: number | undefined;
   baseUrl = environment.baseURL
+  blankets: any[] = [];
 
   constructor(
     private http: HttpClient,
     public dialog: MatDialog,
     public fileService: FileService,
-    public router: Router
+    public router: Router,
+    public httpService: HttpService
   ) {}
 
   ngOnInit(): void {
@@ -32,6 +35,7 @@ export class EsorComponent implements OnInit {
     if (this.router.url === '/esor') {
       this.router.navigate(['/esor/home'])
     }
+    this.updateBlankets();
   }
 
   checkIfEsorTokenIsValid(): boolean {
@@ -81,5 +85,16 @@ export class EsorComponent implements OnInit {
 
   gotToLink(url: string) {
     window.open(url, "_blank");
+  }
+
+  downloadBlankDelegation() {
+    let url = this.baseUrl + this.blankets[0].blanketLink.replace('/api', 'esor')
+    this.fileService.downloadBlankDelegation(url, this.blankets[0].name)
+  }
+
+  private updateBlankets() {
+    this.http.get<any>(this.baseUrl + 'esor/blankets', this.httpService.getOptionWithEsorToken()).subscribe({
+      next: response => {this.blankets = response}
+    })
   }
 }

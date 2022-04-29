@@ -37,6 +37,10 @@ export class FileService {
     this.downloadFile(url, 'Delegacja-' + filename);
   }
 
+  downloadBlankDelegation(url: string, blanketName: string) {
+    this.downloadFile(url, blanketName);
+  }
+
   downloadMetric(matchId: number | undefined) {
     this.http.get<any>(this.baseUrl + 'esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
       next: response => {
