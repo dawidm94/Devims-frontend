@@ -43,6 +43,10 @@ export class TimetableComponent implements OnInit {
     this.fileService.downloadDelegationWithFilename(match.id, match.date + '-' + match.teamHome)
   }
 
+  getMetric(match: any) {
+    this.fileService.downloadMetricWithFilename(match.id, match.date + '-' + match.teamHome)
+  }
+
   openMatchDetailsDialog(matchId: number): void {
     this.dialog.open(MatchDetailsDialogComponent, {
       width: '4s50px',
