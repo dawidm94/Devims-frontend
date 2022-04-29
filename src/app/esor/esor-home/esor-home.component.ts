@@ -53,4 +53,8 @@ export class EsorHomeComponent implements OnInit {
   getMetric(match: any) {
     this.fileService.downloadMetricWithFilename(match.id, match.date + '-' + match.teamHome)
   }
+
+  getIcal(matchId: number) {
+    this.fileService.downloadIcal(matchId);
+  }
 }
