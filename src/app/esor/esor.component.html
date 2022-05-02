@@ -1,4 +1,42 @@
-<div *ngIf="!loggedIn"><button mat-raised-button color="primary" (click)="openLoginDialog()">Zaloguj się do esora</button></div>
+<div *ngIf="!loggedIn" class="center">
+  <section class="login">
+    <span style="margin-right: 10px">W tej chwili nie jesteś zalogowany.</span>
+    <button mat-raised-button color="primary" (click)="openLoginDialog()">Kliknij tutaj aby zalogować się do esora</button>
+  </section>
+  <hr/>
+  <section>
+    <h2>Cześć, tu Sims! Witam Cię na mojej stronie, która ma uprościć niektóre rzeczy w Esorze :-)</h2>
+    <span>Pamiętaj, że po zalogowaniu tutaj, wyloguje Cię z faktycznego esora I NA ODWRÓT!</span>
+    <p>Czyli: Jeżeli po zalogowaniu tutaj, zalogujesz się do Esora, TA strona nie będzie działać prawidłowo i będzie trzeba zalogować się ponownie.</p>
+    <p>Jeżeli coś nie działa to w celu naprawy wykonaj następujące kroki:</p>
+    <ol>
+     <li>Odśwież stronę</li>
+      <li>Wyloguj się i zaloguj ponownie</li>
+      <li>Napisz do mnie np. na messengerze :)</li>
+    </ol>
+    <p>PS. Pisałem to w wolnym czasie, którego nie ma jakoś bardzo dużo, więc proszę o wyrozumiałość ^^</p>
+  </section>
+  <section style="font-style: italic">
+    <h4>Lista ulepszeń:</h4>
+    <ul>
+      <li>Możliwość pobrania delegacji/metryczki na najbliższy mecz z głównej strony zaraz po zalogowaniu</li>
+      <li>'Mój terminarz' na jednej stronie w kolejności od najnowszego meczu</li>
+      <li>Zajęte terminy - cykliczne uzupełnienie terminów na przyszły miesiąc</li>
+      <li>Zajęte terminy - możliwość usunięcia wszystkich zajętych terminów</li>
+      <li>Informacje o meczu bez konieczności przechodzenia na inną stronę</li>
+      <li>Pobranie pustej delegacji z każdego miejsca na stronie</li>
+      <li>Pobieranie delegacji/metryczki - nazwa pliku z datą i nazwą drużyny gospodarzy</li>
+      <li>Pobieraniu meczu do kalendarza - poprawiono godzinę zakończenia meczu</li>
+      <li>... i pewnie jeszcze kilka pierdół, które zrobiłem, a teraz o nich nie pamiętam :) </li>
+    </ul>
+  </section>
+  <section style="font-style: italic">
+    <h4>Plany na przyszłość:</h4>
+    <ul>
+      <li>Obsługa nominacji - akceptacja/odrzucenie</li>
+    </ul>
+  </section>
+</div>
 <div *ngIf="loggedIn">
   <p>
     <mat-toolbar color="primary">
