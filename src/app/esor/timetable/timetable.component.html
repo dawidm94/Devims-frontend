@@ -1,9 +1,9 @@
 <mat-progress-bar *ngIf="!timetable" mode="indeterminate"></mat-progress-bar>
-<table mat-table [dataSource]="timetable" class="mat-elevation-z8">
+<table mat-table [dataSource]="timetable.reverse()" class="mat-elevation-z8">
   <!-- Position Column -->
   <ng-container matColumnDef="position">
     <th mat-header-cell *matHeaderCellDef> Lp. </th>
-    <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+    <td mat-cell *matCellDef="let element; let i = index">{{timetable.length - i}}</td>
   </ng-container>
 
   <!-- matchInfo Column -->
