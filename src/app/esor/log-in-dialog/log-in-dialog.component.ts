@@ -15,7 +15,8 @@ export class LogInDialogComponent {
   token: string | undefined;
   isEmptyInput = false;
   isLoginError = false;
-  baseUrl = environment.baseURL
+  baseUrl = environment.baseURL;
+  isLogging = false;
 
   constructor(
     private http: HttpClient,
@@ -24,6 +25,7 @@ export class LogInDialogComponent {
   ) {}
 
   login() {
+    this.isLogging = true;
     this.isEmptyInput = false;
     if (this.username === undefined || this.password === undefined) {
       this.isEmptyInput = true;
@@ -35,11 +37,12 @@ export class LogInDialogComponent {
         next: token => {
           sessionStorage.setItem('esorToken', token);
           this.isLoginError = false;
+          this.isLogging = false;
           this.dialogRef.close()
         },
         error: err => {
           this.isLoginError = true
-          console.log(err)
+          this.isLogging = false;
         }
       })
   }
