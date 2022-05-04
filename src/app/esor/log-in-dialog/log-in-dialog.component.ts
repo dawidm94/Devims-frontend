@@ -17,6 +17,7 @@ export class LogInDialogComponent {
   isLoginError = false;
   baseUrl = environment.baseURL;
   isLogging = false;
+  isSlowLogging = false;
 
   constructor(
     private http: HttpClient,
@@ -27,10 +28,13 @@ export class LogInDialogComponent {
   login() {
     this.isLogging = true;
     this.isEmptyInput = false;
+    this.isSlowLogging = false;
     if (this.username === undefined || this.password === undefined) {
       this.isEmptyInput = true;
       return;
     }
+
+    setTimeout(() => this.isSlowLogging = true, 4000)
 
     this.http.post(this.baseUrl + 'esor/login', {login: this.username, password: this.password}, { responseType: 'text' as 'text' })
       .subscribe({

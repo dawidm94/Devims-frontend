@@ -13,5 +13,6 @@ Zaloguj się do Esora: <br/><br/>
 <br/>
 <div *ngIf="isEmptyInput" style="color: red">Uzupełnij dane</div>
 <div *ngIf="isLoginError" style="color: red">Błąd logowania. Spróbuj ponownie.</div>
+<div *ngIf="isSlowLogging" style="color: blue">Odśwież stronę i spróbuj jeszcze raz.</div>
 <br/>
 <button mat-stroked-button color="primary" (click)="login()" [disabled]="isLogging">Zaloguj</button>
