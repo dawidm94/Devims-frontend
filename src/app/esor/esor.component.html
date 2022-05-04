@@ -52,7 +52,7 @@
         <button mat-menu-item routerLink="periodically">Uzupełnij cyklicznie przyszły miesiąc</button>
         <button mat-menu-item routerLink="delete-all">Usuń wszystkie zajęte terminy</button>
       </mat-menu>
-      <button mat-button (click)="downloadBlankDelegation()">Pusta delegacja</button>
+      <button mat-button (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>
       <button mat-button color="accent" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
 
       <span class="example-spacer"></span>

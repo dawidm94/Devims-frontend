@@ -20,7 +20,7 @@ export class EsorComponent implements OnInit {
   upcomingMatch: any | undefined;
   upcomingMatchId: number | undefined;
   baseUrl = environment.baseURL
-  blankets: any[] = [];
+  isBlankDelegationDownloading = false;
 
   constructor(
     private http: HttpClient,
@@ -35,7 +35,6 @@ export class EsorComponent implements OnInit {
     if (this.router.url === '/esor') {
       this.router.navigate(['/esor/home'])
     }
-    this.updateBlankets();
   }
 
   checkIfEsorTokenIsValid(): boolean {
@@ -88,15 +87,15 @@ export class EsorComponent implements OnInit {
   }
 
   downloadBlankDelegation() {
-    console.log('this.blankets')
-    console.log(this.blankets)
-    let url = this.baseUrl + this.blankets[0].blanketLink.replace('/api', 'esor')
-    this.fileService.downloadBlankDelegation(url, this.blankets[0].name)
-  }
-
-  private updateBlankets() {
+    this.isBlankDelegationDownloading = true;
     this.http.get<any>(this.baseUrl + 'esor/blankets', this.httpService.getOptionWithEsorToken()).subscribe({
-      next: response => {this.blankets = response}
+      next: response => {
+        console.log(response)
+        let url = this.baseUrl + response[0].blanketLink.replace('/api', 'esor');
+        this.fileService.downloadBlankDelegation(url, response[0].name);
+        this.isBlankDelegationDownloading = false;
+      },
+      error: () => {this.isBlankDelegationDownloading = false}
     })
   }
 }
