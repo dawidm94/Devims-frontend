@@ -88,6 +88,8 @@ export class EsorComponent implements OnInit {
   }
 
   downloadBlankDelegation() {
+    console.log('this.blankets')
+    console.log(this.blankets)
     let url = this.baseUrl + this.blankets[0].blanketLink.replace('/api', 'esor')
     this.fileService.downloadBlankDelegation(url, this.blankets[0].name)
   }
