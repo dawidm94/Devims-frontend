@@ -35,6 +35,9 @@ export class EsorComponent implements OnInit {
     if (this.router.url === '/esor') {
       this.router.navigate(['/esor/home'])
     }
+    if (!this.loggedIn) {
+      this.http.get<any>(this.baseUrl + 'health')
+    }
   }
 
   checkIfEsorTokenIsValid(): boolean {
