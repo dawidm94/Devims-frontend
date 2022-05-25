@@ -37,6 +37,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatNativeDateModule} from "@angular/material/core";
 
 import { MAT_DATE_LOCALE } from '@angular/material/core'
+import {MatDividerModule} from "@angular/material/divider";
 
 
 
@@ -54,32 +55,33 @@ import { MAT_DATE_LOCALE } from '@angular/material/core'
     EsorHomeComponent,
     SinglePeriodComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatSliderModule,
-    MatGridListModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatDialogModule,
-    MatButtonModule,
-    MatSidenavModule,
-    FormsModule,
-    HttpClientModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatProgressSpinnerModule,
-    MatSortModule,
-    MatProgressBarModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatDatepickerModule,
-    ReactiveFormsModule,
-    MatNativeDateModule,
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatSliderModule,
+        MatGridListModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatIconModule,
+        MatInputModule,
+        MatDialogModule,
+        MatButtonModule,
+        MatSidenavModule,
+        FormsModule,
+        HttpClientModule,
+        MatTableModule,
+        MatCheckboxModule,
+        MatProgressSpinnerModule,
+        MatSortModule,
+        MatProgressBarModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatDatepickerModule,
+        ReactiveFormsModule,
+        MatNativeDateModule,
+        MatDividerModule,
+    ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pl-PL' }],
   bootstrap: [AppComponent]
 })

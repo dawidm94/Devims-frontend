@@ -21,6 +21,7 @@ export class EsorComponent implements OnInit {
   upcomingMatchId: number | undefined;
   baseUrl = environment.baseURL
   isBlankDelegationDownloading = false;
+  mobile = window.screen.width < 500;
 
   constructor(
     private http: HttpClient,
@@ -32,6 +33,8 @@ export class EsorComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkIfEsorTokenIsValid()
+    console.log(window.screen.width)
+
     if (this.router.url === '/esor') {
       this.router.navigate(['/esor/home'])
     }

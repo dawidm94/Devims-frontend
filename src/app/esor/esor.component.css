@@ -10,3 +10,15 @@ section {
   margin-top: 10px;
   margin-bottom: 20px;
 }
+
+.mobile-menu-subelement {
+  padding-left: 40px;
+}
+
+.mobile-menu-element {
+  font-weight: bold;
+}
+
+::ng-deep.mat-menu-panel {
+  max-width:fit-content !important;
+}
