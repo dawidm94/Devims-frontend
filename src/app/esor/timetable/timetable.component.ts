@@ -24,9 +24,10 @@ export class TimetableComponent implements OnInit {
     this.updateTimetable();
   }
 
-  displayedColumns: string[] = ['position', 'date', 'matchInfo', 'matchTeams', 'actions'];
   timetable: any | undefined;
   baseUrl = environment.baseURL
+  mobile = window.screen.width < 500;
+  displayedColumns: string[] = this.mobile ? ['date', 'matchInfo', 'matchTeams', 'actions'] : ['position', 'date', 'matchInfo', 'matchTeams', 'actions'];
 
   private updateTimetable() {
     this.http.get<any>(this.baseUrl + 'esor/timetable/my', this.httpService.getOptionsWithSeasonId()).subscribe({
@@ -48,8 +49,10 @@ export class TimetableComponent implements OnInit {
   }
 
   openMatchDetailsDialog(matchId: number): void {
+    let isMobile = window.screen.width < 500
     this.dialog.open(MatchDetailsDialogComponent, {
-      width: '4s50px',
+      width: '450px',
+      height: isMobile ? (window.screen.height - 100) + 'px' : '',
       data: matchId
     });
   }

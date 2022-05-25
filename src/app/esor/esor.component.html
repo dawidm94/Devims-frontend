@@ -75,27 +75,10 @@
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="delete-all">Usuń wszystkie zajęte terminy</button>
         <button mat-menu-item class="mobile-menu-element" (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>
         <button mat-menu-item class="mobile-menu-element" color="accent" style="color: darkorange" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
-<!--        <mat-divider></mat-divider>-->
         <button mat-menu-item class="mobile-menu-element" (click)="logout()">Wyloguj</button>
       </mat-menu>
-      <!--      ###############################################################################################-->
-<!--      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="home">-->
-<!--        <mat-icon>sports_basketball</mat-icon>-->
-<!--      </button>-->
-<!--      <button mat-button routerLink="timetable">Mój terminarz</button>-->
-<!--      <button mat-button [matMenuTriggerFor]="periods">Zajęte terminy</button>-->
-<!--      <mat-menu #periods>-->
-<!--        <button mat-menu-item routerLink="busy-times">Moje zajęte terminy</button>-->
-<!--        <button mat-menu-item routerLink="period">Dodaj zajęty termin</button>-->
-<!--        <button mat-menu-item routerLink="periodically">Uzupełnij cyklicznie przyszły miesiąc</button>-->
-<!--        <button mat-menu-item routerLink="delete-all">Usuń wszystkie zajęte terminy</button>-->
-<!--      </mat-menu>-->
-<!--      <button mat-button (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>-->
-<!--      <button mat-button color="accent" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>-->
-
       <span class="example-spacer"></span>
       <span>Cześć {{username}}!</span>
-<!--      <button mat-button (click)="logout()">Wyloguj</button>-->
     </mat-toolbar>
   </p>
   <router-outlet></router-outlet>
