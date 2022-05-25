@@ -36,7 +36,7 @@ export class EsorComponent implements OnInit {
       this.router.navigate(['/esor/home'])
     }
     if (!this.loggedIn) {
-      this.http.get<any>(this.baseUrl + 'health')
+      this.http.get<any>(this.baseUrl + 'health').subscribe(value => console.log(value))
     }
   }
 
