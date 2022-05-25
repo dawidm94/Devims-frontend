@@ -41,4 +41,20 @@ export class DeleteAllComponent implements OnInit {
     })
   }
 
+  getSliderWidth() {
+    if (window.screen.width > 500) {
+      return "width: 400px"
+    } else {
+      return "width: " + (window.screen.width - 50) + "px"
+    }
+  }
+
+  getImageSize() {
+    if (window.screen.width > 500) {
+      return "width: 20%; height: 20%"
+    } else {
+      return "width: 90%; height: 90%"
+    }
+
+  }
 }

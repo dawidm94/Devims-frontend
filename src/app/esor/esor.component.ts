@@ -33,13 +33,16 @@ export class EsorComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkIfEsorTokenIsValid()
-    console.log(window.screen.width)
 
     if (this.router.url === '/esor') {
       this.router.navigate(['/esor/home'])
     }
     if (!this.loggedIn) {
-      this.http.get<any>(this.baseUrl + 'health').subscribe(value => console.log(value))
+      const requestOptions: Object = {
+        responseType: 'text' as 'text'
+      }
+
+      this.http.get<any>(this.baseUrl + 'health', requestOptions).subscribe();
     }
   }
 

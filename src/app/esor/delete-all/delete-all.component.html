@@ -9,9 +9,10 @@
     max="100"
     aria-label="units"
     [color]="getSliderColor()"
-    [(ngModel)]="sliderValue">
+    [(ngModel)]="sliderValue"
+    [style]="getSliderWidth()">
     </mat-slider>
     <button (click)="deleteAllPeriods()" style="margin-left: 50px" *ngIf="sliderValue==100" mat-stroked-button color="warn">USUŃ WSZYSTKO</button>
   </section>
-  <img *ngIf="deleted" style="width: 20%; height: 20%" src="https://i.imgflip.com/6d64wq.jpg"/>
+  <img *ngIf="deleted" [style]="getImageSize()" src="https://i.imgflip.com/6d64wq.jpg"/>
 </section>

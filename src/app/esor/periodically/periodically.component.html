@@ -24,12 +24,13 @@
   <p *ngIf="showEmptyHoursMessage" style="color: red">Wprowadź obie godziny!</p>
   <p *ngIf="showEmptyReasonMessage" style="color: red">Musisz podać jakiś powód!</p>
 </section>
-<section style="padding-left: 300px">
+<section [style]="getLeftPaddingToSendButton()">
+<!--<section style="padding-left: 300px">-->
   <button (click)="send()" mat-raised-button color="primary" *ngIf="!sentSuccessfully && !sentWithError && !sentWith504" [disabled]="isSending && !sentWithError && !sentSuccessfully">
     Wyślij <mat-icon *ngIf="isSending && !sentWithError && !sentSuccessfully && !sentWith504"><mat-spinner color="primary" diameter="20">
   </mat-spinner></mat-icon>
   </button>
-  <span style="color: red" *ngIf="sentWithError">Coś poszło nie tak :( Skontaktuj się z Simsem.</span>
+  <h3 style="color: red" *ngIf="sentWithError">Coś poszło nie tak :( Skontaktuj się z Simsem.</h3>
   <h1 style="color: green" *ngIf="sentWith504">Udało się!! To wszystko! :)</h1>
   <h1 style="color: green" *ngIf="sentSuccessfully">Udało się :) To wszystko!</h1>
 </section>

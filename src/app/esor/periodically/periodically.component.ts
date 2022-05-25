@@ -158,4 +158,12 @@ export class PeriodicallyComponent implements OnInit {
     this.showEmptyCheckboxesMessage = false;
     this.showEmptyHoursMessage = false;
   }
+
+  getLeftPaddingToSendButton() {
+    if (window.screen.width > 500) {
+      return "padding-left: 300px";
+    } else {
+      return "";
+    }
+  }
 }
