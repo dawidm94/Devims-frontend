@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import {HttpHeaders, HttpParams} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
+
+  currentSeasonId = environment.currentSeasonId
 
   constructor() { }
 
@@ -29,6 +32,8 @@ export class HttpService {
     let params = new HttpParams();
     if (seasonId != null) {
       params = params.append('seasonId', seasonId);
+    } else {
+      params = params.append('seasonId', this.currentSeasonId);
     }
 
     return {headers: headers, params: params}

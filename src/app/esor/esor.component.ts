@@ -17,11 +17,22 @@ export class EsorComponent implements OnInit {
   token: string | undefined;
   username: string | undefined;
   seasonId: number | undefined;
-  upcomingMatch: any | undefined;
-  upcomingMatchId: number | undefined;
   baseUrl = environment.baseURL
   isBlankDelegationDownloading = false;
   mobile = window.screen.width < 500;
+  gotBackendHealthResponse = false;
+  isHealthCheckError = false;
+  loadingMessage = 'Uruchamianie aplikacji - prosimy o chwilę cierpliwości :)'
+  loadingMessageList = [
+    'Potwierdzanie meczów u referenta obsad',
+    'Generowanie delegacji',
+    'Sprawdzanie licencji',
+    'Nadmuchiwanie piłki do kosza',
+    'Włączanie CA70',
+    'Zbieranie podpisów',
+    'Wyliczanie dojazdów',
+    'Sprawdzanie najbliższych meczów'
+  ]
 
   constructor(
     private http: HttpClient,
@@ -37,12 +48,29 @@ export class EsorComponent implements OnInit {
     if (this.router.url === '/esor') {
       this.router.navigate(['/esor/home'])
     }
+
     if (!this.loggedIn) {
       const requestOptions: Object = {
         responseType: 'text' as 'text'
       }
 
-      this.http.get<any>(this.baseUrl + 'health', requestOptions).subscribe();
+      this.http.get<any>(this.baseUrl + 'health', requestOptions).subscribe({
+        next: () => {
+          this.gotBackendHealthResponse = true;
+        },
+        error: () => {
+          this.gotBackendHealthResponse = true;
+          this.isHealthCheckError = true;
+        }
+      });
+    }
+    setInterval(() => this.switchLoadingMessage(), 5000);
+  }
+
+  switchLoadingMessage() {
+    if (!this.gotBackendHealthResponse) {
+      let number = Math.floor(Math.random() * this.loadingMessageList.length)
+      this.loadingMessage = this.loadingMessageList[number]
     }
   }
 
@@ -80,7 +108,7 @@ export class EsorComponent implements OnInit {
       width: '300px'
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    dialogRef.afterClosed().subscribe(() => {
       this.checkIfEsorTokenIsValid()
     });
   }

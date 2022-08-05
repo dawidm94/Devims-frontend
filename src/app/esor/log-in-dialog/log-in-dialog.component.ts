@@ -29,6 +29,8 @@ export class LogInDialogComponent {
     this.isLogging = true;
     this.isEmptyInput = false;
     this.isSlowLogging = false;
+    this.isLoginError = false;
+
     if (this.username === undefined || this.password === undefined) {
       this.isEmptyInput = true;
       return;
@@ -44,7 +46,7 @@ export class LogInDialogComponent {
           this.isLogging = false;
           this.dialogRef.close()
         },
-        error: err => {
+        error: () => {
           this.isLoginError = true
           this.isLogging = false;
         }

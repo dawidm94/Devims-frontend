@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  baseURL: 'https://devims-backend.herokuapp.com/'
+  baseURL: 'https://devims-backend.herokuapp.com/',
+  currentSeasonId: 25
 };

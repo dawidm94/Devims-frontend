@@ -24,17 +24,19 @@ export class EsorHomeComponent implements OnInit {
   }
 
   private updateUpcomingMatch() {
+    let seasonId = sessionStorage.getItem('seasonId');
+    if (!seasonId) {
+
+    }
     this.http.get<any>(this.baseUrl + 'esor/timetable/upcoming', this.httpService.getOptionsWithSeasonId()).subscribe({
       next: response => {
         if (response.items != undefined && response.items.length > 0) {
           this.upcomingMatches = response.items;
-          console.log(this.upcomingMatches)
         }
         this.upcomingMatchLoaded = true
       },
-      error: err => {
+      error: () => {
         this.upcomingMatchLoaded = true
-        console.log(err)
       }
     })
   }
