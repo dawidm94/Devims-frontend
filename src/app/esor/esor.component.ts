@@ -33,6 +33,7 @@ export class EsorComponent implements OnInit {
     'Wyliczanie dojazdów',
     'Sprawdzanie najbliższych meczów'
   ]
+  nameClickCounter = 0;
 
   constructor(
     private http: HttpClient,
@@ -127,12 +128,15 @@ export class EsorComponent implements OnInit {
     this.isBlankDelegationDownloading = true;
     this.http.get<any>(this.baseUrl + 'esor/blankets', this.httpService.getOptionWithEsorToken()).subscribe({
       next: response => {
-        console.log(response)
         let url = this.baseUrl + response[0].blanketLink.replace('/api', 'esor');
         this.fileService.downloadBlankDelegation(url, response[0].name);
         this.isBlankDelegationDownloading = false;
       },
       error: () => {this.isBlankDelegationDownloading = false}
     })
+  }
+
+  addNameClick() {
+    this.nameClickCounter += 1;
   }
 }

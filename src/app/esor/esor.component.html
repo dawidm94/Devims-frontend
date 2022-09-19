@@ -59,10 +59,10 @@
         <button mat-menu-item routerLink="delete-all">Usuń wszystkie zajęte terminy</button>
       </mat-menu>
       <button mat-button (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>
-      <button mat-button color="accent" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
+      <button mat-button color="accent" *ngIf="nameClickCounter > 5" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
 
       <span class="example-spacer"></span>
-      <span>Cześć {{username}}!</span>
+      <span (click)="addNameClick()">Cześć {{username}}!</span>
       <button mat-button (click)="logout()">Wyloguj</button>
     </mat-toolbar>
   </p>
@@ -80,11 +80,11 @@
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="periodically">Uzupełnij cyklicznie przyszły miesiąc</button>
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="delete-all">Usuń wszystkie zajęte terminy</button>
         <button mat-menu-item class="mobile-menu-element" (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>
-        <button mat-menu-item class="mobile-menu-element" color="accent" style="color: darkorange" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
+        <button *ngIf="nameClickCounter > 5" mat-menu-item class="mobile-menu-element" color="accent" style="color: darkorange" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
         <button mat-menu-item class="mobile-menu-element" (click)="logout()">Wyloguj</button>
       </mat-menu>
       <span class="example-spacer"></span>
-      <span>Cześć {{username}}!</span>
+      <span (click)="addNameClick()">Cześć {{username}}!</span>
     </mat-toolbar>
   </p>
   <router-outlet></router-outlet>
