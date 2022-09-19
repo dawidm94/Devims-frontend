@@ -1,7 +1,7 @@
 <mat-card>
   <h1>Najbliższe mecze:</h1>
   <h4 *ngIf="!upcomingMatches && upcomingMatchLoaded">Nie masz żadnego meczu :-(</h4>
-  <mat-grid-list *ngIf="upcomingMatches" [cols]="upcomingMatches.length" [rowHeight]="upcomingMatches.length == 1 ? '8:1' : upcomingMatches.length == 2 ? '4:1' : '3:1'">
+  <mat-grid-list *ngIf="upcomingMatches" [cols]="mobile ? 1 : upcomingMatches.length" [rowHeight]="!mobile ? upcomingMatches.length == 1 ? '8:1' : upcomingMatches.length == 2 ? '4:1' : '3:1' : ''">
     <mat-grid-tile *ngFor="let upcomingMatch of upcomingMatches">
       <mat-card class="match-card" >
         <p>{{upcomingMatch.date}} {{upcomingMatch.time}}</p>

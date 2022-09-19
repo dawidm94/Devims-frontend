@@ -18,6 +18,7 @@ export class EsorHomeComponent implements OnInit {
   upcomingMatches: any;
   upcomingMatchLoaded = false;
   baseUrl = environment.baseURL
+  mobile = window.screen.width < 500;
 
   ngOnInit(): void {
     this.updateUpcomingMatch()
@@ -33,6 +34,7 @@ export class EsorHomeComponent implements OnInit {
         if (response.items != undefined && response.items.length > 0) {
           this.upcomingMatches = response.items;
         }
+
         this.upcomingMatchLoaded = true
       },
       error: () => {
