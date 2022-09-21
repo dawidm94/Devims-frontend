@@ -47,9 +47,10 @@
 <div *ngIf="loggedIn">
   <p *ngIf="!mobile">
     <mat-toolbar color="primary">
-      <button mat-icon-button class="example-icon" aria-label="Example icon-button with menu icon" routerLink="home">
+      <button mat-icon-button routerLink="home">
         <mat-icon>sports_basketball</mat-icon>
       </button>
+      <button mat-button routerLink="nominations">Moje nominacje</button>
       <button mat-button routerLink="timetable">Mój terminarz</button>
       <button mat-button [matMenuTriggerFor]="periods">Zajęte terminy</button>
       <mat-menu #periods>
@@ -73,6 +74,7 @@
       </button>
       <mat-menu #menu>
         <button mat-menu-item class="mobile-menu-element" routerLink="home">Główna strona</button>
+        <button mat-menu-item class="mobile-menu-element" routerLink="nominations">Moje nominacje</button>
         <button mat-menu-item class="mobile-menu-element" routerLink="timetable">Mój terminarz</button>
         <button mat-menu-item class="mobile-menu-element" disabled>Zajęte terminy: </button>
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="busy-times">Moje zajęte terminy</button>

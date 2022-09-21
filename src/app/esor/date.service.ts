@@ -13,6 +13,27 @@ export interface PeriodRequest {
   seasonId: string | null;
 }
 
+export interface ConfirmedNotification {
+  arrival: string | '';
+  buy: number | 1;
+  costAccommodation: number | 0;
+  costPerKilometerGross: number | 0;
+  costTransport: string | '0';
+  costTravel: number | 0;
+  delegationNumber: string | null;
+  departure: string | '';
+  documentType: number | 0;
+  equivalent: number | 0;
+  matchId: number | null;
+  privateTransport: boolean | false;
+  reservation: boolean | false;
+  routesDistanceKilometers: number | 0;
+  toPay: number | 0;
+  vehicleBrand: string | '';
+  vehicleRegistrationNumber: string | '';
+  vehicleEngineSize: string | '';
+}
+
 @Injectable({
   providedIn: 'root'
 })

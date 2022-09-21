@@ -38,6 +38,10 @@ import {MatNativeDateModule} from "@angular/material/core";
 
 import { MAT_DATE_LOCALE } from '@angular/material/core'
 import {MatDividerModule} from "@angular/material/divider";
+import { NominationsComponent } from './esor/nominations/nominations.component';
+import { RejectNominationDialogComponent } from './esor/reject-nomination-dialog/reject-nomination-dialog.component';
+import { AcceptNominationDialogComponent } from './esor/accept-nomination-dialog/accept-nomination-dialog.component';
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 
@@ -53,7 +57,10 @@ import {MatDividerModule} from "@angular/material/divider";
     TimetableComponent,
     MatchDetailsDialogComponent,
     EsorHomeComponent,
-    SinglePeriodComponent
+    SinglePeriodComponent,
+    NominationsComponent,
+    RejectNominationDialogComponent,
+    AcceptNominationDialogComponent
   ],
     imports: [
         BrowserModule,
@@ -81,6 +88,7 @@ import {MatDividerModule} from "@angular/material/divider";
         ReactiveFormsModule,
         MatNativeDateModule,
         MatDividerModule,
+        MatTooltipModule,
     ],
   providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pl-PL' }],
   bootstrap: [AppComponent]

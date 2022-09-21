@@ -1,0 +1,12 @@
+button {
+  margin-right: 10px;
+  float: right;
+}
+div {
+  float:left;
+}
+
+span {
+  float: left;
+  margin-top: 10px;
+}

@@ -23,7 +23,7 @@ export class BusyTimesComponent implements OnInit {
 
   ngOnInit(): void {
     this.http.get<any>(this.baseUrl + 'esor/periods', this.httpService.getOptionsWithSeasonId()).subscribe({
-      next: value => {console.log(value); this.periods = value.items},
+      next: value => this.periods = value.items,
       error: err => console.log(err)
     })
   }

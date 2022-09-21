@@ -17,11 +17,13 @@ export class EsorHomeComponent implements OnInit {
 
   upcomingMatches: any;
   upcomingMatchLoaded = false;
+  nominations = 0;
   baseUrl = environment.baseURL
   mobile = window.screen.width < 500;
 
   ngOnInit(): void {
     this.updateUpcomingMatch()
+    this.updateNominations()
   }
 
   private updateUpcomingMatch() {
@@ -39,6 +41,18 @@ export class EsorHomeComponent implements OnInit {
       },
       error: () => {
         this.upcomingMatchLoaded = true
+      }
+    })
+  }
+
+  private updateNominations() {
+    let seasonId = sessionStorage.getItem('seasonId');
+    if (!seasonId) {
+
+    }
+    this.http.get<any>(this.baseUrl + 'esor/nominations/count', this.httpService.getOptionsWithSeasonId()).subscribe({
+      next: response => {
+        this.nominations = response
       }
     })
   }

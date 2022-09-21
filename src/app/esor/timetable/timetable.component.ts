@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {FileService} from "../file.service";
-import {LogInDialogComponent} from "../log-in-dialog/log-in-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {MatchDetailsDialogComponent} from "../match-details-dialog/match-details-dialog.component";
 import {HttpService} from "../http.service";

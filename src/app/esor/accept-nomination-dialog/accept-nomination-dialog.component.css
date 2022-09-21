@@ -1,0 +1,23 @@
+.decision-button {
+  margin-right: 10px;
+  float: right;
+}
+
+.input-button {
+  margin-top: 0.3em;
+  padding: 1.55em 0;
+  line-height: 1.125;
+}
+
+.gross-rate-button {
+  margin-left: 20px;
+}
+
+td, th {
+  padding: 0 15px;
+}
+
+.center {
+  width: 50%;
+  margin: 0 auto;
+}
