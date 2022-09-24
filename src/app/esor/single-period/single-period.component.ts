@@ -23,6 +23,7 @@ export class SinglePeriodComponent implements OnInit {
   sentWithError = false;
   actualPeriods: Period[] = [];
   baseUrl = environment.baseURL
+  wholeDay = false;
 
   constructor(public dateService: DateService, public http: HttpClient, public httpService: HttpService) {}
 
@@ -30,22 +31,30 @@ export class SinglePeriodComponent implements OnInit {
     this.getActualPeriods();
   }
 
+  toggleWholeDay() {
+    this.updateFromChosen()
+    this.updateToChosen()
+  }
+
   updateFromChosen() {
-    this.fromChosen = this.fromDate != undefined && this.fromTime != undefined;
+    this.fromChosen = this.fromDate != undefined && (this.fromTime != undefined && !this.wholeDay || this.wholeDay);
   }
 
   updateToChosen() {
-    this.toChosen = this.toDate != undefined && this.toTime != undefined;
+    this.toChosen = this.toDate != undefined && (this.toTime != undefined && !this.wholeDay || this.wholeDay);
   }
 
   updateReasonFilled() {
-    this.reasonFilled = this.reason != undefined && this.reason != '';
+    console.log(this.reason)
+    this.reasonFilled = this.reason != undefined && this.reason != '' && this.reason.length > 1;
   }
 
   send() {
     this.isSending = true;
     let seasonId = sessionStorage.getItem('seasonId');
-    let newPeriod = this.dateService.getPeriodWithDate(this.fromDate, this.fromTime, this.toDate, this.toTime, this.reason);
+    let fromTime = this.wholeDay ? '00:00' : this.fromTime;
+    let toTime = this.wholeDay ? '23:59' : this.toTime;
+    let newPeriod = this.dateService.getPeriodWithDate(this.fromDate, fromTime, this.toDate, toTime, this.reason);
     this.actualPeriods.push(newPeriod);
     let request = {periods: this.actualPeriods, seasonId: seasonId}
     this.sendPeriods(request)

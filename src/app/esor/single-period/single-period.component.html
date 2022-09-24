@@ -1,13 +1,14 @@
-<h1>Dodaj zajęty termin</h1>
+<h1 class="inline">Dodaj zajęty termin</h1>
+<mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="wholeDay" (change)="toggleWholeDay()">Cały dzień</mat-checkbox>
 <section>
   <h2>Od</h2>
   <mat-form-field appearance="fill">
     <mat-label>Data:</mat-label>
-    <input matInput [matDatepicker]="picker" autocomplete="off" [(ngModel)]="fromDate" (change)="updateFromChosen()">
+    <input matInput [matDatepicker]="picker" autocomplete="off" [(ngModel)]="fromDate" (dateChange)="updateFromChosen()">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
-  <mat-form-field appearance="fill" style="padding-left: 20px">
+  <mat-form-field *ngIf="!wholeDay" appearance="fill" style="padding-left: 20px">
     <mat-label>Godzina:</mat-label>
     <input type="time" matInput name="fromTime" [(ngModel)]="fromTime" (change)="updateFromChosen()">
   </mat-form-field>
@@ -16,11 +17,11 @@
   <h2>Do</h2>
   <mat-form-field appearance="fill">
     <mat-label>Data:</mat-label>
-    <input matInput [matDatepicker]="toPicker" autocomplete="off" [(ngModel)]="toDate" [min]="fromDate" (change)="updateToChosen()">
+    <input matInput [matDatepicker]="toPicker" autocomplete="off" [(ngModel)]="toDate" [min]="fromDate" (dateChange)="updateToChosen()">
     <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
     <mat-datepicker #toPicker></mat-datepicker>
   </mat-form-field>
-  <mat-form-field appearance="fill" style="padding-left: 20px">
+  <mat-form-field *ngIf="!wholeDay" appearance="fill" style="padding-left: 20px">
     <mat-label>Godzina:</mat-label>
     <input type="time" matInput name="toTime" [(ngModel)]="toTime" (change)="updateToChosen()">
   </mat-form-field>
@@ -29,10 +30,10 @@
   <h2>Powód</h2>
   <mat-form-field appearance="fill">
     <mat-label>Powód</mat-label>
-    <input matInput placeholder='Studia / Praca / Zajęte?' [(ngModel)]="reason" (change)="updateReasonFilled()">
+    <input matInput placeholder='Studia / Praca / Zajęte?' [(ngModel)]="reason" (keyup)="updateReasonFilled()">
   </mat-form-field>
   <button (click)="send()" mat-raised-button color="primary" *ngIf="reasonFilled" [disabled]="isSending" style="margin-left: 20px"> Wyślij
-    <mat-icon *ngIf="isSending"><mat-spinner color="accent" diameter="20"></mat-spinner></mat-icon>
+    <mat-icon *ngIf="isSending"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
   </button>
   <h2 *ngIf="sentSuccessfully" style="color: green">Termin dodany!</h2>
   <h2 *ngIf="sentWithError" style="color: red">Wystąpił błąd przy dodawaniu terminu!</h2>
