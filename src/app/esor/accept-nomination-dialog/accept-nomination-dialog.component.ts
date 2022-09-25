@@ -87,7 +87,8 @@ export class AcceptNominationDialogComponent implements OnInit {
   }
 
   acceptNomination(): void {
-    let notification = {arrival: '', buy: 1, costAccommodation: 0, costPerKilometerGross: this.nomination.perKilometer[0].gross, costTransport: this.transportAmount + '', costTravel: 0, delegationNumber: null,
+
+    let notification = {arrival: '', buy: 1, costAccommodation: 0, costPerKilometerGross: this.nomination.perKilometer.length > 0 ? this.nomination.perKilometer[0].gross : null, costTransport: this.transportAmount + '', costTravel: 0, delegationNumber: null,
       departure: '', documentType: 0, equivalent: this.grossAmount, matchId: this.matchId, privateTransport: false, reservation: false, routes: [], routesDistanceKilometers: 0,
       toPay: this.toPay, vehicleBrand: '', vehicleRegistrationNumber: '', vehicleEngineSize: ''}
     this.sendNotification(notification)
