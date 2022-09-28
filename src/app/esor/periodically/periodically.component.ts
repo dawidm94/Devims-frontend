@@ -82,8 +82,8 @@ export class PeriodicallyComponent implements OnInit {
     return days;
   }
 
-  send(){
-    this.clearValidateMessages();
+  send() {
+    this.clearMessages();
     if (!this.isValidate()) {
       return;
     }
@@ -109,6 +109,8 @@ export class PeriodicallyComponent implements OnInit {
       request.periods.push(actualPeriod);
     })
 
+    this.actualPeriods = request.periods
+
     this.sendPeriods(request)
   }
 
@@ -122,6 +124,10 @@ export class PeriodicallyComponent implements OnInit {
         } else {
           this.sentWithError = true
         }
+        this.isSending = false
+      },
+      complete: () => {
+        this.isSending = false
       }
     })
   }
@@ -153,10 +159,21 @@ export class PeriodicallyComponent implements OnInit {
     })
   }
 
+  private clearMessages() {
+    this.clearValidateMessages();
+    this.clearSentMessages();
+  }
+
   private clearValidateMessages() {
     this.showEmptyReasonMessage = false;
     this.showEmptyCheckboxesMessage = false;
     this.showEmptyHoursMessage = false;
+  }
+
+  private clearSentMessages() {
+    this.sentSuccessfully = false;
+    this.sentWith504 = false;
+    this.sentWithError = false;
   }
 
   getLeftPaddingToSendButton() {
