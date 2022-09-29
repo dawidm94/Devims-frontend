@@ -28,7 +28,7 @@ export class RejectNominationDialogComponent implements OnInit {
   }
 
   rejectNomination(): void {
-    this.http.get<any>(this.baseUrl + 'esor/nominations/' + this.matchId + '/reject', this.httpService.getOptionsWithSeasonId()).subscribe({
+    this.http.post<any>(this.baseUrl + 'esor/nominations/' + this.matchId + '/reject', this.httpService.getOptionWithEsorToken()).subscribe({
       next: () => {
         this.dialogRef.close(true)
       },
