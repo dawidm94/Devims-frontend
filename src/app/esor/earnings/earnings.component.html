@@ -1,0 +1,23 @@
+<section>
+  <h1>Wybierz sezon</h1>
+  <mat-form-field appearance="fill">
+    <mat-label>Sezon</mat-label>
+    <select matNativeControl required [(ngModel)]="selectedSeasonId" (change)="getSeasonEarnings()" [disabled]="isLoadingEarnings">
+      <option *ngFor="let season of seasons" [value]="season.id">{{season.nazwa}}</option>
+    </select>
+  </mat-form-field>
+</section>
+<section *ngIf="selectedSeasonId">
+  <section *ngIf="isLoadingEarnings">
+    <h3 class="money">Liczymy pieniążki...</h3>
+    <h3 class="money">Proszę o cierpliwość - trochę to potrwa</h3>
+    <img [class]="isMobile ? 'mobile-img' : ''" src="assets/images/money.gif">
+  </section>
+  <section *ngIf="!isLoadingEarnings">
+    <h2>Dotychczasowe mecze: {{esorEarnings.alreadyEarnedAmount}}zł</h2>
+    <h2>Przyszłe mecze: {{esorEarnings.futureNominationsAmount}}zł</h2>
+    <h2 class="money">Suma: {{esorEarnings.alreadyEarnedAmount + esorEarnings.futureNominationsAmount}}zł</h2>
+    <h5 style="font-style: italic">(Kwoty netto - wypłacone)</h5>
+  </section>
+  <h2 style="color: red" *ngIf="isError">Wystąpił nieoczekiwany błąd :c</h2>
+</section>

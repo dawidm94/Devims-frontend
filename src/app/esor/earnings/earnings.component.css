@@ -1,0 +1,19 @@
+section {
+  padding-left: 10px;
+}
+
+h1 {
+  padding-right: 10px;
+  display: inline;
+}
+
+.money {
+  color: green;
+  font-weight: bold;
+}
+
+.mobile-img {
+  width:90%;
+  height:90%;
+  object-fit:cover;
+}

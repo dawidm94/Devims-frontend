@@ -42,6 +42,7 @@ import { NominationsComponent } from './esor/nominations/nominations.component';
 import { RejectNominationDialogComponent } from './esor/reject-nomination-dialog/reject-nomination-dialog.component';
 import { AcceptNominationDialogComponent } from './esor/accept-nomination-dialog/accept-nomination-dialog.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
+import { EarningsComponent } from './esor/earnings/earnings.component';
 
 
 
@@ -60,7 +61,8 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     SinglePeriodComponent,
     NominationsComponent,
     RejectNominationDialogComponent,
-    AcceptNominationDialogComponent
+    AcceptNominationDialogComponent,
+    EarningsComponent
   ],
     imports: [
         BrowserModule,

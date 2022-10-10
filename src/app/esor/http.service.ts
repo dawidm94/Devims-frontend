@@ -17,6 +17,14 @@ export class HttpService {
 
     return {headers: headers};
   }
+
+  getOptionWithEsorTokenAndContentTypeJson() {
+    let esorToken = sessionStorage.getItem('esorToken') as string
+    let headers = new HttpHeaders({'Esor-Token': esorToken}).set('Content-Type','application/json');
+
+    return {headers: headers};
+  }
+
   getOptionWithEsorTokenWithBlobAsJsonResponseType() {
     let esorToken = sessionStorage.getItem('esorToken') as string
     let headers = new HttpHeaders({'Esor-Token': esorToken});

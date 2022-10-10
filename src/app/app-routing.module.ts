@@ -9,6 +9,7 @@ import {EsorHomeComponent} from "./esor/esor-home/esor-home.component";
 import {TimetableComponent} from "./esor/timetable/timetable.component";
 import {SinglePeriodComponent} from "./esor/single-period/single-period.component";
 import {NominationsComponent} from "./esor/nominations/nominations.component";
+import {EarningsComponent} from "./esor/earnings/earnings.component";
 
 const routes: Routes = [
   {
@@ -39,6 +40,9 @@ const routes: Routes = [
       },
       {
         path: 'nominations', component: NominationsComponent
+      },
+      {
+        path: 'earnings', component: EarningsComponent
       }
     ]},
 ];
