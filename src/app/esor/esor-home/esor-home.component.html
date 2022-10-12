@@ -15,6 +15,7 @@
         <button mat-raised-button (click)="getDelegation(upcomingMatch)">Delegacja</button>
         <button mat-raised-button (click)="getIcal(upcomingMatch.id)">Kalendarz</button>
         <button [style]="mobile ? 'margin-top: 10px' : ''" mat-raised-button (click)="getMetric(upcomingMatch)">Metryczka</button>
+        <button *ngIf="mobile" style="margin-top: 10px" mat-raised-button (click)="goToGoogleMaps(upcomingMatch.id)"><mat-icon style="color: dodgerblue">navigation</mat-icon></button>
       </mat-card>
     </mat-grid-tile>
   </mat-grid-list>

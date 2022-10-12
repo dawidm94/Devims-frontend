@@ -75,4 +75,19 @@ export class EsorHomeComponent implements OnInit {
   getIcal(matchId: number) {
     this.fileService.downloadIcal(matchId);
   }
+
+  goToGoogleMaps(matchId: number) {
+    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
+      next: response => {
+        let destination = response.hall
+        let url = 'https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=' + destination
+        window.open(url, "_blank");
+
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
+
+  }
 }
