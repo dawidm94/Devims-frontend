@@ -18,6 +18,7 @@ export class EarningsComponent implements OnInit {
   isLoadingEarnings = false;
   esorEarnings: any | undefined
   isError = false;
+  intervalId: number | undefined;
 
   constructor(
     private http: HttpClient,
@@ -44,8 +45,7 @@ export class EarningsComponent implements OnInit {
 
     this.http.post<any>(this.baseUrl + 'esor/earnings', this.selectedSeasonId, this.httpService.getOptionWithEsorTokenAndContentTypeJson()).subscribe({
       next: response => {
-        this.esorEarnings = response
-        this.isLoadingEarnings = false;
+        this.intervalId = setInterval(() => {this.checkEarningsStatus(response.uuid)}, 1000);
       },
 
       error: err => {
@@ -55,7 +55,22 @@ export class EarningsComponent implements OnInit {
         this.esorEarnings = undefined
       }
     })
+  }
 
-    console.log(this.selectedSeasonId)
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
+  }
+
+  private checkEarningsStatus(uuid: string) {
+    this.http.get<any>(this.baseUrl + 'esor/earnings/check/' + uuid, this.httpService.getOptionWithEsorToken()).subscribe({
+      next: response => {
+        if (response.status != 'PENDING') {
+          clearInterval(this.intervalId);
+          this.esorEarnings = response
+          this.isLoadingEarnings = false;
+        }
+      },
+      error: err => {console.log(err)}
+    })
   }
 }

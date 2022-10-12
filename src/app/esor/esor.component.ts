@@ -65,7 +65,7 @@ export class EsorComponent implements OnInit {
         }
       });
     }
-    setInterval(() => this.switchLoadingMessage(), 5000);
+    setInterval(() => this.switchLoadingMessage(), 7000);
   }
 
   switchLoadingMessage() {
