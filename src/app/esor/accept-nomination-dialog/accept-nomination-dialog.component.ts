@@ -22,12 +22,12 @@ export class AcceptNominationDialogComponent implements OnInit {
   ngOnInit(): void {
     this.getNomination();
     this.getMatch();
-    this.getUser();
+    this.getFinancialData();
   }
 
   baseUrl = environment.baseURL
   mobile = window.screen.width < 500;
-  user: any;
+  financialData: any;
   match: any = '';
   nomination: any = '';
   nominationHeader = ''
@@ -57,10 +57,10 @@ export class AcceptNominationDialogComponent implements OnInit {
       }
     })
   }
-  getUser(): void {
-    this.http.get<any>(this.baseUrl + 'esor/user', this.httpService.getOptionsWithSeasonId()).subscribe({
+  getFinancialData(): void {
+    this.http.get<any>(this.baseUrl + 'esor/user/financial-data', this.httpService.getOptionsWithSeasonId()).subscribe({
       next: (response) => {
-        this.user = response
+        this.financialData = response
       },
       error: err => {
         console.log(err)
@@ -80,7 +80,7 @@ export class AcceptNominationDialogComponent implements OnInit {
   }
 
   goToGoogleMaps() {
-    let origin = this.user.address + '+' + this.user.city
+    let origin = this.financialData.address + '+' + this.financialData.city
     let destination = this.match.hall
     let url = 'https://www.google.com/maps/dir/?api=1&travelmode=driving&origin=' + origin + '&destination=' + destination
     window.open(url, "_blank");
