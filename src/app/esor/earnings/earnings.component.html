@@ -10,7 +10,7 @@
 <section *ngIf="selectedSeasonId">
   <section *ngIf="isLoadingEarnings">
     <h3 class="money">Liczymy pieniążki...</h3>
-    <h3 class="money">Proszę o cierpliwość - trochę to potrwa</h3>
+    <h3 class="money">Proszę o cierpliwość - trochę to potrwa (nawet&nbsp;do&nbsp;minuty)</h3>
     <img [class]="isMobile ? 'mobile-img' : ''" src="assets/images/money.gif">
   </section>
   <section *ngIf="!isLoadingEarnings">
@@ -18,6 +18,10 @@
     <h2>Przyszłe mecze: {{esorEarnings.futureNominationsAmount}}zł</h2>
     <h2 class="money">Suma: {{esorEarnings.alreadyEarnedAmount + esorEarnings.futureNominationsAmount}}zł</h2>
     <h5 style="font-style: italic">(Kwoty netto - wypłacone)</h5>
+    <hr/>
+    <p *ngFor="let payment of esorEarnings.teamPayments | keyvalue">
+      {{payment.key}} - <b>{{payment.value}}zł</b>
+    </p>
   </section>
   <h2 style="color: red" *ngIf="isError">Wystąpił nieoczekiwany błąd :c</h2>
 </section>
