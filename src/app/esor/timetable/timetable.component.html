@@ -1,4 +1,5 @@
 <mat-progress-bar *ngIf="!timetable" mode="indeterminate"></mat-progress-bar>
+<h1 *ngIf="timetable" style="text-align: center; font-weight: bold">MÓJ TERMINARZ</h1>
 <table *ngIf="timetable" mat-table [dataSource]="timetable" class="mat-elevation-z8">
   <!-- Position Column -->
   <ng-container matColumnDef="position" >

@@ -1,4 +1,5 @@
 <mat-progress-bar *ngIf="!nominations || reloading" mode="indeterminate"></mat-progress-bar>
+<h1 *ngIf="nominations" style="text-align: center; font-weight: bold">MOJE NOMINACJE</h1>
 <table *ngIf="nominations && nominations.length > 0" mat-table [dataSource]="nominations" class="mat-elevation-z8">
   <!-- Position Column -->
   <ng-container matColumnDef="position" >
