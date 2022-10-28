@@ -1,23 +1,23 @@
 
 stages:
-  # - dependencies
+  - Dependencies
   # - test
-  - build
-  - publish
+  - Build
+  - Publish
 
-# install_dependencies:
-#   image: node:12-alpine
-#   stage: dependencies
-#   script:
-#     - npm install
-#   only:
-#     - main
-#   cache:
-#     key:
-#       files:
-#         - package-lock.json
-#     paths:
-#       - node_modules
+Install_dependencies:
+  image: node:12-alpine
+  stage: Dependencies
+  script:
+    - npm install
+  only:
+    - main
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
 
 # lint:
 #   image: node:12-alpine
@@ -47,29 +47,28 @@ stages:
 #       - node_modules
 #     policy: pull
 
-build_project:
+Build_project:
   image: node:12-alpine
-  stage: build
+  stage: Build
   only:
     - main
   script:
-    - npm install
     - ng build
   artifacts:
     paths:
       - $CI_PROJECT_DIR/dist
-  # cache:
-  #   key:
-  #     files:
-  #       - package-lock.json
-  #   paths:
-  #     - node_modules
-  #   policy: pull
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+    policy: pull
 
-publish:
+Publish:
   before_script:
     - apt-get update -qq && apt-get install -y -qq sshpass
-  stage: publish
+  stage: Publish
   only:
     - main
   script:
