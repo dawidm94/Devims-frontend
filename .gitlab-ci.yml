@@ -78,4 +78,4 @@ Publish:
     # - sshpass -e scp -r -o StrictHostKeyChecking=no $CI_PROJECT_DIR/dist gitlab-ci@146.59.94.173:/home/gitlab-ci
     - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 rm -rf /var/www/html || true
     - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 cp -r /home/gitlab-ci/dist/devims /var/www/html
-    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 systemctl restart nginx.service
+    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 sudo systemctl restart nginx.service
