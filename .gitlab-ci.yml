@@ -1,62 +1,30 @@
 
 stages:
-  # - Dependencies
-  # # - test
-  # - Build
+  - Dependencies
+  # - test
+  - Build
   - Publish
 
-# Install_dependencies:
+Install_dependencies:
+  image: node:12-alpine
+  stage: Dependencies
+  script:
+    - npm install
+  only:
+    - main
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+
+# lint:
 #   image: node:12-alpine
-#   stage: Dependencies
+#   stage: test
 #   script:
-#     - npm install
-#   only:
-#     - main
-#   cache:
-#     key:
-#       files:
-#         - package-lock.json
-#     paths:
-#       - node_modules
-
-# # lint:
-# #   image: node:12-alpine
-# #   stage: test
-# #   script:
-# #     - npm link @angular/cli@11.2.6
-# #     - ng lint
-# #   cache:
-# #     key:
-# #       files:
-# #         - package-lock.json
-# #     paths:
-# #       - node_modules
-# #     policy: pull
-
-# # test:
-# #   image: markhobson/node-chrome:latest
-# #   stage: test
-# #   script:
-# #     - npm link @angular/cli@11.2.6
-# #     - npm test -- --browsers=ChromeHeadless --watch=false
-# #   cache:
-# #     key:
-# #       files:
-# #         - package-lock.json
-# #     paths:
-# #       - node_modules
-# #     policy: pull
-
-# Build_project:
-#   image: node:12-alpine
-#   stage: Build
-#   only:
-#     - main
-#   script:
-#     - npm run build
-#   artifacts:
-#     paths:
-#       - $CI_PROJECT_DIR/dist
+#     - npm link @angular/cli@11.2.6
+#     - ng lint
 #   cache:
 #     key:
 #       files:
@@ -64,6 +32,38 @@ stages:
 #     paths:
 #       - node_modules
 #     policy: pull
+
+# test:
+#   image: markhobson/node-chrome:latest
+#   stage: test
+#   script:
+#     - npm link @angular/cli@11.2.6
+#     - npm test -- --browsers=ChromeHeadless --watch=false
+#   cache:
+#     key:
+#       files:
+#         - package-lock.json
+#     paths:
+#       - node_modules
+#     policy: pull
+
+Build_project:
+  image: node:12-alpine
+  stage: Build
+  only:
+    - main
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - $CI_PROJECT_DIR/dist
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+    policy: pull
 
 Publish:
   before_script:
@@ -74,8 +74,8 @@ Publish:
   script:
     - sshpass -V
     - export SSHPASS=$CI_USER_PASS
-    # - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 rm -r /home/gitlab-ci/dist || true
-    # - sshpass -e scp -r -o StrictHostKeyChecking=no $CI_PROJECT_DIR/dist gitlab-ci@146.59.94.173:/home/gitlab-ci
+    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 rm -r /home/gitlab-ci/dist || true
+    - sshpass -e scp -r -o StrictHostKeyChecking=no $CI_PROJECT_DIR/dist gitlab-ci@146.59.94.173:/home/gitlab-ci
     - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 rm -r /var/www/html || true
     - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 cp -r /home/gitlab-ci/dist/devims /var/www/html
     - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 sudo systemctl restart nginx.service
