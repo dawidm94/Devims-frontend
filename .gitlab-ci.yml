@@ -50,24 +50,28 @@ stages:
 build_project:
   image: node:12-alpine
   stage: build
+  only:
+    - main
   script:
-    - npm link @angular/cli@11.2.6
+    - npm install
     - ng build
   artifacts:
     paths:
       - $CI_PROJECT_DIR/dist
-  cache:
-    key:
-      files:
-        - package-lock.json
-    paths:
-      - node_modules
-    policy: pull
+  # cache:
+  #   key:
+  #     files:
+  #       - package-lock.json
+  #   paths:
+  #     - node_modules
+  #   policy: pull
 
 publish:
   before_script:
     - apt-get update -qq && apt-get install -y -qq sshpass
   stage: publish
+  only:
+    - main
   script:
     - sshpass -V
     - export SSHPASS=$CI_USER_PASS
