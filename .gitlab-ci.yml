@@ -1,0 +1,76 @@
+
+stages:
+  - dependencies
+  - test
+  - build
+  - publish
+
+install_dependencies:
+  image: node:12-alpine
+  stage: dependencies
+  script:
+    - npm install
+  only:
+    - main
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+
+lint:
+  image: node:12-alpine
+  stage: test
+  script:
+    - npm link @angular/cli@11.2.6
+    - ng lint
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+    policy: pull
+
+test:
+  image: markhobson/node-chrome:latest
+  stage: test
+  script:
+    - npm link @angular/cli@11.2.6
+    - npm test -- --browsers=ChromeHeadless --watch=false
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+    policy: pull
+
+build_project:
+  image: node:12-alpine
+  stage: build
+  script:
+    - npm link @angular/cli@11.2.6
+    - ng build
+  artifacts:
+    paths:
+      - devims-front/dist
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - node_modules
+    policy: pull
+
+publish:
+  before_script:
+    - apt-get update -qq && apt-get install -y -qq sshpass
+  stage: publish
+  script:
+    - sshpass -V
+    - export SSHPASS=$CI_USER_PASS
+    - sshpass -e scp -o -r StrictHostKeyChecking=no devims-front/dist gitlab-ci@146.59.94.173:/home/gitlab-ci/dist
+    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 sudo mv -r /home/gitlab-ci/dist /var/www/html
+    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 sudo systemctl restart nginx.service
