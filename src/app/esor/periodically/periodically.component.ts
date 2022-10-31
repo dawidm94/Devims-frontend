@@ -69,7 +69,7 @@ export class PeriodicallyComponent implements OnInit {
   }
 
   getNextMonthName() {
-    return this.firstDayNextMonth.toLocaleDateString('default', {month: 'long'});
+    return this.firstDayNextMonth.toLocaleDateString('pl-PL', {month: 'long'});
   }
 
   getDaysInMonth(month: number, year: number) {
