@@ -41,7 +41,7 @@ export class PeriodicallyComponent implements OnInit {
   isSending = false;
   sentSuccessfully = false;
   sentWithError = false;
-  sentWith504 = false;
+  sentButTimeout = false;
   baseUrl = environment.baseURL
 
   constructor(private http: HttpClient, public dateService: DateService, public httpService: HttpService) { }
@@ -120,7 +120,7 @@ export class PeriodicallyComponent implements OnInit {
       error: err => {
         console.log(err);
         if (err.status == 504) {
-          this.sentWith504 = true;
+          this.sentButTimeout = true;
         } else {
           this.sentWithError = true
         }
@@ -172,7 +172,7 @@ export class PeriodicallyComponent implements OnInit {
 
   private clearSentMessages() {
     this.sentSuccessfully = false;
-    this.sentWith504 = false;
+    this.sentButTimeout = false;
     this.sentWithError = false;
   }
 

@@ -1,6 +1,11 @@
 <section>
   <h1 style="display: inline">Moje zajęte terminy</h1>
-  <span *ngIf="periods.length != 0 " class="right-button" style="text-align: center"><button mat-stroked-button color="warn" (click)="deleteSelections()">Usuń zaznaczone</button></span>
+  <span *ngIf="periods.length != 0" class="right-button" style="text-align: center">
+    <button mat-stroked-button color="warn" (click)="deleteSelections()" [disabled]="isSending">
+      <mat-icon *ngIf="isSending"><mat-spinner color="warn" diameter="20"></mat-spinner></mat-icon>
+      Usuń zaznaczone
+    </button>
+  </span>
 </section>
 <table mat-table [dataSource]="periods" class="mat-elevation-z8">
   <!-- Checkbox Column -->

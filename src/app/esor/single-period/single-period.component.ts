@@ -21,6 +21,7 @@ export class SinglePeriodComponent implements OnInit {
   isSending = false;
   sentSuccessfully = false;
   sentWithError = false;
+  sentButTimeout = false;
   actualPeriods: Period[] = [];
   baseUrl = environment.baseURL
   wholeDay = false;
@@ -76,7 +77,7 @@ export class SinglePeriodComponent implements OnInit {
       error: err => {
         this.isSending = false;
         if (err.status == 504) {
-          this.sentSuccessfully = true;
+          this.sentButTimeout = true;
         } else {
           this.sentWithError = true
         }
