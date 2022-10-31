@@ -34,7 +34,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import { EsorHomeComponent } from './esor/esor-home/esor-home.component';
 import { SinglePeriodComponent } from './esor/single-period/single-period.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {MatNativeDateModule} from "@angular/material/core";
+import {DateAdapter, MatNativeDateModule} from "@angular/material/core";
 
 import { MAT_DATE_LOCALE } from '@angular/material/core'
 import {MatDividerModule} from "@angular/material/divider";
@@ -43,6 +43,7 @@ import { RejectNominationDialogComponent } from './esor/reject-nomination-dialog
 import { AcceptNominationDialogComponent } from './esor/accept-nomination-dialog/accept-nomination-dialog.component';
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { EarningsComponent } from './esor/earnings/earnings.component';
+import {CustomDateAdapter} from "./esor/custom.date.adapter";
 
 
 
@@ -92,7 +93,10 @@ import { EarningsComponent } from './esor/earnings/earnings.component';
         MatDividerModule,
         MatTooltipModule,
     ],
-  providers: [{ provide: MAT_DATE_LOCALE, useValue: 'pl-PL' }],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'pl-PL' },
+    { provide: DateAdapter, useClass: CustomDateAdapter}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
