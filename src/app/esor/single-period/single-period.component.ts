@@ -46,7 +46,6 @@ export class SinglePeriodComponent implements OnInit {
   }
 
   updateReasonFilled() {
-    console.log(this.reason)
     this.reasonFilled = this.reason != undefined && this.reason != '' && this.reason.length > 1;
   }
 
