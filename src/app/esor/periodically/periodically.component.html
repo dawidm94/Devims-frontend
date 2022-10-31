@@ -26,10 +26,10 @@
 </section>
 <section [style]="getLeftPaddingToSendButton()">
   <button (click)="send()" mat-raised-button color="primary" [disabled]="isSending">
-    Wyślij <mat-icon *ngIf="isSending && !sentWithError && !sentSuccessfully && !sentWith504"><mat-spinner color="primary" diameter="20">
+    Wyślij <mat-icon *ngIf="isSending && !sentWithError && !sentSuccessfully && !sentButTimeout"><mat-spinner color="primary" diameter="20">
   </mat-spinner></mat-icon>
   </button>
   <h3 style="color: red" *ngIf="sentWithError">Coś poszło nie tak :( Skontaktuj się z Simsem.</h3>
-  <h1 style="color: green" *ngIf="sentWith504">Udało się!! To wszystko! :)</h1>
+  <h3 style="color: orange" *ngIf="sentButTimeout">Esor jeszcze procesuje. Zerknij za minutę czy masz wszystkie terminy i najlepiej nie dodawaj nic w tym czasie!</h3>
   <h1 style="color: green" *ngIf="sentSuccessfully">Udało się :) To wszystko!</h1>
 </section>

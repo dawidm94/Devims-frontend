@@ -14,6 +14,7 @@ export class BusyTimesComponent implements OnInit {
   periods: any | undefined;
   isSending = false;
   sentSuccessfully = true;
+  sentButTimeout = true;
   sentWithError = true;
   baseUrl = environment.baseURL
 
@@ -48,10 +49,11 @@ export class BusyTimesComponent implements OnInit {
       },
       error: err => {
         if (err.status == 504) {
-          this.sentSuccessfully = true;
+          this.sentButTimeout = true;
         } else {
           this.sentWithError = true
         }
+        this.isSending = false;
       }
     })
   }
