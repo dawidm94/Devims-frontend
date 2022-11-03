@@ -50,7 +50,6 @@ export class AcceptNominationDialogComponent implements OnInit {
           this.calculateNetAmount()
         }
         this.nominationHeader = response.league + ': ' + response.round + ': Mecz nr ' + response.matchNumber + ' (' + response.date + ')'
-        console.log(response)
         this.nomination = response
       },
       error: err => {
@@ -88,10 +87,10 @@ export class AcceptNominationDialogComponent implements OnInit {
   }
 
   acceptNomination(): void {
-  console.log(this.nomination.delegationNumber)
     let nomination = {arrival: '', buy: this.nomination.buy, costAccommodation: 0, costPerKilometerGross: this.nomination.perKilometer.length > 0 ? this.nomination.perKilometer[0].gross : null, costTransport: this.transportAmount + '', costTravel: 0, delegationNumber: this.nomination.delegationNumber,
       departure: '', documentType: 0, equivalent: this.grossAmount, matchId: this.matchId, privateTransport: false, reservation: false, routes: [], routesDistanceKilometers: 0,
       toPay: this.toPay, vehicleBrand: '', vehicleRegistrationNumber: '', vehicleEngineSize: ''}
+
     this.sendNomination(nomination)
   }
 
