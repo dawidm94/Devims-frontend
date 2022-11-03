@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpService} from "../http.service";
 import {environment} from "../../../environments/environment";
-import {ConfirmedNotification, PeriodRequest} from "../date.service";
+import {ConfirmedNomination, PeriodRequest} from "../date.service";
 
 @Component({
   selector: 'app-accept-nomination-dialog',
@@ -50,6 +50,7 @@ export class AcceptNominationDialogComponent implements OnInit {
           this.calculateNetAmount()
         }
         this.nominationHeader = response.league + ': ' + response.round + ': Mecz nr ' + response.matchNumber + ' (' + response.date + ')'
+        console.log(response)
         this.nomination = response
       },
       error: err => {
@@ -87,11 +88,11 @@ export class AcceptNominationDialogComponent implements OnInit {
   }
 
   acceptNomination(): void {
-
-    let notification = {arrival: '', buy: 1, costAccommodation: 0, costPerKilometerGross: this.nomination.perKilometer.length > 0 ? this.nomination.perKilometer[0].gross : null, costTransport: this.transportAmount + '', costTravel: 0, delegationNumber: null,
+  console.log(this.nomination.delegationNumber)
+    let nomination = {arrival: '', buy: this.nomination.buy, costAccommodation: 0, costPerKilometerGross: this.nomination.perKilometer.length > 0 ? this.nomination.perKilometer[0].gross : null, costTransport: this.transportAmount + '', costTravel: 0, delegationNumber: this.nomination.delegationNumber,
       departure: '', documentType: 0, equivalent: this.grossAmount, matchId: this.matchId, privateTransport: false, reservation: false, routes: [], routesDistanceKilometers: 0,
       toPay: this.toPay, vehicleBrand: '', vehicleRegistrationNumber: '', vehicleEngineSize: ''}
-    this.sendNotification(notification)
+    this.sendNomination(nomination)
   }
 
   toggleGrossRates() {
@@ -110,7 +111,7 @@ export class AcceptNominationDialogComponent implements OnInit {
     }
   }
 
-  private sendNotification(request: ConfirmedNotification) {
+  private sendNomination(request: ConfirmedNomination) {
     this.http.post<any>(this.baseUrl + 'esor/nominations/' + this.matchId + '/confirm', request, this.httpService.getOptionWithEsorToken()).subscribe({
       next: () => {
         this.dialogRef.close(true)

@@ -13,7 +13,7 @@ export interface PeriodRequest {
   seasonId: string | null;
 }
 
-export interface ConfirmedNotification {
+export interface ConfirmedNomination {
   arrival: string | '';
   buy: number | 1;
   costAccommodation: number | 0;
