@@ -31,8 +31,7 @@ export class FileService {
     if (!matchId) {
       return
     }
-    let districtId = 7 //TODO: Change to read from api
-    let url = this.baseUrl + 'esor/match/' + matchId + '/delegation/' + districtId;
+    let url = this.baseUrl + 'esor/match/' + matchId + '/delegation/';
 
     this.downloadFile(url, 'Delegacja-' + filename);
   }

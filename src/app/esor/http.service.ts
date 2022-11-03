@@ -26,10 +26,9 @@ export class HttpService {
   }
 
   getOptionWithEsorTokenWithBlobAsJsonResponseType() {
-    let esorToken = sessionStorage.getItem('esorToken') as string
-    let headers = new HttpHeaders({'Esor-Token': esorToken});
+    let optionsWithSeasonId = this.getOptionsWithSeasonId();
 
-    return {headers: headers, responseType: 'blob' as 'json'};
+    return {headers: optionsWithSeasonId.headers, params: optionsWithSeasonId.params, responseType: 'blob' as 'json'};
   }
 
   getOptionsWithSeasonId() {
