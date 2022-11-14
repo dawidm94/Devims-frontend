@@ -10,6 +10,7 @@ import {TimetableComponent} from "./esor/timetable/timetable.component";
 import {SinglePeriodComponent} from "./esor/single-period/single-period.component";
 import {NominationsComponent} from "./esor/nominations/nominations.component";
 import {EarningsComponent} from "./esor/earnings/earnings.component";
+import {SettlementsComponent} from "./esor/settlements/settlements.component";
 
 const routes: Routes = [
   {
@@ -43,6 +44,9 @@ const routes: Routes = [
       },
       {
         path: 'earnings', component: EarningsComponent
+      },
+      {
+        path: 'settlements', component: SettlementsComponent
       }
     ]},
 ];

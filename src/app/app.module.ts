@@ -44,6 +44,7 @@ import { AcceptNominationDialogComponent } from './esor/accept-nomination-dialog
 import {MatTooltipModule} from "@angular/material/tooltip";
 import { EarningsComponent } from './esor/earnings/earnings.component';
 import {CustomDateAdapter} from "./esor/custom.date.adapter";
+import { SettlementsComponent } from './esor/settlements/settlements.component';
 
 
 
@@ -63,7 +64,8 @@ import {CustomDateAdapter} from "./esor/custom.date.adapter";
     NominationsComponent,
     RejectNominationDialogComponent,
     AcceptNominationDialogComponent,
-    EarningsComponent
+    EarningsComponent,
+    SettlementsComponent
   ],
     imports: [
         BrowserModule,

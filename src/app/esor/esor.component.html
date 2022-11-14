@@ -25,6 +25,7 @@
   <hr/>
   <section style="font-style: italic">
     <h4>Lista ulepszeń:</h4>
+    <div>14.11.2022r. Zakładka "Rozliczenia" (póki co tylko wersja komputerowa) - możliwość oznaczania zapłaconych meczów wraz z dodawaniem komentarza.</div>
     <div>03.11.2022r. Poprawka z przypisywaniem numeru delegacji dla okręgowych rozgrywek, poprawka z podliczaniem zarobków (czasami kwota był podawana z kilkoma zerami po przecinku), delegacje dla boiskowych RC w formacie PZKosz.</div>
     <div>31.10.2022r. Poprawki z dodawaniem zajętych terminów - komunikat o zakończeniu dodawania dopierio po faktycznym przeprocesowaniu przez esor</div>
     <div>28.10.2022r. Zakończenie prac przenoszenia aplikacji do domeny devims.pl</div>
@@ -69,7 +70,7 @@
       </button>
       <button mat-button routerLink="nominations">Moje nominacje</button>
       <button mat-button routerLink="timetable">Mój terminarz</button>
-      <button mat-button [matMenuTriggerFor]="periods">Zajęte terminy</button>
+      <button mat-button [matMenuTriggerFor]="periods">Zajęte terminy ↓</button>
       <mat-menu #periods>
         <button mat-menu-item routerLink="busy-times">Moje zajęte terminy</button>
         <button mat-menu-item routerLink="period">Dodaj zajęty termin</button>
@@ -77,7 +78,11 @@
         <button mat-menu-item routerLink="delete-all">Usuń wszystkie zajęte terminy</button>
       </mat-menu>
       <button mat-button (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>
-      <button mat-button routerLink="earnings">Zarobki</button>
+      <button mat-button [matMenuTriggerFor]="others">Inne ↓</button>
+      <mat-menu #others>
+        <button mat-menu-item routerLink="settlements">Rozliczenia</button>
+        <button mat-menu-item routerLink="earnings">Zarobki</button>
+      </mat-menu>
       <button mat-button color="accent" *ngIf="nameClickCounter > 5" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
 
       <span class="example-spacer"></span>
