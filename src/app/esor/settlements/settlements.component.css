@@ -10,12 +10,7 @@ table {
   flex: 0 0 3% !important;
   width: 3% !important;
 
-  word-wrap: break-word !important;
   white-space: unset !important;
-
-  overflow-wrap: break-word;
-
-  word-break: break-word;
 
   -ms-hyphens: auto;
   -moz-hyphens: auto;
