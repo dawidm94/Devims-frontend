@@ -41,17 +41,14 @@ export class MatchDetailsDialogComponent implements OnInit {
     switch (status) {
       case -1:
       case '-1': {
-        // return 'close'
         return 'sentiment_very_dissatisfied'
       }
       case 1:
       case '1': {
-        // return 'question_mark'
         return 'sentiment_neutral'
       }
       case 2:
       case '2': {
-        // return 'check'
         return 'mood'
       }
       default: {

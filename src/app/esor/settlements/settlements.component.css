@@ -109,6 +109,85 @@ table {
   hyphens: auto;
 }
 
+/*-----------------------------MOBILE------------------------------------*/
+.mat-column-mobile-paid {
+  text-align: left;
+  justify-content: left;
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+  width: 15% !important;
+  overflow-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-mobile-date {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 25% !important;
+  width: 25% !important;
+  overflow-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-mobile-teamHome {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 38% !important;
+  width: 38% !important;
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-mobile-toPay {
+  text-align: center;
+  justify-content: center;
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+  width: 15% !important;
+  overflow-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-mobile-details {
+  text-align: right;
+  justify-content: right;
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 8% !important;
+  width: 8% !important;
+  overflow-wrap: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+/*----------------------------------------------------------------------------*/
 .help-icon {
   transform: scale(85%);
 }
@@ -120,4 +199,11 @@ table {
 
 .mat-tooltip {
   white-space: pre-line;
+}
+
+.aligned-with-icon {
+  float: right;
+  position: absolute;
+  margin-top: 5px;
+  margin-left: 5px; /* optional */
 }

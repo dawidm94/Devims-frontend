@@ -2,16 +2,22 @@
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     <h3 *ngIf="isLongLoading">Jak doszły nowe mecze, ładowanie trwa troszkę dłużej.</h3>
   <section *ngIf="isVeryLongLoading">
-    <h3>... a za pierwszym razem jeszcze dłużej :) - spokojnie - to tylko raz.</h3>
+    <h3>... a za pierwszym razem jeszcze dłużej :) Spokojnie - to tylko raz.</h3>
   </section>
 </section>
+
 <div *ngIf="timetable" style="text-align: center">
-  <h1 class="inline" style="text-align: center; font-weight: bold">Rozliczenia</h1>
-  <mat-icon style="padding-left: 5px" color="primary" matTooltipClass="info-tooltip" matTooltip="Kontroluj przelewy od klubów za wszystkie mecze. Każdy mecz będzie pojawiać się dzień po rozegraniu. Uwaga - automatyczne zapisywanie przy każdorazowej zmianie. Nie musisz klikać nic dodatkowego :)" matTooltipPosition="right">
+  <h1 class="inline" style="text-align: center; font-weight: bold; vertical-align:middle">Rozliczenia</h1>
+  <span *ngIf="mobile" style="display: inline; float: right; padding-right: 15px; transform: scale(85%)">
+    <button mat-mini-fab color="primary" (click)="toggleMobileHelp()">
+      <mat-icon>question_mark</mat-icon>
+    </button>
+  </span>
+  <mat-icon *ngIf="!mobile" style="padding-left: 5px" color="primary" matTooltipClass="info-tooltip" matTooltip="Kontroluj przelewy od klubów za wszystkie mecze. Każdy mecz będzie pojawiać się dzień po rozegraniu. Uwaga - automatyczne zapisywanie przy każdorazowej zmianie. Nie musisz klikać nic dodatkowego :)" matTooltipPosition="right">
     info
   </mat-icon>
 </div>
-<table *ngIf="timetable" mat-table [dataSource]="timetable" class="mat-elevation-z8">
+<table *ngIf="!mobile && timetable" mat-table [dataSource]="timetable" class="mat-elevation-z8">
   <!-- Position Column -->
   <ng-container matColumnDef="position" >
     <th mat-header-cell *matHeaderCellDef> Lp. </th>
@@ -61,7 +67,7 @@
     </th>
     <td class=""  mat-cell *matCellDef="let timetable">
       <mat-form-field appearance="standard">
-              <textarea matInput [(ngModel)]="timetable.settlement.comment" placeholder="<brak uwag>" rows="1" maxlength="255" (blur)="updateSettlements()"></textarea>
+        <textarea matInput [(ngModel)]="timetable.settlement.comment" placeholder="<brak uwag>" rows="1" maxlength="250" (blur)="updateSettlements()"></textarea>
       </mat-form-field>
     </td>
   </ng-container>
@@ -69,3 +75,62 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
+
+<section *ngIf="mobile && timetable">
+  <section *ngIf="showMobileHelp" style="padding-left: 4px">
+    <h5>Po lewej stronie zaznaczaj jeżeli klub zapłacił za mecz.</h5>
+    <h5>Jeżeli chcesz dodać komentarz (np. nr delegacji, datę płatności, jakieś uwagi) lub uzyskać więcej informacji o meczu, kliknij w dymek po prawej stronie.</h5>
+    <h5>UWAGA: Wszystkie "akcje" zapisują się automatycznie, nie musisz nigdzie klikać "zapisz".</h5>
+    <div>
+      <mat-icon color="primary">add_comment</mat-icon> <span class="aligned-with-icon">- brak komentarza</span>
+    </div>
+    <div>
+      <mat-icon color="primary">comment</mat-icon> <span class="aligned-with-icon">- z komentarzem</span>
+    </div>
+  </section>
+  <table mat-table [dataSource]="timetable" class="mat-elevation-z8">
+    <!-- matchTeams Column -->
+    <ng-container matColumnDef="mobile-teamHome">
+      <th mat-header-cell *matHeaderCellDef> Gospodarz </th>
+      <td mat-cell *matCellDef="let timetable"> {{timetable.match.teamHome}} </td>
+    </ng-container>
+
+    <!-- date Column -->
+    <ng-container matColumnDef="mobile-date">
+      <th mat-header-cell *matHeaderCellDef> Data </th>
+      <td mat-cell *matCellDef="let timetable"> {{timetable.match.date}} {{timetable.match.time}} </td>
+    </ng-container>
+
+    <!-- Paid  Column -->
+    <ng-container matColumnDef="mobile-paid">
+      <th mat-header-cell *matHeaderCellDef></th>
+
+      <td mat-cell *matCellDef="let timetable"><mat-checkbox color="primary" [(ngModel)]="timetable.settlement.paid" (change)="updateSettlements()"></mat-checkbox></td>
+    </ng-container>
+
+    <!-- toPay Column -->
+    <ng-container matColumnDef="mobile-toPay">
+      <th mat-header-cell *matHeaderCellDef> Kwota </th>
+      <td mat-cell *matCellDef="let timetable"> {{timetable.settlement.toPay}} zł</td>
+    </ng-container>
+
+    <!-- Comment  Column -->
+    <ng-container matColumnDef="mobile-details">
+      <th mat-header-cell *matHeaderCellDef style="text-align: center !important">
+      </th>
+      <td class=""  mat-cell *matCellDef="let timetable">
+        <button mat-icon-button title="Szczegóły meczu" (click)="openMobileDetailsDialog(timetable)">
+          <mat-icon color="primary" *ngIf="timetable.settlement.comment != undefined
+           && timetable.settlement.comment != null
+           && timetable.settlement.comment.trim() != ''">comment</mat-icon>
+          <mat-icon color="primary" *ngIf="timetable.settlement.comment == undefined
+          || timetable.settlement.comment == null
+          || timetable.settlement.comment.trim() == ''">add_comment</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedMobileColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedMobileColumns;"></tr>
+  </table>
+</section>

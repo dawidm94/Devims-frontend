@@ -1,0 +1,12 @@
+<section>
+  <h2>Mecz nr {{timetable.match.matchNumber}}: {{timetable.match.teamHome}} - {{timetable.match.teamVisitor}}</h2>
+</section>
+<section>
+  <p>Liga: <b>{{timetable.match.league}}</b></p>
+  <p>Data i godzina spotkania: <b>{{timetable.match.date}} {{timetable.match.time}}</b></p>
+  <p>Do zapłaty: <b>{{timetable.settlement.toPay}} zł</b></p>
+  <p>Zapłacono: <b>{{timetable.settlement.paid == true ? 'TAK' : 'NIE'}}</b></p>
+  <p>Komentarz:</p>
+  <textarea matInput [(ngModel)]="timetable.settlement.comment" placeholder="<brak uwag>" maxlength="250" cols="30" rows="4"></textarea>
+  <h5>Przeciągnij prawy dolny róg aby zwiększyć rozmiar</h5>
+</section>

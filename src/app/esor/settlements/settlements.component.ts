@@ -3,6 +3,10 @@ import {HttpClient} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {HttpService} from "../http.service";
 import {environment} from "../../../environments/environment";
+import {MatchDetailsDialogComponent} from "../match-details-dialog/match-details-dialog.component";
+import {
+  SettlementMobileDetailsDialogComponent
+} from "../settlement-mobile-details-dialog/settlement-mobile-details-dialog.component";
 
 @Component({
   selector: 'app-settlements',
@@ -24,15 +28,17 @@ export class SettlementsComponent implements OnInit {
 
   timetable: any | undefined;
   isLongLoading = false;
+  showMobileHelp = false;
   isVeryLongLoading = false;
   baseUrl = environment.baseURL
+  mobile = window.screen.width < 500;
   displayedColumns: string[] = ['position', 'paid', 'date', 'league', 'matchTeams', 'toPay', 'comment'];
+  displayedMobileColumns: string[] = ['mobile-paid', 'mobile-date','mobile-teamHome', 'mobile-toPay', 'mobile-details'];
 
   private getSettlements() {
     this.http.get<any>(this.baseUrl + 'esor/settlement', this.httpService.getOptionsWithSeasonId()).subscribe({
       next: response => {
         this.timetable = response
-        console.log(this.timetable)
       },
       error: err => {
         console.log(err)
@@ -42,18 +48,7 @@ export class SettlementsComponent implements OnInit {
 
   updateSettlements() {
     let settlements = this.timetable.map((src: { settlement: any; }) => src.settlement)
-    this.http.put<any>(this.baseUrl + 'esor/settlement', settlements, this.httpService.getOptionWithEsorToken()).subscribe({
-      next: () => {
-        console.log('pykło')
-      },
-      error: () => {
-        console.log('nie pykło')
-      }
-    });
-  }
-
-  test() {
-    console.log('check')
+    this.http.put<any>(this.baseUrl + 'esor/settlement', settlements, this.httpService.getOptionWithEsorToken()).subscribe();
   }
 
   private handleLongLoading() {
@@ -64,5 +59,24 @@ export class SettlementsComponent implements OnInit {
     setTimeout( ()=>{
       this.isVeryLongLoading = true;
     }, 7 * 1000) // 7 sec
+  }
+
+  toggleMobileHelp() {
+    this.showMobileHelp = !this.showMobileHelp;
+  }
+
+  openMobileDetailsDialog(timetable: any): void {
+    const dialog = this.dialog.open(SettlementMobileDetailsDialogComponent, {
+      width: '450px',
+      height: (window.screen.height - 200) + 'px',
+      data: timetable
+    });
+
+    dialog.afterClosed().subscribe(response => {
+      const objectToReplace = this.timetable.find((arrayItem: { settlement: any; }) => arrayItem.settlement.id === response.settlement.id);
+      Object.assign(objectToReplace, response)
+
+      this.updateSettlements();
+    })
   }
 }
