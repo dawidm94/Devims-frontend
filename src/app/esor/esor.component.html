@@ -63,7 +63,7 @@
   </section>
 </div>
 <div *ngIf="loggedIn">
-  <p *ngIf="!mobile">
+  <div *ngIf="!mobile">
     <mat-toolbar color="primary">
       <button mat-icon-button routerLink="home">
         <mat-icon>sports_basketball</mat-icon>
@@ -89,8 +89,8 @@
       <span (click)="addNameClick()">Cześć {{username}}!</span>
       <button mat-button (click)="logout()">Wyloguj</button>
     </mat-toolbar>
-  </p>
-  <p *ngIf="mobile">
+  </div>
+  <div *ngIf="mobile">
     <mat-toolbar color="primary">
       <button mat-icon-button [matMenuTriggerFor]="menu" class="example-icon" aria-label="Example icon-button with menu icon">
         <mat-icon>menu</mat-icon>
@@ -114,7 +114,15 @@
       <span class="example-spacer"></span>
       <span (click)="addNameClick()">Cześć {{username}}!</span>
     </mat-toolbar>
-  </p>
+  </div>
+  <div class="announcement">
+    <p *ngIf="!mobile">
+      ❕ Wypróbuj nową zakładkę Inne -> ROZLICZENIA ❕
+    </p>
+    <p *ngIf="mobile">
+      ❕ Wypróbuj nową zakładkę ROZLICZENIA ❕
+    </p>
+  </div>
   <router-outlet></router-outlet>
 </div>
 

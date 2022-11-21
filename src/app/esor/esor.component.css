@@ -22,3 +22,9 @@ section {
 ::ng-deep.mat-menu-panel {
   max-width:fit-content !important;
 }
+
+.announcement {
+  font-weight: bold;
+  text-align: center;
+  background-color: khaki;
+}
