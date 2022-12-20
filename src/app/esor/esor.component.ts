@@ -21,6 +21,7 @@ export class EsorComponent implements OnInit {
   isBlankDelegationDownloading = false;
   mobile = window.screen.width < 500;
   gotBackendHealthResponse = false;
+  showReleaseHistory = false;
   isHealthCheckError = false;
   loadingMessage = 'Uruchamianie aplikacji - prosimy o chwilę cierpliwości :)'
   loadingMessageList = [
