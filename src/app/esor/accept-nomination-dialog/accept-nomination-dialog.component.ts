@@ -45,10 +45,15 @@ export class AcceptNominationDialogComponent implements OnInit {
   getNomination(): void {
     this.http.get<any>(this.baseUrl + 'esor/nominations/' + this.matchId, this.httpService.getOptionsWithSeasonId()).subscribe({
       next: (response) => {
+        if (response.costTransport != null) {
+          this.transportAmount = response.costTransport;
+        }
+
         if (response.equivalentOptions && response.equivalentOptions.length > 0) {
           this.grossAmount = response.equivalentOptions[0].gross
           this.calculateNetAmount()
         }
+
         this.nominationHeader = response.league + ': ' + response.round + ': Mecz nr ' + response.matchNumber + ' (' + response.date + ')'
         this.nomination = response
       },

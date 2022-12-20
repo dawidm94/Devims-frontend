@@ -5,6 +5,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {MatchDetailsDialogComponent} from "../match-details-dialog/match-details-dialog.component";
 import {HttpService} from "../http.service";
 import {environment} from "../../../environments/environment";
+import {AcceptNominationDialogComponent} from "../accept-nomination-dialog/accept-nomination-dialog.component";
 
 @Component({
   selector: 'app-timetable',
@@ -58,5 +59,14 @@ export class TimetableComponent implements OnInit {
 
   getIcal(matchId: number) {
     this.fileService.downloadIcal(matchId);
+  }
+
+  editNomination(matchId: number) {
+    let isMobile = window.screen.width < 500
+    this.dialog.open(AcceptNominationDialogComponent, {
+      width: '450px',
+      height: isMobile ? (window.screen.height - 100) + 'px' : '',
+      data: matchId
+    }).afterClosed().subscribe()
   }
 }
