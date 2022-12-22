@@ -16,6 +16,7 @@ export class EsorComponent implements OnInit {
   loggedIn = false;
   token: string | undefined;
   username: string | undefined;
+  firstName: string | undefined;
   seasonId: number | undefined;
   baseUrl = environment.baseURL
   isBlankDelegationDownloading = false;
@@ -86,6 +87,7 @@ export class EsorComponent implements OnInit {
         next: response => {
           this.loggedIn = true;
           this.username = response.username
+          this.firstName = response.username.split(/(\s+)/)[0];
           this.updateSeasonId(esorToken)
           return true
         },
