@@ -6,6 +6,7 @@ import {FileService} from "./file.service";
 import {Router} from "@angular/router";
 import {environment} from "../../environments/environment";
 import {HttpService} from "./http.service";
+import {Meta, Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-esor',
@@ -38,12 +39,16 @@ export class EsorComponent implements OnInit {
   nameClickCounter = 0;
 
   constructor(
+    private metaService: Meta,
+    private titleService: Title,
     private http: HttpClient,
     public dialog: MatDialog,
     public fileService: FileService,
     public router: Router,
     public httpService: HttpService
-  ) {}
+  ) {
+    this.titleService.setTitle("Devims - ESOR");
+  }
 
   ngOnInit(): void {
     this.checkIfEsorTokenIsValid()
@@ -141,5 +146,10 @@ export class EsorComponent implements OnInit {
 
   addNameClick() {
     this.nameClickCounter += 1;
+  }
+
+
+  addTag() {
+    this.metaService.addTag({ name: 'description', content: 'Narzędzie do kompleksowego zarządzania nominacjami sędziowskimi z systemu ESOR.' });
   }
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {BrowserModule, Meta} from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -98,6 +98,7 @@ import { SettlementMobileDetailsDialogComponent } from './esor/settlement-mobile
         MatTooltipModule,
     ],
   providers: [
+    Meta,
     { provide: MAT_DATE_LOCALE, useValue: 'pl-PL' },
     { provide: DateAdapter, useClass: CustomDateAdapter}
   ],
