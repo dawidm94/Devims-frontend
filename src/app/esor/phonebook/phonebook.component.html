@@ -1,6 +1,6 @@
 <section>
   <h1 style="text-align: center; font-weight: bold">SĘDZIOWIE</h1>
-  <div class="center">
+  <div class="center" [style]="mobile ? 'width: 75%;' : 'width: 50%;'">
     <mat-form-field>
       <mat-label>Wyszukaj</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Możesz szukać po każdym polu :)" #input>
