@@ -151,6 +151,6 @@ export class EsorComponent implements OnInit {
 
 
   addTag() {
-    this.metaService.addTag({ name: 'description', content: 'Narzędzie do kompleksowego zarządzania nominacjami sędziowskimi z systemu ESOR.' });
+    this.metaService.addTag({ name: 'description', content: 'Narzędzie do kompleksowego zarządzania nominacjami sędziowskimi z systemu ESOR - od ich akceptacji lub odrzucenia, po nawigację do hali, ewidencję zarobków i wiele innych.' });
   }
 }
