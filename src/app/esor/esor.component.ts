@@ -51,6 +51,7 @@ export class EsorComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.addTag();
     this.checkIfEsorTokenIsValid()
 
     if (this.router.url === '/esor') {
