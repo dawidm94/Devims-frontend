@@ -1,0 +1,22 @@
+table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 95%;
+}
+
+.center {
+  width: 50%;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+}
+
+.mobileButton {
+  width: 45px!important;
+  min-width: unset!important;
+}

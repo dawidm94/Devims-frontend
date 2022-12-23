@@ -26,10 +26,11 @@
   <section>
     <h4>Lista ulepszeń:</h4>
     <section *ngIf="!showReleaseHistory" style="font-style: italic; margin-bottom: 20px">
-      <div style="margin-bottom: 5px">20.12.2022r. Edycja nominacji z poziomu "Mój terminarz".</div>
+      <div style="margin-bottom: 5px">23.12.2022r. Zakładka 'Sędziowie'.</div>
       <button mat-stroked-button (click)="showReleaseHistory = true" [disabled]="!gotBackendHealthResponse">Pokaż całą historię</button>
     </section>
     <section *ngIf="showReleaseHistory" style="font-style: italic">
+      <div>23.12.2022r. Zakładka 'Sędziowie'.</div>
       <div>20.12.2022r. Edycja nominacji z poziomu "Mój terminarz".</div>
       <div>15.11.2022r. Zakładka "Rozliczenia" - możliwość oznaczania zapłaconych meczów wraz z dodawaniem komentarza.</div>
       <div>03.11.2022r. Poprawka z przypisywaniem numeru delegacji dla okręgowych rozgrywek, poprawka z podliczaniem zarobków (czasami kwota był podawana z kilkoma zerami po przecinku), delegacje dla boiskowych RC w formacie PZKosz.</div>
@@ -95,6 +96,7 @@
       <mat-menu #others>
         <button mat-menu-item routerLink="settlements">Rozliczenia</button>
         <button mat-menu-item routerLink="earnings">Zarobki</button>
+        <button mat-menu-item routerLink="phonebook">Sędziowie</button>
       </mat-menu>
       <button mat-button color="accent" *ngIf="nameClickCounter > 5" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
 
@@ -125,6 +127,7 @@
         <button mat-menu-item class="mobile-menu-element" disabled>Inne: </button>
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="settlements"> 🕯️ Rozliczenia</button>
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="earnings">🦌Zarobki</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="phonebook">🍬Sędziowie</button>
         <button *ngIf="nameClickCounter > 5" mat-menu-item class="mobile-menu-element" color="accent" style="color: darkorange" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
         <button mat-menu-item class="mobile-menu-element" (click)="logout()">👼🏻 Wyloguj</button>
       </mat-menu>

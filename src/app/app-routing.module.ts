@@ -11,6 +11,7 @@ import {SinglePeriodComponent} from "./esor/single-period/single-period.componen
 import {NominationsComponent} from "./esor/nominations/nominations.component";
 import {EarningsComponent} from "./esor/earnings/earnings.component";
 import {SettlementsComponent} from "./esor/settlements/settlements.component";
+import {PhonebookComponent} from "./esor/phonebook/phonebook.component";
 
 const routes: Routes = [
   {
@@ -47,6 +48,9 @@ const routes: Routes = [
       },
       {
         path: 'settlements', component: SettlementsComponent
+      },
+      {
+        path: 'phonebook', component: PhonebookComponent
       }
     ]},
 ];

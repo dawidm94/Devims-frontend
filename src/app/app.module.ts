@@ -46,6 +46,10 @@ import { EarningsComponent } from './esor/earnings/earnings.component';
 import {CustomDateAdapter} from "./esor/custom.date.adapter";
 import { SettlementsComponent } from './esor/settlements/settlements.component';
 import { SettlementMobileDetailsDialogComponent } from './esor/settlement-mobile-details-dialog/settlement-mobile-details-dialog.component';
+import { PhonebookComponent } from './esor/phonebook/phonebook.component';
+import {MatPaginatorIntl, MatPaginatorModule} from "@angular/material/paginator";
+import {getPolishPaginatorIntl} from "./esor/polish-paginator-init";
+import {ClipboardModule} from "@angular/cdk/clipboard";
 
 
 
@@ -67,40 +71,44 @@ import { SettlementMobileDetailsDialogComponent } from './esor/settlement-mobile
     AcceptNominationDialogComponent,
     EarningsComponent,
     SettlementsComponent,
-    SettlementMobileDetailsDialogComponent
+    SettlementMobileDetailsDialogComponent,
+    PhonebookComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatSliderModule,
-        MatGridListModule,
-        MatCardModule,
-        MatFormFieldModule,
-        MatIconModule,
-        MatInputModule,
-        MatDialogModule,
-        MatButtonModule,
-        MatSidenavModule,
-        FormsModule,
-        HttpClientModule,
-        MatTableModule,
-        MatCheckboxModule,
-        MatProgressSpinnerModule,
-        MatSortModule,
-        MatProgressBarModule,
-        MatToolbarModule,
-        MatMenuModule,
-        MatDatepickerModule,
-        ReactiveFormsModule,
-        MatNativeDateModule,
-        MatDividerModule,
-        MatTooltipModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatSliderModule,
+    MatGridListModule,
+    MatCardModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatSidenavModule,
+    FormsModule,
+    HttpClientModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatProgressSpinnerModule,
+    MatSortModule,
+    MatProgressBarModule,
+    MatToolbarModule,
+    MatMenuModule,
+    MatDatepickerModule,
+    ReactiveFormsModule,
+    MatNativeDateModule,
+    MatDividerModule,
+    MatTooltipModule,
+    MatPaginatorModule,
+    ClipboardModule,
+  ],
   providers: [
     Meta,
     { provide: MAT_DATE_LOCALE, useValue: 'pl-PL' },
-    { provide: DateAdapter, useClass: CustomDateAdapter}
+    { provide: DateAdapter, useClass: CustomDateAdapter},
+    { provide: MatPaginatorIntl, useValue: getPolishPaginatorIntl()}
   ],
   bootstrap: [AppComponent]
 })
