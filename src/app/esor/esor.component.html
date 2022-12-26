@@ -76,11 +76,8 @@
 <div *ngIf="loggedIn">
   <div *ngIf="!mobile">
     <mat-toolbar color="primary">
-<!--      <button mat-icon-button routerLink="home">-->
-<!--        <mat-icon>sports_basketball</mat-icon>-->
-<!--      </button>-->
-      <button style="transform: scale(2);" mat-icon-button routerLink="home">
-        🎄
+      <button mat-icon-button routerLink="home">
+        <mat-icon>sports_basketball</mat-icon>
       </button>
       <button mat-button routerLink="nominations">Moje nominacje</button>
       <button mat-button routerLink="timetable">Mój terminarz</button>
@@ -101,49 +98,44 @@
       <button mat-button color="accent" *ngIf="nameClickCounter > 5" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
 
       <span class="example-spacer"></span>
-<!--      <span (click)="addNameClick()">Cześć {{username}}!</span>-->
-      🎄<span class="christmas">Wesołych Świąt {{firstName}}!</span>🎄
+      <span (click)="addNameClick()">Cześć {{username}}!</span>
       <button mat-button (click)="logout()">Wyloguj</button>
     </mat-toolbar>
   </div>
   <div *ngIf="mobile">
     <mat-toolbar color="primary">
-<!--      <button mat-icon-button [matMenuTriggerFor]="menu">-->
-<!--        <mat-icon>menu</mat-icon>-->
-<!--      </button>-->
-      <button style="transform: scale(2);" mat-icon-button [matMenuTriggerFor]="menu">
-        🎄
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu>
-        <button mat-menu-item class="mobile-menu-element" routerLink="home">🎅 Główna strona</button>
-        <button mat-menu-item class="mobile-menu-element" routerLink="nominations">🤶 Moje nominacje</button>
-        <button mat-menu-item class="mobile-menu-element" routerLink="timetable">🎁 Mój terminarz</button>
+        <button mat-menu-item class="mobile-menu-element" routerLink="home">Główna strona</button>
+        <button mat-menu-item class="mobile-menu-element" routerLink="nominations">Moje nominacje</button>
+        <button mat-menu-item class="mobile-menu-element" routerLink="timetable">Mój terminarz</button>
         <button mat-menu-item class="mobile-menu-element" disabled>Zajęte terminy: </button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="busy-times">🎄 Moje zajęte terminy</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="period">⛄ Dodaj zajęty termin</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="periodically">❄️ Uzupełnij cyklicznie przyszły miesiąc</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="delete-all">🌟 Usuń wszystkie zajęte terminy</button>
-        <button mat-menu-item class="mobile-menu-element" (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">🔔 Pusta delegacja</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="busy-times">Moje zajęte terminy</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="period">Dodaj zajęty termin</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="periodically">Uzupełnij cyklicznie przyszły miesiąc</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="delete-all">Usuń wszystkie zajęte terminy</button>
+        <button mat-menu-item class="mobile-menu-element" (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>
         <button mat-menu-item class="mobile-menu-element" disabled>Inne: </button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="settlements"> 🕯️ Rozliczenia</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="earnings">🦌Zarobki</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="phonebook">🍬Sędziowie</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="settlements">Rozliczenia</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="earnings">Zarobki</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="phonebook">Sędziowie</button>
         <button *ngIf="nameClickCounter > 5" mat-menu-item class="mobile-menu-element" color="accent" style="color: darkorange" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
-        <button mat-menu-item class="mobile-menu-element" (click)="logout()">👼🏻 Wyloguj</button>
+        <button mat-menu-item class="mobile-menu-element" (click)="logout()">Wyloguj</button>
       </mat-menu>
       <span class="example-spacer"></span>
-<!--      <span (click)="addNameClick()">Cześć {{username}}!</span>-->
-      <span class="christmas">Wesołych Świąt!</span>
+      <span (click)="addNameClick()">Cześć {{username}}!</span>
     </mat-toolbar>
   </div>
-<!--  <div class="announcement">-->
-<!--    <p *ngIf="!mobile">-->
-<!--      ❕ Wypróbuj nową zakładkę Inne -> ROZLICZENIA ❕-->
-<!--    </p>-->
-<!--    <p *ngIf="mobile">-->
-<!--      ❗ Wypróbuj nową zakładkę ROZLICZENIA ❗-->
-<!--    </p>-->
-<!--  </div>-->
+  <div class="announcement">
+    <p *ngIf="!mobile">
+      ❕ Wypróbuj nową zakładkę Inne -> SĘDZIOWIE ❕
+    </p>
+    <p *ngIf="mobile">
+      ❗ Wypróbuj nową zakładkę SĘDZIOWIE ❗
+    </p>
+  </div>
   <router-outlet></router-outlet>
 </div>
 
