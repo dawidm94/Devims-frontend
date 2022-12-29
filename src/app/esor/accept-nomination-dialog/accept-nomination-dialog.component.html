@@ -10,83 +10,89 @@
   <button [style]="mobile ? 'margin-bottom: 20px' : 'margin-left: 40px'" [class]="mobile ? 'gross-rate-button center' : 'gross-rate-button'" mat-raised-button (click)="toggleGrossRates()">{{showGrossRates ? 'Ukryj stawki' : 'Pokaż stawki'}}</button>
 <table *ngIf="showGrossRates && !mobile">
   <tr>
+    <th style="color: dodgerblue" colspan="2" align="center">STAWKI 2023</th>
+  </tr>
+  <tr>
     <th>sędzia boiskowy</th>
     <th>sędzia funkcyjny</th>
   </tr>
   <tr>
-    <td>3LM - 160zł</td>
-    <td>Ślzkosz - 45zł</td>
+    <td>3LM - 170zł</td>
+    <td>Ślzkosz - 55zł</td>
   </tr>
   <tr>
-    <td>2LK - 120zł</td>
+    <td>2LK - 150zł</td>
     <td>PLK - 150zł</td>
   </tr>
   <tr>
-    <td>U19M - 100zł</td>
+    <td>U19M - 110zł</td>
     <td>PLKK - 120zł</td>
   </tr>
   <tr>
-    <td>U19K, U17M - 90zł</td>
+    <td>U19K, U17M - 100zł</td>
     <td>1LM - 100zł</td>
   </tr>
   <tr>
-    <td>U17K, U15M, U14M - 70zł</td>
+    <td>U17K, U15M, U14M - 80zł</td>
     <td>1LK, 2LM - 80zł</td>
   </tr>
   <tr>
-    <td>U15K, U14K, U13M - 60zł</td>
+    <td>U15K, U14K, U13M - 70zł</td>
   </tr>
   <tr>
-    <td>Minikoszykówka - n x 30zł</td>
+    <td>Minikoszykówka - n x 40zł</td>
   </tr>
 </table>
 <table *ngIf="showGrossRates && mobile">
+  <tr>
+    <th style="color: dodgerblue" colspan="2" align="center">STAWKI 2023</th>
+  </tr>
   <tr>
     <th>s. boiskowy</th>
     <th>s. funkcyjny</th>
   </tr>
   <tr>
-    <td>3LM - 160zł</td>
+    <td>3LM - 170zł</td>
     <td>PLK - 150zł</td>
   </tr>
   <tr>
-    <td>MU-19 - 100zł</td>
+    <td>MU-19 - 110zł</td>
     <td>PLKK - 120zł</td>
   </tr>
   <tr>
-    <td>MU-17- 90zł</td>
+    <td>MU-17- 100zł</td>
     <td>1LM - 100zł</td>
   </tr>
   <tr>
-    <td>MU-15 - 70zł</td>
+    <td>MU-15 - 80zł</td>
     <td>2LM - 80zł</td>
   </tr>
   <tr>
-    <td>MU-14 - 70zł</td>
+    <td>MU-14 - 80zł</td>
     <td>1LK - 80zł</td>
   </tr>
   <tr>
-    <td>MU-13 - 60zł</td>
-    <td>Reszta - 45zł</td>
+    <td>MU-13 - 70zł</td>
+    <td>Reszta - 55zł</td>
   </tr>
   <tr>
-    <td>2LK - 120zł</td>
+    <td>2LK - 150zł</td>
   </tr>
   <tr>
-    <td>KU-19 - 90zł</td>
+    <td>KU-19 - 100zł</td>
   </tr>
   <tr>
-    <td>KU-17 - 70zł</td>
+    <td>KU-17 - 80zł</td>
   </tr>
-    <td>KU-15 - 60zł</td>
+    <td>KU-15 - 70zł</td>
   <tr>
-    <td>KU-14 - 60zł</td>
-  </tr>
-  <tr>
-    <td>KU-13 - 60zł</td>
+    <td>KU-14 - 70zł</td>
   </tr>
   <tr>
-    <td>Minikosz - n x 30zł</td>
+    <td>KU-13 - 70zł</td>
+  </tr>
+  <tr>
+    <td>Minikosz - n x 40zł</td>
   </tr>
 </table>
 <mat-form-field appearance="fill">
@@ -103,6 +109,7 @@
 <table *ngIf="showTransportRates && !mobile">
   <tr>
     <th colspan="2">Wszystkie rozgrywki (Ślzkosz + RC)</th>
+  </tr>
   <tr>
     <td>Do 10km - 10zł</td>
     <td>Do 45km - 45zł</td>
