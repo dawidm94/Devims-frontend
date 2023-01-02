@@ -3,7 +3,6 @@ import {HttpClient} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {HttpService} from "../http.service";
 import {environment} from "../../../environments/environment";
-import {MatchDetailsDialogComponent} from "../match-details-dialog/match-details-dialog.component";
 import {
   SettlementMobileDetailsDialogComponent
 } from "../settlement-mobile-details-dialog/settlement-mobile-details-dialog.component";
@@ -34,6 +33,7 @@ export class SettlementsComponent implements OnInit {
   mobile = window.screen.width < 500;
   displayedColumns: string[] = ['position', 'paid', 'date', 'league', 'matchTeams', 'toPay', 'comment'];
   displayedMobileColumns: string[] = ['mobile-paid', 'mobile-date','mobile-teamHome', 'mobile-toPay', 'mobile-details'];
+  isError = false;
 
   private getSettlements() {
     this.http.get<any>(this.baseUrl + 'esor/settlement', this.httpService.getOptionsWithSeasonId()).subscribe({
@@ -41,6 +41,7 @@ export class SettlementsComponent implements OnInit {
         this.timetable = response
       },
       error: err => {
+        this.isError = true;
         console.log(err)
       }
     })

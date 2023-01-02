@@ -5,6 +5,9 @@
     <h3>... a za pierwszym razem jeszcze dłużej :) Spokojnie - to tylko raz.</h3>
   </section>
 </section>
+<section *ngIf="isError">
+  <h1 style="color: red">Wystąpił błąd w pobieraniu meczów. Skontaktuj się z Simsem - na pewno pomoże!</h1>
+</section>
 
 <div *ngIf="timetable" style="text-align: center">
   <h1 class="inline" style="text-align: center; font-weight: bold; vertical-align:middle">Rozliczenia</h1>
