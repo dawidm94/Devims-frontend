@@ -68,6 +68,10 @@ export class EarningsComponent implements OnInit {
           clearInterval(this.intervalId);
           this.esorEarnings = response
           this.isLoadingEarnings = false;
+
+          if (response.status == 'FAILED') {
+            this.isError = true;
+          }
         }
       },
       error: err => {console.log(err)}

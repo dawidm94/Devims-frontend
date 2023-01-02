@@ -13,7 +13,7 @@
     <h3 class="money">Proszę o cierpliwość - trochę to potrwa (nawet&nbsp;do&nbsp;minuty)</h3>
     <img [class]="isMobile ? 'mobile-img' : ''" src="assets/images/money.gif">
   </section>
-  <section *ngIf="!isLoadingEarnings">
+  <section *ngIf="!isLoadingEarnings && !isError">
     <h2>Dotychczasowe mecze: {{esorEarnings.alreadyEarnedAmount}}zł</h2>
     <h2>Przyszłe mecze: {{esorEarnings.futureNominationsAmount}}zł</h2>
     <h2 class="money">Suma: {{esorEarnings.alreadyEarnedAmount + esorEarnings.futureNominationsAmount}}zł</h2>
@@ -24,4 +24,5 @@
     </p>
   </section>
   <h2 style="color: red" *ngIf="isError">Wystąpił nieoczekiwany błąd :c</h2>
+  <h2 style="color: red" *ngIf="isError">Skontaktuj się z Simsem - na pewno pomoże.</h2>
 </section>
