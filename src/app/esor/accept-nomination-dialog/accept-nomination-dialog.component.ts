@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpService} from "../http.service";
 import {environment} from "../../../environments/environment";
-import {ConfirmedNomination, PeriodRequest} from "../date.service";
+import {ConfirmedNomination} from "../date.service";
 
 @Component({
   selector: 'app-accept-nomination-dialog',
@@ -37,6 +37,7 @@ export class AcceptNominationDialogComponent implements OnInit {
   toPay = 0
   showTransportRates = false;
   showGrossRates = false;
+  buy = 0;
 
   closeDialog(): void {
     this.dialogRef.close(false)
@@ -48,6 +49,8 @@ export class AcceptNominationDialogComponent implements OnInit {
         if (response.costTransport != null) {
           this.transportAmount = response.costTransport;
         }
+
+        this.buy = response.buy
 
         if (response.equivalentOptions && response.equivalentOptions.length > 0) {
           this.grossAmount = response.equivalentOptions[0].gross
@@ -110,8 +113,10 @@ export class AcceptNominationDialogComponent implements OnInit {
   calculateNetAmount() {
     if (this.grossAmount == 0) {
       this.toPay = 0
+
     } else {
-      this.toPay = (this.grossAmount - (Math.round(0.12 * (this.grossAmount - this.grossAmount * 0.2)))) + this.transportAmount * 1 //needed to not treat as string (love JS)
+      let costs = this.buy == 1 ? this.grossAmount * 0.2 : 0
+      this.toPay = (this.grossAmount - (Math.round(0.12 * (this.grossAmount - costs)))) + this.transportAmount * 1 //needed to not treat as string (love JS)
     }
   }
 
