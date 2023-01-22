@@ -50,6 +50,9 @@ import { PhonebookComponent } from './esor/phonebook/phonebook.component';
 import {MatPaginatorIntl, MatPaginatorModule} from "@angular/material/paginator";
 import {getPolishPaginatorIntl} from "./esor/polish-paginator-init";
 import {ClipboardModule} from "@angular/cdk/clipboard";
+import { TimetableGeneralComponent } from './esor/timetable-general/timetable-general.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatExpansionModule} from "@angular/material/expansion";
 
 
 
@@ -72,7 +75,8 @@ import {ClipboardModule} from "@angular/cdk/clipboard";
     EarningsComponent,
     SettlementsComponent,
     SettlementMobileDetailsDialogComponent,
-    PhonebookComponent
+    PhonebookComponent,
+    TimetableGeneralComponent
   ],
   imports: [
     BrowserModule,
@@ -103,6 +107,8 @@ import {ClipboardModule} from "@angular/cdk/clipboard";
     MatTooltipModule,
     MatPaginatorModule,
     ClipboardModule,
+    MatSelectModule,
+    MatExpansionModule,
   ],
   providers: [
     Meta,

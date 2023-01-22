@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort} from "@angular/material/sort";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatTableDataSource} from "@angular/material/table";
@@ -51,6 +51,7 @@ export class PhonebookComponent implements OnInit  {
       this.dataSource.paginator.firstPage();
     }
   }
+
   private getReferees() {
     this.http.get<any>(this.baseUrl + 'esor/referees', this.httpService.getOptionsWithSeasonId()).subscribe({
       next: response => {

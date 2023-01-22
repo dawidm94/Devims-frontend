@@ -1,0 +1,140 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<h1 *ngIf="timetable" style="text-align: center; font-weight: bold">TERMINARZ OGÓLNY</h1>
+
+<mat-accordion>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div style="font-weight: bold">Filtr:</div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <mat-card>
+      <mat-card-content>
+        <mat-form-field class="example-form-field" appearance="fill">
+          <mat-label>Miejscowość</mat-label>
+          <input matInput type="text" [(ngModel)]="city" (keyup.enter)="updateTimetable()">
+          <button *ngIf="city" matSuffix mat-icon-button aria-label="Wyczyść" (click)="city=''">
+            <mat-icon>close</mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Mecz zakończony</mat-label>
+          <mat-select [(ngModel)]="finished">
+            <mat-option [value]="">- - -</mat-option>
+            <mat-option [value]="1">Nie</mat-option>
+            <mat-option [value]="2">Tak</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Data od:</mat-label>
+          <input matInput [matDatepicker]="picker" autocomplete="off" [(ngModel)]="fromDate" (keyup.enter)="updateTimetable()">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Data do:</mat-label>
+          <input matInput [matDatepicker]="picker2" autocomplete="off" [(ngModel)]="toDate" (keyup.enter)="updateTimetable()">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Gospodarz</mat-label>
+          <mat-select [(ngModel)]="homeTeamId">
+            <mat-option [value]="">- - -</mat-option>
+            <mat-option *ngFor="let team of teams" [value]="team.id">
+              {{team.nazwa}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Gość</mat-label>
+          <mat-select [(ngModel)]="visitorTeamId">
+            <mat-option [value]="">- - -</mat-option>
+            <mat-option *ngFor="let team of teams" [value]="team.id">
+              {{team.nazwa}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Liga</mat-label>
+          <mat-select [(ngModel)]="leagueId">
+            <mat-option [value]="">- - -</mat-option>
+            <mat-option *ngFor="let league of leagues" [value]="league.id">
+              {{league.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button (click)="clearAllFilters()" mat-raised-button style="margin-right: 20px">Wyczyść</button>
+        <button (click)="updateTimetable()" mat-raised-button color="primary" [disabled]="isLoading">Filtruj</button>
+      </mat-card-content>
+    </mat-card>
+
+  </mat-expansion-panel>
+</mat-accordion>
+<table *ngIf="timetable" mat-table [dataSource]="timetable" class="mat-elevation-z8">
+  <!-- Position Column -->
+  <ng-container matColumnDef="position" >
+    <th mat-header-cell *matHeaderCellDef> Lp. </th>
+    <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+  </ng-container>
+
+  <!-- matchInfo Column -->
+  <ng-container matColumnDef="matchInfo">
+    <th mat-header-cell *matHeaderCellDef> Liga, kolejka, nr meczu </th>
+    <td mat-cell *matCellDef="let match"> {{match.league}}, {{match.round}}, {{match.matchNumber}} </td>
+  </ng-container>
+
+  <!-- matchTeams Column -->
+  <ng-container matColumnDef="matchTeams">
+    <th mat-header-cell *matHeaderCellDef> Mecz </th>
+    <td mat-cell *matCellDef="let match">
+      <span style="font-weight: 580">
+        {{match.teamHome}} - {{match.teamVisitor}}
+      </span>
+      <div>
+        boiskowi:
+        <span *ngFor="let referee of match.referees; let isLast=last" class="referee">
+          <span [style]="getRefereeColor(referee.status)">{{referee.fullName}}</span>{{isLast ? '' : ', '}}
+        </span>
+      </div>
+      <div>
+        stolikowi:
+        <span *ngFor="let referee of match.tableReferees; let isLast=last" class="referee">
+          <span [style]="getRefereeColor(referee.status)">{{referee.fullName}}</span>{{isLast ? '' : ', '}}
+        </span>
+      </div>
+    </td>
+  </ng-container>
+
+  <!-- date Column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Data </th>
+    <td mat-cell *matCellDef="let match"> {{match.date}} {{match.time}} </td>
+  </ng-container>
+
+  <!-- Actions  Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Akcje </th>
+    <td mat-cell *matCellDef="let row">
+      <button mat-icon-button color="primary" title="Szczegóły meczu" (click)="openMatchDetailsDialog(row.id)"><mat-icon>info</mat-icon></button>
+      <button *ngIf="row.nominationConfirm" mat-icon-button color="primary" title="Pobierz delegacje" (click)="getDelegation(row)"><mat-icon>sim_card_download</mat-icon></button>
+      <button *ngIf="row.nominationUpdate" mat-icon-button color="primary" title="Edytuj nominację" (click)="editNomination(row.id)"><mat-icon>edit_document</mat-icon></button>
+      <button mat-icon-button color="primary" title="Dodaj do kalendarza" (click)="getIcal(row.id)"><mat-icon>insert_invitation</mat-icon></button>
+      <button mat-icon-button color="primary" title="Pobierz metryczkę" (click)="getMetric(row)"><mat-icon>subject</mat-icon></button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator showFirstLastButtons [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page" style="padding-bottom: 100px">
+</mat-paginator>
+

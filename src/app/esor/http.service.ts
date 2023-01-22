@@ -32,17 +32,36 @@ export class HttpService {
   }
 
   getOptionsWithSeasonId() {
-    let seasonId = sessionStorage.getItem('seasonId');
     let esorToken = sessionStorage.getItem('esorToken') as string
-    let headers = new HttpHeaders({'Esor-Token': esorToken});
 
+    let headers = new HttpHeaders({'Esor-Token': esorToken});
+    let params = this.getHttpParamsWithSeasonId();
+
+    return {headers: headers, params: params}
+  }
+
+  private getHttpParamsWithSeasonId() {
+    let seasonId = sessionStorage.getItem('seasonId');
     let params = new HttpParams();
+
     if (seasonId != null) {
       params = params.append('seasonId', seasonId);
+
     } else {
       params = params.append('seasonId', this.currentSeasonId);
     }
 
-    return {headers: headers, params: params}
+    return params;
+  }
+
+  getOptionWithSeasonIdAndCustomParams(params: HttpParams) {
+    let optionsWithSeasonId = this.getOptionsWithSeasonId();
+    params.keys().forEach(key => {
+      let value = params.get(key);
+      if (value != null) {
+        optionsWithSeasonId.params = optionsWithSeasonId.params.append(key, value);
+      }
+    })
+    return optionsWithSeasonId;
   }
 }

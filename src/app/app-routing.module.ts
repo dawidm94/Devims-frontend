@@ -12,6 +12,7 @@ import {NominationsComponent} from "./esor/nominations/nominations.component";
 import {EarningsComponent} from "./esor/earnings/earnings.component";
 import {SettlementsComponent} from "./esor/settlements/settlements.component";
 import {PhonebookComponent} from "./esor/phonebook/phonebook.component";
+import {TimetableGeneralComponent} from "./esor/timetable-general/timetable-general.component";
 
 const routes: Routes = [
   {
@@ -33,6 +34,9 @@ const routes: Routes = [
       },
       {
         path: 'timetable', component: TimetableComponent
+      },
+      {
+        path: 'timetable-general', component: TimetableGeneralComponent
       },
       {
         path: 'home', component: EsorHomeComponent
