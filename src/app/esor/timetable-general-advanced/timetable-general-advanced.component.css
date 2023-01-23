@@ -1,0 +1,43 @@
+.full-table {
+  width: 100%;
+}
+
+.mat-form-field {
+  font-size: 14px;
+  width: 95%;
+}
+
+.center {
+  margin: 0 auto;
+}
+
+.referee {
+  font-weight: 550;
+}
+
+td {
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+}
+
+mat-form-field {
+  padding-right: 20px;
+}
+
+mat-panel-title {
+  justify-content: center !important;
+}
+
+.mat-column-example {
+  width: 200px;
+  border-right: 1px solid currentColor;
+  padding-right: 24px;
+  text-align: center;
+}
+.mat-column-description {
+  text-align: center;
+}
+
+.dictionary-table {
+  width: 70%;
+}

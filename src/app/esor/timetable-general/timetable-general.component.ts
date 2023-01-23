@@ -23,6 +23,10 @@ export class TimetableGeneralComponent implements OnInit {
   teams: any;
   leagues: any[] = [];
   panelOpenState = false;
+  timetable: any | undefined;
+  baseUrl = environment.baseURL
+  mobile = window.screen.width < 500;
+  displayedColumns: string[] = this.mobile ? ['date', 'matchInfo', 'matchTeams', 'actions'] : ['date', 'matchInfo', 'matchTeams', 'actions'];
 
   //filter
   city = '';
@@ -39,7 +43,6 @@ export class TimetableGeneralComponent implements OnInit {
     public fileService: FileService,
     public httpService: HttpService) { }
 
-
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
 
@@ -47,11 +50,6 @@ export class TimetableGeneralComponent implements OnInit {
     this.getTeams();
     this.updateTimetable();
   }
-
-  timetable: any | undefined;
-  baseUrl = environment.baseURL
-  mobile = window.screen.width < 500;
-  displayedColumns: string[] = this.mobile ? ['date', 'matchInfo', 'matchTeams', 'actions'] : ['date', 'matchInfo', 'matchTeams', 'actions'];
 
   updateTimetable() {
     this.isLoading = true

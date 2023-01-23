@@ -53,6 +53,7 @@ import {ClipboardModule} from "@angular/cdk/clipboard";
 import { TimetableGeneralComponent } from './esor/timetable-general/timetable-general.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatExpansionModule} from "@angular/material/expansion";
+import { TimetableGeneralAdvancedComponent } from './esor/timetable-general-advanced/timetable-general-advanced.component';
 
 
 
@@ -76,7 +77,8 @@ import {MatExpansionModule} from "@angular/material/expansion";
     SettlementsComponent,
     SettlementMobileDetailsDialogComponent,
     PhonebookComponent,
-    TimetableGeneralComponent
+    TimetableGeneralComponent,
+    TimetableGeneralAdvancedComponent
   ],
   imports: [
     BrowserModule,

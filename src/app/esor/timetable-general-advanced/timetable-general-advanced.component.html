@@ -1,0 +1,91 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<h1 style="text-align: center; font-weight: bold">ZAAWANSOWANY TERMINARZ OGÓLNY</h1>
+<div *ngIf="!isLoading" class="center" [style]="mobile ? 'width: 75%;' : 'width: 50%;'">
+  <mat-form-field>
+    <mat-label>Wyszukaj</mat-label>
+    <input matInput (keyup)="applyFilter($event)" [placeholder]="mobile ? 'Szukaj po czym chcesz lub słowniczek :)' : 'Możesz szukać po wszystkim co widzisz, albo słowa klucz ze słowniczka :)'" #input>
+  </mat-form-field>
+</div>
+<mat-accordion *ngIf="!isLoading">
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div style="font-weight: bold">Słowniczek:</div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <table style="margin-left: auto; margin-right: auto" mat-table [dataSource]="dictionaryData" class="mat-elevation-z8 dictionary-table">
+      <ng-container matColumnDef="example">
+        <th mat-header-cell *matHeaderCellDef> Przykład </th>
+        <td mat-cell *matCellDef="let element"> {{element.example}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Opis </th>
+        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedDictionaryColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedDictionaryColumns;"></tr>
+    </table>
+  </mat-expansion-panel>
+</mat-accordion>
+<h3 *ngIf="isLoading">Trwa wczytywanie CAŁEGO terminarza.</h3>
+<table *ngIf="timetable" mat-table [dataSource]="timetable" class="mat-elevation-z8 full-table">
+  <!-- Position Column -->
+  <ng-container matColumnDef="position" >
+    <th mat-header-cell *matHeaderCellDef> Lp. </th>
+    <td mat-cell *matCellDef="let element; let i = index">{{i + 1}}</td>
+  </ng-container>
+
+  <!-- matchInfo Column -->
+  <ng-container matColumnDef="matchInfo">
+    <th mat-header-cell *matHeaderCellDef> Liga, kolejka, nr meczu </th>
+    <td mat-cell *matCellDef="let match"> {{match.league}}, {{match.round}}, {{match.matchNumber}} </td>
+  </ng-container>
+
+  <!-- matchTeams Column -->
+  <ng-container matColumnDef="matchTeams">
+    <th mat-header-cell *matHeaderCellDef> Mecz </th>
+    <td mat-cell *matCellDef="let match">
+      <span style="font-weight: 580">
+        {{match.teamHome}} - {{match.teamVisitor}}
+      </span>
+      <div>
+        boiskowi:
+        <span *ngFor="let referee of match.referees; let isLast=last" class="referee">
+          <span [style]="getRefereeColor(referee.status)">{{referee.fullName}}</span>{{isLast ? '' : ', '}}
+        </span>
+      </div>
+      <div>
+        stolikowi:
+        <span *ngFor="let referee of match.tableReferees; let isLast=last" class="referee">
+          <span [style]="getRefereeColor(referee.status)">{{referee.fullName}}</span>{{isLast ? '' : ', '}}
+        </span>
+      </div>
+    </td>
+  </ng-container>
+
+  <!-- date Column -->
+  <ng-container matColumnDef="date">
+    <th mat-header-cell *matHeaderCellDef> Data </th>
+    <td mat-cell *matCellDef="let match"> {{match.date}} {{match.time}} </td>
+  </ng-container>
+
+  <!-- Actions  Column -->
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef> Akcje </th>
+    <td mat-cell *matCellDef="let row">
+      <button mat-icon-button color="primary" title="Szczegóły meczu" (click)="openMatchDetailsDialog(row.id)"><mat-icon>info</mat-icon></button>
+      <button *ngIf="row.nominationConfirm" mat-icon-button color="primary" title="Pobierz delegacje" (click)="getDelegation(row)"><mat-icon>sim_card_download</mat-icon></button>
+      <button *ngIf="row.nominationUpdate" mat-icon-button color="primary" title="Edytuj nominację" (click)="editNomination(row.id)"><mat-icon>edit_document</mat-icon></button>
+      <button mat-icon-button color="primary" title="Dodaj do kalendarza" (click)="getIcal(row.id)"><mat-icon>insert_invitation</mat-icon></button>
+      <button mat-icon-button color="primary" title="Pobierz metryczkę" (click)="getMetric(row)"><mat-icon>subject</mat-icon></button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+<mat-paginator showFirstLastButtons [pageSizeOptions]="pageSizeOptions" style="padding-bottom: 100px"></mat-paginator>
+

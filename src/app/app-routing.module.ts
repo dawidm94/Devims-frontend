@@ -13,6 +13,9 @@ import {EarningsComponent} from "./esor/earnings/earnings.component";
 import {SettlementsComponent} from "./esor/settlements/settlements.component";
 import {PhonebookComponent} from "./esor/phonebook/phonebook.component";
 import {TimetableGeneralComponent} from "./esor/timetable-general/timetable-general.component";
+import {
+  TimetableGeneralAdvancedComponent
+} from "./esor/timetable-general-advanced/timetable-general-advanced.component";
 
 const routes: Routes = [
   {
@@ -37,6 +40,9 @@ const routes: Routes = [
       },
       {
         path: 'timetable-general', component: TimetableGeneralComponent
+      },
+      {
+        path: 'timetable-general-advanced', component: TimetableGeneralAdvancedComponent
       },
       {
         path: 'home', component: EsorHomeComponent
