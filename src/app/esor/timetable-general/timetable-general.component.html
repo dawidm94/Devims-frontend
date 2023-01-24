@@ -144,6 +144,6 @@
 <mat-paginator showFirstLastButtons [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
                [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page" style="padding-bottom: 100px">
 </mat-paginator>
-<div *ngIf="showGoToTopButton" class="to-top" (click)="scrollToTop()">
+<div class="to-top" (click)="scrollToTop()">
   <mat-icon aria-hidden="false" aria-label="Example home icon">north</mat-icon>
 </div>

@@ -28,7 +28,6 @@ export class TimetableGeneralComponent implements OnInit {
   baseUrl = environment.baseURL
   mobile = window.screen.width < 500;
   displayedColumns: string[] = this.mobile ? ['date', 'matchInfo', 'matchTeams', 'actions'] : ['date', 'matchInfo', 'matchTeams', 'actions'];
-  showGoToTopButton = false;
 
   //filter
   city = '';
