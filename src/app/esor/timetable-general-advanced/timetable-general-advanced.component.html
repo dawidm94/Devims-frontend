@@ -88,6 +88,6 @@
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
 <mat-paginator showFirstLastButtons [pageSizeOptions]="pageSizeOptions" style="padding-bottom: 100px"></mat-paginator>
-<div class="to-top" (click)="scrollToTop()">
+<div *ngIf="!isLoading" class="to-top" (click)="scrollToTop()">
   <mat-icon aria-hidden="false" aria-label="Example home icon">north</mat-icon>
 </div>
