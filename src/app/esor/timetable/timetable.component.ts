@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {FileService} from "../file.service";
 import {MatDialog} from "@angular/material/dialog";
@@ -6,6 +6,7 @@ import {MatchDetailsDialogComponent} from "../match-details-dialog/match-details
 import {HttpService} from "../http.service";
 import {environment} from "../../../environments/environment";
 import {AcceptNominationDialogComponent} from "../accept-nomination-dialog/accept-nomination-dialog.component";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-timetable',
@@ -18,7 +19,8 @@ export class TimetableComponent implements OnInit {
     private http: HttpClient,
     public dialog: MatDialog,
     public fileService: FileService,
-    public httpService: HttpService) { }
+    public httpService: HttpService,
+    @Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
     this.updateTimetable();
@@ -68,5 +70,13 @@ export class TimetableComponent implements OnInit {
       height: isMobile ? (window.screen.height - 100) + 'px' : '',
       data: matchId
     }).afterClosed().subscribe()
+  }
+
+  scrollToTop(): void {
+    return this.document.body.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'start'
+    });
   }
 }
