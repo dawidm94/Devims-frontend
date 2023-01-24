@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {FileService} from "../file.service";
@@ -7,6 +7,7 @@ import {environment} from "../../../environments/environment";
 import {MatchDetailsDialogComponent} from "../match-details-dialog/match-details-dialog.component";
 import {AcceptNominationDialogComponent} from "../accept-nomination-dialog/accept-nomination-dialog.component";
 import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-timetable-general',
@@ -27,6 +28,7 @@ export class TimetableGeneralComponent implements OnInit {
   baseUrl = environment.baseURL
   mobile = window.screen.width < 500;
   displayedColumns: string[] = this.mobile ? ['date', 'matchInfo', 'matchTeams', 'actions'] : ['date', 'matchInfo', 'matchTeams', 'actions'];
+  showGoToTopButton = false;
 
   //filter
   city = '';
@@ -41,7 +43,8 @@ export class TimetableGeneralComponent implements OnInit {
     private http: HttpClient,
     public dialog: MatDialog,
     public fileService: FileService,
-    public httpService: HttpService) { }
+    public httpService: HttpService,
+    @Inject(DOCUMENT) private document: Document) { }
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -191,5 +194,13 @@ export class TimetableGeneralComponent implements OnInit {
     this.visitorTeamId = '';
     this.leagueId = '';
     this.finished = '';
+  }
+
+  scrollToTop(): void {
+    return this.document.body.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'start'
+    });
   }
 }

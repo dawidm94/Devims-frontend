@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {FileService} from "../file.service";
@@ -8,6 +8,7 @@ import {environment} from "../../../environments/environment";
 import {MatchDetailsDialogComponent} from "../match-details-dialog/match-details-dialog.component";
 import {AcceptNominationDialogComponent} from "../accept-nomination-dialog/accept-nomination-dialog.component";
 import {MatTableDataSource} from "@angular/material/table";
+import {DOCUMENT} from "@angular/common";
 
 @Component({
   selector: 'app-timetable-general-advanced',
@@ -20,7 +21,8 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
     private http: HttpClient,
     public dialog: MatDialog,
     public fileService: FileService,
-    public httpService: HttpService) { }
+    public httpService: HttpService,
+    @Inject(DOCUMENT) private document: Document) { }
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -180,6 +182,14 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
       }
     })
     return status;
+  }
+
+  scrollToTop(): void {
+    return this.document.body.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'start'
+    });
   }
 }
 

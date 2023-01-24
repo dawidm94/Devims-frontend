@@ -18,3 +18,11 @@ mat-form-field {
 mat-panel-title {
   justify-content: center !important;
 }
+
+.to-top {
+  bottom: 0;
+  cursor: pointer;
+  margin: 0 8px 12px 0;
+  position: fixed;
+  right: 0;
+}
