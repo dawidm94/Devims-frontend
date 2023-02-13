@@ -41,6 +41,7 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
   mobile = window.screen.width < 500;
   displayedColumns: string[] = this.mobile ? ['date', 'matchInfo', 'matchTeams', 'actions'] : ['date', 'matchInfo', 'matchTeams', 'actions'];
   displayedDictionaryColumns: string[] = ['example', 'description'];
+  searchingValue = "";
   dictionaryData : any = [
     {example: 'brak', description: 'Wyświetla mecze, gdzie brakuje obsady.'},
     {example: 'zaakceptowana', description: 'Wyświetla mecze, gdzie wszyscy sędziowie zaakceptowali.'},
@@ -190,6 +191,16 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
       block: 'start',
       inline: 'start'
     });
+  }
+
+  setSearchingValue(dictionaryKey: string) {
+    this.timetable.filter = dictionaryKey.trim().toLowerCase();
+    this.searchingValue = dictionaryKey;
+    this.panelOpenState = false;
+
+    if (this.timetable.paginator) {
+      this.timetable.paginator.firstPage();
+    }
   }
 }
 

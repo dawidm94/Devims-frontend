@@ -49,3 +49,13 @@ mat-panel-title {
   position: fixed;
   right: 0;
 }
+
+.dictionary-table .mat-row .mat-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+}
+
+.dictionary-table .mat-row:hover .mat-cell {
+  border-color: currentColor;
+}

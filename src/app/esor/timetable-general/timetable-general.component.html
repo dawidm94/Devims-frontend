@@ -140,7 +140,7 @@
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 </table>
-<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="isLoading && timetable" mode="indeterminate"></mat-progress-bar>
 <mat-paginator showFirstLastButtons [length]="totalRows" [pageIndex]="currentPage" [pageSize]="pageSize"
                [pageSizeOptions]="pageSizeOptions" (page)="pageChanged($event)" aria-label="Select page" style="padding-bottom: 100px">
 </mat-paginator>

@@ -1,7 +1,7 @@
 <div *ngIf="!loggedIn" class="center">
   <section class="login">
     <span style="margin-right: 10px">W tej chwili nie jesteś zalogowany.</span>
-    <button mat-raised-button color="primary" (click)="openLoginDialog()" [disabled]="!gotBackendHealthResponse">Kliknij tutaj aby zalogować się do esora</button>
+    <button mat-raised-button color="primary" (click)="openLoginDialog()" [disabled]="!gotBackendHealthResponse || isHealthCheckError">Kliknij tutaj aby zalogować się do esora</button>
     <div *ngIf="!gotBackendHealthResponse" style="margin-top: 20px"> <b>{{loadingMessage}}</b>
       <mat-progress-bar mode="indeterminate" *ngIf="!gotBackendHealthResponse"></mat-progress-bar>
     </div>

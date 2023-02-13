@@ -3,12 +3,13 @@
 <div *ngIf="!isLoading" class="center" [style]="mobile ? 'width: 75%;' : 'width: 50%;'">
   <mat-form-field>
     <mat-label>Wyszukaj</mat-label>
-    <input matInput (keyup)="applyFilter($event)" [placeholder]="mobile ? 'Szukaj po czym chcesz lub słowniczek :)' : 'Możesz szukać po wszystkim co widzisz, albo słowa klucz ze słowniczka :)'" #input>
+    <input matInput [(ngModel)]="searchingValue" (keyup)="applyFilter($event)" [placeholder]="mobile ? 'Szukaj po czym chcesz lub słowniczek :)' : 'Możesz szukać po wszystkim co widzisz, albo słowa klucz ze słowniczka :)'" #input>
   </mat-form-field>
 </div>
 <mat-accordion *ngIf="!isLoading">
   <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
+                       (closed)="panelOpenState = false"
+                       [(expanded)]="panelOpenState">
     <mat-expansion-panel-header>
       <mat-panel-title>
         <div style="font-weight: bold">Słowniczek:</div>
@@ -26,7 +27,7 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedDictionaryColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedDictionaryColumns;"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedDictionaryColumns;" (click)="setSearchingValue(row.example)"></tr>
     </table>
   </mat-expansion-panel>
 </mat-accordion>
