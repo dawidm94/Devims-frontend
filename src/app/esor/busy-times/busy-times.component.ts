@@ -17,6 +17,7 @@ export class BusyTimesComponent implements OnInit {
   sentButTimeout = true;
   sentWithError = true;
   baseUrl = environment.baseURL
+  mobile = window.screen.width < 500;
 
   constructor(private http: HttpClient, public httpService: HttpService) {
 
@@ -29,7 +30,7 @@ export class BusyTimesComponent implements OnInit {
     })
   }
 
-  displayedColumns: string[] = ['select', 'position', 'dateFrom', 'dateTo', 'reason'];
+  displayedColumns: string[] = this.mobile ? ['select', 'dateFrom', 'dateTo', 'reason'] : ['select', 'dateFrom', 'dateTo', 'reason'];
   selection = new SelectionModel<any>(true, []);
 
   deleteSelections() {

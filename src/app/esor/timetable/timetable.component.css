@@ -1,5 +1,7 @@
+
 table {
   width: 100%;
+  /*table-layout: fixed;*/
 }
 
 .to-top {
@@ -8,4 +10,8 @@ table {
   margin: 0 8px 12px 0;
   position: fixed;
   right: 0;
+}
+
+.mobile-table {
+  table-layout: fixed;
 }

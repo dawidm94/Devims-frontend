@@ -104,5 +104,7 @@
       }
     }
   },
-  "defaultProject": "Devims"
+  "cli": {
+    "analytics": false
+  }
 }

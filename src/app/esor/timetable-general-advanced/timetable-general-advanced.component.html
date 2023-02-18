@@ -1,7 +1,7 @@
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 <h1 style="text-align: center; font-weight: bold">ZAAWANSOWANY TERMINARZ OGÓLNY</h1>
 <div *ngIf="!isLoading" class="center" [style]="mobile ? 'width: 75%;' : 'width: 50%;'">
-  <mat-form-field>
+  <mat-form-field appearance="outline">
     <mat-label>Wyszukaj</mat-label>
     <input matInput [(ngModel)]="searchingValue" (keyup)="applyFilter($event)" [placeholder]="mobile ? 'Szukaj po czym chcesz lub słowniczek :)' : 'Możesz szukać po wszystkim co widzisz, albo słowa klucz ze słowniczka :)'" #input>
   </mat-form-field>
