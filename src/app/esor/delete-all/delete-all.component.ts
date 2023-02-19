@@ -25,7 +25,7 @@ export class DeleteAllComponent implements OnInit {
   }
 
   getSliderColor(): ThemePalette {
-    return this.sliderValue == 100 ? 'warn' : 'primary';
+    return this.sliderValue == 100 ? 'warn' : 'accent';
   }
 
   deleteAllPeriods(): void {

@@ -1,26 +1,24 @@
-<section style="margin: 15px">
-  <section>
-    <h2>Mecz nr {{matchDetails.matchNumber}}: {{matchDetails.teamHome}} - {{matchDetails.teamVisitor}}</h2>
-  </section>
-  <section>
-    <p>Liga: <b>{{matchDetails.league}}</b></p>
-    <p>Data i godzina spotkania: <b>{{matchDetails.date}} {{matchDetails.time}}</b></p>
-    <p>Hala: <b>{{matchDetails.hall}}</b></p>
-    <p>Hotel: <b>{{matchDetails.hotel}}</b></p>
-    <p>Sędziowie: </p>
-    <p *ngFor="let referee of matchDetails.referees" class="accept-status-icon">
-      <mat-icon [style]="getIconColor(referee.status)">{{getIconNameByStatus(referee.status)}}</mat-icon>{{referee.fullName}}
+<section>
+  <h2>Mecz nr {{matchDetails.matchNumber}}: {{matchDetails.teamHome}} - {{matchDetails.teamVisitor}}</h2>
+</section>
+<section>
+  <p>Liga: <b>{{matchDetails.league}}</b></p>
+  <p>Data i godzina spotkania: <b>{{matchDetails.date}} {{matchDetails.time}}</b></p>
+  <p>Hala: <b>{{matchDetails.hall}}</b></p>
+  <p>Hotel: <b>{{matchDetails.hotel}}</b></p>
+  <p>Sędziowie: </p>
+  <p *ngFor="let referee of matchDetails.referees" class="accept-status-icon">
+    <mat-icon [style]="getIconColor(referee.status)">{{getIconNameByStatus(referee.status)}}</mat-icon>{{referee.fullName}}
+  </p>
+  <p>Sędziowie stolikowi: </p>
+    <p *ngFor="let tableReferee of matchDetails.tableReferees" class="accept-status-icon">
+      <mat-icon [style]="getIconColor(tableReferee.status)">{{getIconNameByStatus(tableReferee.status)}}</mat-icon>{{tableReferee.fullName}}
     </p>
-    <p>Sędziowie stolikowi: </p>
-      <p *ngFor="let tableReferee of matchDetails.tableReferees" class="accept-status-icon">
-        <mat-icon [style]="getIconColor(tableReferee.status)">{{getIconNameByStatus(tableReferee.status)}}</mat-icon>{{tableReferee.fullName}}
-      </p>
-    <p>Komisarze:</p>
-      <p *ngFor="let commisioneer of matchDetails.commisioneers" class="accept-status-icon">
-        <mat-icon [style]="getIconColor(commisioneer.status)">{{getIconNameByStatus(commisioneer.status)}}</mat-icon>{{commisioneer.fullName}}
-      </p>
-    <p>Kontakt z gospodarzem: <b>{{matchDetails.contact}}</b></p>
-    <p>Metoda płatności klubu: <b>{{matchDetails.paymentMethod ? matchDetails.paymentMethod : '---'}}</b></p>
-    <p>Uwagi do meczu: <b>{{matchDetails.remarks}}</b></p>
-  </section>
+  <p>Komisarze:</p>
+    <p *ngFor="let commisioneer of matchDetails.commisioneers" class="accept-status-icon">
+      <mat-icon [style]="getIconColor(commisioneer.status)">{{getIconNameByStatus(commisioneer.status)}}</mat-icon>{{commisioneer.fullName}}
+    </p>
+  <p>Kontakt z gospodarzem: <b>{{matchDetails.contact}}</b></p>
+  <p>Metoda płatności klubu: <b>{{matchDetails.paymentMethod ? matchDetails.paymentMethod : '---'}}</b></p>
+  <p>Uwagi do meczu: <b>{{matchDetails.remarks}}</b></p>
 </section>

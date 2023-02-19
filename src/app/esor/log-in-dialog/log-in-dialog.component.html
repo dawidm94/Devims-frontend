@@ -1,21 +1,18 @@
-<h3 mat-dialog-title>Zaloguj się do Esora: </h3>
-<section mat-dialog-content style="padding-bottom: 0">
-  <mat-form-field appearance="fill" floatLabel="always" [style]="mobile ? 'width:240px' : 'width:300px'">
-    <mat-label>Login</mat-label>
-    <input matInput [(ngModel)]="username">
-  </mat-form-field>
-  <mat-form-field appearance="fill" [style]="mobile ? 'width:240px' : 'width:300px'">
-    <mat-label>Wprowadź hasło</mat-label>
-    <input (keyup.enter)="login()" matInput [type]="passwordHide ? 'password' : 'text'" [(ngModel)]="password">
-    <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
-      <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
-    </button>
-  </mat-form-field>
-  <br/>
-  <div *ngIf="isEmptyInput" style="color: red">Uzupełnij dane</div>
-  <div *ngIf="isLoginError" style="color: red">Błąd logowania. Spróbuj ponownie.</div>
-  <div *ngIf="!isLoginError && isSlowLogging" style="color: blue">Odśwież stronę i spróbuj jeszcze raz.</div>
-</section>
-<section mat-dialog-actions>
-  <button style="width: 100%; height: 50px" mat-stroked-button color="primary" (click)="login()" [disabled]="isLogging">Zaloguj</button>
-</section>
+Zaloguj się do Esora: <br/><br/>
+<mat-form-field appearance="fill" floatLabel="always">
+  <mat-label>Login</mat-label>
+  <input matInput [(ngModel)]="username">
+</mat-form-field>
+<mat-form-field appearance="fill">
+  <mat-label>Wprowadź hasło</mat-label>
+  <input (keyup.enter)="login()" matInput [type]="passwordHide ? 'password' : 'text'" [(ngModel)]="password">
+  <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="passwordHide">
+    <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+  </button>
+</mat-form-field>
+<br/>
+<div *ngIf="isEmptyInput" style="color: red">Uzupełnij dane</div>
+<div *ngIf="isLoginError" style="color: red">Błąd logowania. Spróbuj ponownie.</div>
+<div *ngIf="!isLoginError && isSlowLogging" style="color: blue">Odśwież stronę i spróbuj jeszcze raz.</div>
+<br/>
+<button mat-stroked-button color="primary" (click)="login()" [disabled]="isLogging">Zaloguj</button>

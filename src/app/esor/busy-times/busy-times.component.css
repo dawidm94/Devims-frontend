@@ -10,6 +10,6 @@ table {
 }
 
 .mat-column-select {
-  flex: 0 0 3% !important;
-  width: 3% !important;
+  width: 20px;
+  padding-right: 24px;
 }

@@ -115,7 +115,7 @@ export class EsorComponent implements OnInit {
 
   openLoginDialog(): void {
     const dialogRef = this.dialog.open(LogInDialogComponent, {
-      width: this.mobile ? '300px' : '360px'
+      width: '300px'
     });
 
     dialogRef.afterClosed().subscribe(() => {

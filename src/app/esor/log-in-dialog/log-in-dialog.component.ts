@@ -18,7 +18,6 @@ export class LogInDialogComponent {
   baseUrl = environment.baseURL;
   isLogging = false;
   isSlowLogging = false;
-  mobile = window.screen.width < 500;
 
   constructor(
     private http: HttpClient,

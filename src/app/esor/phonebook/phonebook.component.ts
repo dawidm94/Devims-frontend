@@ -26,7 +26,7 @@ export class PhonebookComponent implements OnInit  {
   baseUrl = environment.baseURL
   mobile = window.screen.width < 500;
 
-  displayedColumns: string[] = this.mobile ? ['mobile-nazwisko', 'mobile-imie', 'mobile-actions'] : ['nazwisko', 'imie', 'miasto', 'telefon', 'email'];
+  displayedColumns: string[] = this.mobile ? ['nazwisko', 'imie', 'mobile-actions'] : ['nazwisko', 'imie', 'miasto', 'telefon', 'email'];
   dataSource: MatTableDataSource<RefereeData> | any;
 
 
