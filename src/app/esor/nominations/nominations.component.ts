@@ -56,7 +56,7 @@ export class NominationsComponent implements OnInit {
   openAcceptNominationDialog(matchId: number): void {
     let isMobile = window.screen.width < 500
     this.dialog.open(AcceptNominationDialogComponent, {
-      width: '450px',
+      width: isMobile ? '450px' : '550px',
       height: isMobile ? (window.screen.height - 100) + 'px' : '',
       data: matchId
     }).afterClosed().subscribe(isAccepted => {

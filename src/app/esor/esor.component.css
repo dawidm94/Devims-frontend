@@ -15,11 +15,7 @@ section {
   padding-left: 40px;
 }
 
-.mobile-menu-element {
-  font-weight: bold;
-}
-
-::ng-deep.mat-menu-panel {
+::ng-deep.mat-mdc-menu-panel {
   max-width:fit-content !important;
 }
 

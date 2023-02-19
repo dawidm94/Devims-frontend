@@ -1,7 +1,7 @@
 <section>
   <h1 style="text-align: center; font-weight: bold">SĘDZIOWIE</h1>
   <div class="center" [style]="mobile ? 'width: 75%;' : 'width: 50%;'">
-    <mat-form-field>
+    <mat-form-field appearance="outline">
       <mat-label>Wyszukaj</mat-label>
       <input matInput (keyup)="applyFilter($event)" [placeholder]="mobile ? 'Imię / nazwisko / nr tel. / email' : 'Możesz szukać po każdym polu :)'" #input>
     </mat-form-field>
@@ -39,12 +39,22 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="mobile-nazwisko">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Nazwisko </th>
+        <td mat-cell *matCellDef="let row"> {{row.nazwisko}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="mobile-imie">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Imie </th>
+        <td mat-cell *matCellDef="let row"> {{row.imie}} </td>
+      </ng-container>
+
       <ng-container matColumnDef="mobile-actions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
         <td mat-cell *matCellDef="let row; let i = index">
-          <a style="color:green;" [href]="'tel:' + row.telefon"><button class="mobileButton" mat-button><mat-icon>call</mat-icon></button></a>
-          <a style="color: darkgoldenrod" [href]="'sms:' + row.telefon"><button class="mobileButton" mat-button><mat-icon>email</mat-icon></button></a>
-          <a [href]="'mailto:' + row.email"><button color="primary" class="mobileButton" mat-button><mat-icon>alternate_email</mat-icon></button></a>
+          <a [href]="'tel:' + row.telefon"><button class="mobileButton" mat-button><mat-icon style="color:green; font-weight: bold">call</mat-icon></button></a>
+          <a [href]="'sms:' + row.telefon"><button class="mobileButton" mat-button><mat-icon style="color: darkgoldenrod; font-weight: bold">email</mat-icon></button></a>
+          <a [href]="'mailto:' + row.email"><button color="primary" class="mobileButton" mat-button><mat-icon style='font-weight: bold'>alternate_email</mat-icon></button></a>
         </td>
       </ng-container>
 
