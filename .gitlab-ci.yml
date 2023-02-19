@@ -1,4 +1,3 @@
-
 stages:
   - Dependencies
   # - test
@@ -6,7 +5,7 @@ stages:
   - Publish
 
 Install_dependencies:
-  image: node:12-alpine
+  image: node:19.6-alpine3.17
   stage: Dependencies
   script:
     - npm install
@@ -48,7 +47,7 @@ Install_dependencies:
 #     policy: pull
 
 Build_project:
-  image: node:12-alpine
+  image: node:19.6-alpine3.17
   stage: Build
   only:
     - main
