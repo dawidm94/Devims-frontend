@@ -157,8 +157,8 @@
     <span matSuffix>ZŁ</span>
     <input matInput disabled [(ngModel)]="toPay">
   </mat-form-field>
-  <section [style]="mobile ? 'padding-bottom: 20px' : ''">
-    <button class="decision-button" mat-raised-button (click)="closeDialog()">Anuluj</button>
-    <button class="decision-button" mat-raised-button color="primary" (click)="acceptNomination()">Potwierdź</button>
-  </section>
+</section>
+<section mat-dialog-actions align="end" [style]="mobile ? 'padding-bottom: 20px' : ''">
+  <button class="decision-button" mat-raised-button (click)="closeDialog()">Anuluj</button>
+  <button class="decision-button" mat-raised-button color="primary" (click)="acceptNomination()">Potwierdź</button>
 </section>

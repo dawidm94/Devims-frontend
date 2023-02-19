@@ -207,3 +207,19 @@ table {
   margin-top: 5px;
   margin-left: 5px; /* optional */
 }
+
+.mat-column-mobile-paid {
+  padding: 0;
+}
+.mat-column-mobile-date {
+  padding: 3px;
+}
+.mat-column-mobile-teamHome {
+  padding: 3px;
+}
+.mat-column-mobile-toPay {
+  padding: 3px;
+}
+.mat-column-mobile-details {
+  padding: 3px;
+}

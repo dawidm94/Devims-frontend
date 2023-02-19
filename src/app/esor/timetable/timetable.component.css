@@ -1,7 +1,7 @@
 
 table {
   width: 100%;
-  table-layout: fixed;
+  /*table-layout: fixed;*/
 }
 
 .to-top {
@@ -12,3 +12,6 @@ table {
   right: 0;
 }
 
+.mobile-table {
+  table-layout: fixed;
+}

@@ -1,5 +1,5 @@
 <mat-progress-bar *ngIf="!upcomingMatchLoaded" mode="indeterminate"></mat-progress-bar>
-<section *ngIf="nominations > 0">
+<section style="padding-bottom: 5px" *ngIf="nominations > 0">
   <h2 style="color: red; display: inline; margin-left: 5px">Oczekujące nominacje: {{nominations}}</h2>
   <button routerLink="/esor/nominations" style="margin-left: 10px" mat-stroked-button color="warn">Przejdź do nominacji</button>
 </section>
