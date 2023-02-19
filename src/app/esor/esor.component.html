@@ -113,23 +113,23 @@
         <mat-icon>menu</mat-icon>
       </button>
       <mat-menu #menu>
-        <button mat-menu-item class="mobile-menu-element" routerLink="home">Główna strona</button>
-        <button mat-menu-item class="mobile-menu-element" routerLink="nominations">Moje nominacje</button>
+        <button mat-menu-item class="mobile-menu-element" routerLink="home"><b>Główna strona</b></button>
+        <button mat-menu-item class="mobile-menu-element" routerLink="nominations"><b>Moje nominacje</b></button>
         <button mat-menu-item class="mobile-menu-element" disabled>Terminarz: </button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="timetable">Mój terminarz</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="timetable-general">Terminarz ogólny</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="timetable"><b>Mój terminarz</b></button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="timetable-general"><b>Terminarz ogólny</b></button>
         <button mat-menu-item class="mobile-menu-element" disabled>Zajęte terminy: </button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="busy-times">Moje zajęte terminy</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="period">Dodaj zajęty termin</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="periodically">Uzupełnij cyklicznie przyszły miesiąc</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="delete-all">Usuń wszystkie zajęte terminy</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="busy-times"><b>Moje zajęte terminy</b></button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="period"><b>Dodaj zajęty termin</b></button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="periodically"><b>Uzupełnij cyklicznie przyszły miesiąc</b></button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="delete-all"><b>Usuń wszystkie zajęte terminy</b></button>
         <button mat-menu-item class="mobile-menu-element" disabled>Inne: </button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="settlements">Rozliczenia</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="earnings">Zarobki</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="phonebook">Sędziowie</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading"><b>Pusta delegacja</b></button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="settlements"><b>Rozliczenia</b></button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="earnings"><b>Zarobki</b></button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="phonebook"><b>Sędziowie</b></button>
         <button *ngIf="nameClickCounter > 5" mat-menu-item class="mobile-menu-element" style="color: darkorange" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
-        <button mat-menu-item class="mobile-menu-element" (click)="logout()">Wyloguj</button>
+        <button mat-menu-item class="mobile-menu-element" (click)="logout()"><b>Wyloguj</b></button>
       </mat-menu>
       <span class="example-spacer"></span>
       <span (click)="addNameClick()">Cześć {{username}}!</span>

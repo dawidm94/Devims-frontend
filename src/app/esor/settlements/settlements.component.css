@@ -2,7 +2,7 @@ table {
   width: 100%;
 }
 
-.mat-form-field{
+.mat-mdc-form-field{
   width: 90% !important;
 }
 
@@ -51,8 +51,8 @@ table {
 .mat-column-matchTeams {
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 36% !important;
-  width: 36% !important;
+  flex: 0 0 32% !important;
+  width: 32% !important;
   overflow-wrap: break-word;
   word-break: break-word;
 
@@ -84,8 +84,8 @@ table {
   justify-content: center;
   word-wrap: break-word !important;
   white-space: unset !important;
-  flex: 0 0 5% !important;
-  width: 5% !important;
+  flex: 0 0 9% !important;
+  width: 9% !important;
   overflow-wrap: break-word;
 
   word-break: break-word;
@@ -197,7 +197,7 @@ table {
   vertical-align: middle;
 }
 
-.mat-tooltip {
+.mat-mdc-tooltip {
   white-space: pre-line;
 }
 

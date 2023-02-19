@@ -1,5 +1,7 @@
+
 table {
   width: 100%;
+  table-layout: fixed;
 }
 
 .to-top {
@@ -9,3 +11,4 @@ table {
   position: fixed;
   right: 0;
 }
+

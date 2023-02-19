@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.mat-form-field {
+.mat-mdc-form-field {
   font-size: 14px;
   width: 95%;
 }
@@ -50,12 +50,12 @@ mat-panel-title {
   right: 0;
 }
 
-.dictionary-table .mat-row .mat-cell {
+.dictionary-table .mat-mdc-row .mat-mdc-cell {
   border-bottom: 1px solid transparent;
   border-top: 1px solid transparent;
   cursor: pointer;
 }
 
-.dictionary-table .mat-row:hover .mat-cell {
+.dictionary-table .mat-mdc-row:hover .mat-mdc-cell {
   border-color: currentColor;
 }

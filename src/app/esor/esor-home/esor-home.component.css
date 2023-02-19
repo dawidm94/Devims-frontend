@@ -5,3 +5,15 @@
 button {
   margin-right: 5px;
 }
+
+.container {
+  display: -webkit-flex;
+  display: flex;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.teams {
+  line-height: 1em;
+}
