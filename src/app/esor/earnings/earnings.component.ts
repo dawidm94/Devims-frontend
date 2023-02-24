@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {HttpService} from "../http.service";
+import {Platform} from "@angular/cdk/platform";
 
 @Component({
   selector: 'app-earnings',
@@ -22,7 +23,8 @@ export class EarningsComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private httpService: HttpService
+    private httpService: HttpService,
+    public platform: Platform
   ) { }
 
   ngOnInit(): void {

@@ -2,8 +2,8 @@
   <h1>Wybierz sezon</h1>
   <mat-form-field appearance="fill">
     <mat-label>Sezon</mat-label>
-    <select matNativeControl required [(ngModel)]="selectedSeasonId" (change)="getSeasonEarnings()" [disabled]="isLoadingEarnings">
-      <option disabled selected value="">Sezony:</option>
+    <select matNativeControl [(ngModel)]="selectedSeasonId" (change)="getSeasonEarnings()" [disabled]="isLoadingEarnings">
+      <option *ngIf="platform.SAFARI" value="">-----</option>
       <option *ngFor="let season of seasons" [value]="season.id">{{season.nazwa}}</option>
     </select>
   </mat-form-field>
