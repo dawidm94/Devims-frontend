@@ -3,6 +3,7 @@
   <mat-form-field appearance="fill">
     <mat-label>Sezon</mat-label>
     <select matNativeControl required [(ngModel)]="selectedSeasonId" (change)="getSeasonEarnings()" [disabled]="isLoadingEarnings">
+      <option disabled selected value="" style="display:none"></option>
       <option *ngFor="let season of seasons" [value]="season.id">{{season.nazwa}}</option>
     </select>
   </mat-form-field>
