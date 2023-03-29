@@ -20,6 +20,7 @@ export class EsorHomeComponent implements OnInit {
   nominations = 0;
   baseUrl = environment.baseURL
   mobile = window.screen.width < 500;
+  screenWidth = window.screen.width;
 
   ngOnInit(): void {
     this.updateUpcomingMatch()
@@ -33,6 +34,8 @@ export class EsorHomeComponent implements OnInit {
     }
     this.http.get<any>(this.baseUrl + 'esor/timetable/upcoming', this.httpService.getOptionsWithSeasonId()).subscribe({
       next: response => {
+        //Test response
+        // response = JSON.parse("{\"items\":[{\"id\":157671,\"matchNumber\":\"M1.2\",\"league\":\"U14M\",\"date\":\"2023-03-29\",\"time\":\"17:00\",\"teamHome\":\"Uczniowski Klub Sportowy Szkola Podstawowa nr 27 Katowice\",\"teamVisitor\":\"Gliwickie Towarzystwo Koszykówki Spółka Akcyjna \"},{\"id\":157671,\"matchNumber\":\"M1.2\",\"league\":\"U14M\",\"date\":\"2023-03-29\",\"time\":\"17:00\",\"teamHome\":\"Uczniowski Klub Sportowy SP 27 Katowice\",\"teamVisitor\":\"Gliwickie Towarzystwo Koszykówki Spółka Akcyjna \"},{\"id\":142112,\"matchNumber\":\"205\",\"league\":\"Energa Basket Liga\",\"date\":\"2023-04-08\",\"time\":\"15:30\",\"teamHome\":\"Tauron GTK Gliwice\",\"teamVisitor\":\"Legia Warszawa\"}]}");
         if (response.items != undefined && response.items.length > 0) {
           this.upcomingMatches = response.items;
         }

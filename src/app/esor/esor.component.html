@@ -26,10 +26,11 @@
   <section>
     <h4>Lista ulepszeń:</h4>
     <section style="font-style: italic">
-      <div>22.01.2023r. Zakładka 'Terminarz ogólny'.</div>
+      <div>29.03.2023r. Poprawiony wygląd najbliższych meczów.</div>
       <button *ngIf="!showReleaseHistory" mat-stroked-button (click)="showReleaseHistory = true"
               [disabled]="!gotBackendHealthResponse" style="margin: 10px">Pokaż całą historię</button>
       <span *ngIf="showReleaseHistory">
+        <div>22.01.2023r. Zakładka 'Terminarz ogólny'.</div>
         <div>23.12.2022r. Zakładka 'Sędziowie'.</div>
         <div>20.12.2022r. Edycja nominacji z poziomu "Mój terminarz".</div>
         <div>15.11.2022r. Zakładka "Rozliczenia" - możliwość oznaczania zapłaconych meczów wraz z dodawaniem komentarza.</div>
