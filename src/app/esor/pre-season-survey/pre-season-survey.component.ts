@@ -53,7 +53,6 @@ export class PreSeasonSurveyComponent implements OnInit {
   getPreSeasonSurveyData(): void {
     this.http.get<any>(this.baseUrl + 'esor/pre-season-survey', this.httpService.getOptionWithEsorToken()).subscribe({
       next: (response) => {
-        console.log(response)
         this.surveyData = response;
 
         this.isLoading = false;
