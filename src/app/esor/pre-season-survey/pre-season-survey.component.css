@@ -1,0 +1,62 @@
+h1 {
+  font-weight: bold;
+}
+
+.desktop-mat-form-field {
+  padding-left: 20px;
+  padding-bottom: 15px;
+}
+
+.mobile-label {
+  width: 100%;
+}
+
+mat-form-field.firstName {
+  width: 10%;
+}
+
+mat-form-field.lastName {
+  width: 20%;
+}
+
+mat-form-field.birthDate {
+  width: 10%;
+}
+
+mat-form-field.refereeCourseYear {
+  width: 13%;
+}
+
+mat-form-field.registrationAddress {
+  width: 30%;
+}
+
+mat-form-field.residenceAddress {
+  width: 30%;
+}
+
+mat-form-field.phoneNumber {
+  width: 10%;
+}
+
+mat-form-field.email {
+  width: 15%;
+}
+
+h3.day {
+  font-style: italic;
+  display: inline;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+/*.day-container {*/
+/*  padding-left: 30px;*/
+/*}*/

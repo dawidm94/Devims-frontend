@@ -16,6 +16,7 @@ import {TimetableGeneralComponent} from "./esor/timetable-general/timetable-gene
 import {
   TimetableGeneralAdvancedComponent
 } from "./esor/timetable-general-advanced/timetable-general-advanced.component";
+import {PreSeasonSurveyComponent} from "./esor/pre-season-survey/pre-season-survey.component";
 
 const routes: Routes = [
   {
@@ -61,6 +62,9 @@ const routes: Routes = [
       },
       {
         path: 'phonebook', component: PhonebookComponent
+      },
+      {
+        path: 'pre-season-survey', component: PreSeasonSurveyComponent
       }
     ]},
 ];

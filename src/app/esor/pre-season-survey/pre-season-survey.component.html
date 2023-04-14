@@ -1,0 +1,354 @@
+<mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
+<div *ngIf="!isLoading">
+  <div *ngIf="!mobile">
+    <div style="text-align: center">
+      <h1 style="margin-bottom: 0">Ankieta przedsezonowa 2023/2024</h1>
+      <h4 style="color: red">(należy wysłać do 31 sierpnia 2023r.)</h4>
+      <h5 *ngIf="surveyData.id">Ankieta została już wysłana, ale możesz zaktualizować.</h5>
+      <div>
+        <h2 class="header">Dane sędziego:</h2>
+        <mat-form-field class="firstName desktop-mat-form-field">
+          <mat-label>Imię</mat-label>
+          <input matInput [formControl]="firstName" required>
+          <mat-error *ngIf="firstName.invalid">{{getErrorMessage('firstName')}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="lastName desktop-mat-form-field">
+          <mat-label>Nazwisko</mat-label>
+          <input matInput [formControl]="lastName" required>
+          <mat-error *ngIf="lastName.invalid">{{getErrorMessage('lastName')}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="birthDate desktop-mat-form-field">
+          <mat-label>Data urodzenia</mat-label>
+          <input matInput [matDatepicker]="picker" autocomplete="off" [formControl]="birthDate" placeholder="DD.MM.YYYY">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="birthDate.invalid">{{getErrorMessage('birthDate')}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="refereeCourseYear desktop-mat-form-field">
+          <mat-label>Rok rozpoczęcia sędziowania</mat-label>
+          <input matInput [formControl]="refereeCourseYear" required>
+          <mat-error *ngIf="refereeCourseYear.invalid">{{getErrorMessage('refereeCourseYear')}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="registrationAddress desktop-mat-form-field">
+          <mat-label>Adres zameldowania</mat-label>
+          <input matInput [formControl]="registrationAddress" required>
+          <mat-error *ngIf="registrationAddress.invalid">{{getErrorMessage('registrationAddress')}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="residenceAddress desktop-mat-form-field">
+          <mat-label>Adres zamieszkania</mat-label>
+          <input matInput [formControl]="residenceAddress" required>
+          <mat-error *ngIf="residenceAddress.invalid">{{getErrorMessage('residenceAddress')}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="phoneNumber desktop-mat-form-field">
+          <mat-label>Nr telefonu</mat-label>
+          <input matInput [formControl]="phoneNumber" required>
+          <mat-error *ngIf="phoneNumber.invalid">{{getErrorMessage('phoneNumber')}}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="email desktop-mat-form-field">
+          <mat-label>Aktualny adres e-mail</mat-label>
+          <input matInput [formControl]="email" required>
+          <mat-error *ngIf="email.invalid">{{getErrorMessage('email')}}</mat-error>
+        </mat-form-field>
+      </div>
+      <div>
+        <h2 class="header">Możliwości sędziowania</h2>
+        <div class="container">
+          <div class="day-container">
+            <h3 class="day">Poniedziałek</h3>
+            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="monday.wholeDay">Cały dzień</mat-checkbox>
+            <mat-form-field *ngIf="!monday.wholeDay" style="padding-left: 20px">
+              <mat-label>Od:</mat-label>
+              <input type="time" matInput name="fromTime" [(ngModel)]="monday.fromTime">
+            </mat-form-field>
+            <mat-form-field *ngIf="!monday.wholeDay" style="padding-left: 20px">
+              <mat-label>Do:</mat-label>
+              <input type="time" matInput name="toTime" [(ngModel)]="monday.toTime">
+            </mat-form-field>
+          </div>
+          <div class="day-container">
+            <h3 class="day">Wtorek</h3>
+            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="tuesday.wholeDay">Cały dzień</mat-checkbox>
+            <mat-form-field *ngIf="!tuesday.wholeDay" style="padding-left: 20px">
+              <mat-label>Od:</mat-label>
+              <input type="time" matInput name="fromTime" [(ngModel)]="tuesday.fromTime">
+            </mat-form-field>
+            <mat-form-field *ngIf="!tuesday.wholeDay" style="padding-left: 20px">
+              <mat-label>Do:</mat-label>
+              <input type="time" matInput name="toTime" [(ngModel)]="tuesday.toTime">
+            </mat-form-field>
+          </div>
+          <div class="day-container">
+            <h3 class="day">Środa</h3>
+            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="wednesday.wholeDay">Cały dzień</mat-checkbox>
+            <mat-form-field *ngIf="!wednesday.wholeDay" style="padding-left: 20px">
+              <mat-label>Od:</mat-label>
+              <input type="time" matInput name="fromTime" [(ngModel)]="wednesday.fromTime">
+            </mat-form-field>
+            <mat-form-field *ngIf="!wednesday.wholeDay" style="padding-left: 20px">
+              <mat-label>Do:</mat-label>
+              <input type="time" matInput name="toTime" [(ngModel)]="wednesday.toTime">
+            </mat-form-field>
+          </div>
+          <div class="day-container">
+            <h3 class="day">Czwartek</h3>
+            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="thursday.wholeDay">Cały dzień</mat-checkbox>
+            <mat-form-field *ngIf="!thursday.wholeDay" style="padding-left: 20px">
+              <mat-label>Od:</mat-label>
+              <input type="time" matInput name="fromTime" [(ngModel)]="thursday.fromTime">
+            </mat-form-field>
+            <mat-form-field *ngIf="!thursday.wholeDay" style="padding-left: 20px">
+              <mat-label>Do:</mat-label>
+              <input type="time" matInput name="toTime" [(ngModel)]="thursday.toTime">
+            </mat-form-field>
+          </div>
+          <div class="day-container">
+            <h3 class="day">Piątek</h3>
+            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="friday.wholeDay">Cały dzień</mat-checkbox>
+            <mat-form-field *ngIf="!friday.wholeDay" style="padding-left: 20px">
+              <mat-label>Od:</mat-label>
+              <input type="time" matInput name="fromTime" [(ngModel)]="friday.fromTime">
+            </mat-form-field>
+            <mat-form-field *ngIf="!friday.wholeDay" style="padding-left: 20px">
+              <mat-label>Do:</mat-label>
+              <input type="time" matInput name="toTime" [(ngModel)]="friday.toTime">
+            </mat-form-field>
+          </div>
+          <div class="day-container">
+            <h3 class="day">Sobota</h3>
+            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="saturday.wholeDay">Cały dzień</mat-checkbox>
+            <mat-form-field *ngIf="!saturday.wholeDay" style="padding-left: 20px">
+              <mat-label>Od:</mat-label>
+              <input type="time" matInput name="fromTime" [(ngModel)]="saturday.fromTime">
+            </mat-form-field>
+            <mat-form-field *ngIf="!saturday.wholeDay" style="padding-left: 20px">
+              <mat-label>Do:</mat-label>
+              <input type="time" matInput name="toTime" [(ngModel)]="saturday.toTime">
+            </mat-form-field>
+          </div>
+          <div class="day-container">
+            <h3 class="day">Niedziela</h3>
+            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="sunday.wholeDay">Cały dzień</mat-checkbox>
+            <mat-form-field *ngIf="!sunday.wholeDay" style="padding-left: 20px">
+              <mat-label>Od:</mat-label>
+              <input type="time" matInput name="fromTime" [(ngModel)]="sunday.fromTime">
+            </mat-form-field>
+            <mat-form-field *ngIf="!sunday.wholeDay" style="padding-left: 20px">
+              <mat-label>Do:</mat-label>
+              <input type="time" matInput name="toTime" [(ngModel)]="sunday.toTime">
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div>
+          <mat-form-field appearance="outline" style="width: 800px">
+            <textarea [(ngModel)]="extraComment" matInput placeholder="Proszę wypisać wszystkie ograniczenia i możliwości dotyczące sędziowania - ile razy w tygodniu chcesz sędziować, możliwości transportowe itp. Każda informacja bardzo pomoże." rows="5" maxlength="250"></textarea>
+          </mat-form-field>
+        </div>
+        <div *ngIf="errorMessage != ''" style="color: red; white-space: pre-line">
+          {{errorMessage}}
+        </div>
+        <button *ngIf="!sentSuccessfully && !sentWithError" (click)="send()" mat-raised-button color="primary">
+          <mat-icon *ngIf="isSending"><mat-spinner color="warn" diameter="20"></mat-spinner></mat-icon>
+          {{surveyData.id ? 'Zaktualizuj ankietę' :'Wyślij ankietę'}}
+        </button>
+        <h3 *ngIf="sentSuccessfully" style="color: green; font-weight: bold">Pomyślnie wysłano ankietę. Pamiętaj, że do końca wskazanego terminu powyżej, możesz jeszcze ją edytować wracając tutaj. Dzięki :-)</h3>
+        <h3 *ngIf="sentWithError" style="color: red; font-weight: bold">Coś poszło nie tak z wysyłaniem ankiety. Skontaktuj się z Dawidem Marcinków (dawid.marcinkow@gmail.com).</h3>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="mobile">
+    <div style="text-align: center">
+      <h1 style="margin-bottom: 0">Ankieta przedsezonowa 2023/2024</h1>
+      <h4 style="color: red">(należy wysłać do 31 sierpnia 2023r.)</h4>
+      <h5 *ngIf="surveyData.id">Ankieta została już wysłana, ale możesz zaktualizować.</h5>
+      <mat-stepper orientation="vertical">
+        <mat-step>
+          <ng-template matStepLabel>Dane sędziego</ng-template>
+          <ng-template matStepContent>
+            <div>
+              <mat-form-field class="mobile-firstName mobile-label">
+                <mat-label>Imię</mat-label>
+                <input matInput [formControl]="firstName" required>
+                <mat-error *ngIf="firstName.invalid">{{getErrorMessage('firstName')}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="mobile-lastName mobile-label">
+                <mat-label>Nazwisko</mat-label>
+                <input matInput [formControl]="lastName" required>
+                <mat-error *ngIf="lastName.invalid">{{getErrorMessage('lastName')}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="mobile-birthDate mobile-label">
+                <mat-label>Data urodzenia</mat-label>
+                <input matInput [matDatepicker]="picker" autocomplete="off" [formControl]="birthDate" placeholder="DD.MM.YYYY">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+                <mat-error *ngIf="birthDate.invalid">{{getErrorMessage('birthDate')}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="mobile-refereeCourseYear mobile-label">
+                <mat-label>Rok rozpoczęcia sędziowania</mat-label>
+                <input matInput [formControl]="refereeCourseYear" required>
+                <mat-error *ngIf="refereeCourseYear.invalid">{{getErrorMessage('refereeCourseYear')}}</mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="mobile-registrationAddress mobile-label">
+                <mat-label>Adres zameldowania</mat-label>
+                <input matInput [formControl]="registrationAddress" required>
+                <mat-error *ngIf="registrationAddress.invalid">{{getErrorMessage('registrationAddress')}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="mobile-residenceAddress mobile-label">
+                <mat-label>Adres zamieszkania</mat-label>
+                <input matInput [formControl]="residenceAddress" required>
+                <mat-error *ngIf="residenceAddress.invalid">{{getErrorMessage('residenceAddress')}}</mat-error>
+              </mat-form-field>
+            </div>
+            <div>
+              <mat-form-field class="mobile-phoneNumber mobile-label">
+                <mat-label>Nr telefonu</mat-label>
+                <input matInput [formControl]="phoneNumber" required>
+                <mat-error *ngIf="phoneNumber.invalid">{{getErrorMessage('phoneNumber')}}</mat-error>
+              </mat-form-field>
+
+              <mat-form-field class="mobile-email mobile-label">
+                <mat-label>Aktualny adres e-mail</mat-label>
+                <input matInput [formControl]="email" required>
+                <mat-error *ngIf="email.invalid">{{getErrorMessage('email')}}</mat-error>
+              </mat-form-field>
+            </div>
+            <div style="margin-top: 10px">
+              <button mat-raised-button matStepperNext>Dalej</button>
+            </div>
+          </ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Możliwości sędziowania</ng-template>
+          <ng-template matStepContent>
+          <div class="container">
+            <div class="day-container">
+              <h3 class="day">Poniedziałek</h3>
+              <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="monday.wholeDay">Cały dzień</mat-checkbox>
+              <mat-form-field *ngIf="!monday.wholeDay" style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="monday.fromTime">
+              </mat-form-field>
+              <mat-form-field *ngIf="!monday.wholeDay" style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="monday.toTime">
+              </mat-form-field>
+            </div>
+            <div class="day-container">
+              <h3 class="day">Wtorek</h3>
+              <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="tuesday.wholeDay">Cały dzień</mat-checkbox>
+              <mat-form-field *ngIf="!tuesday.wholeDay" style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="tuesday.fromTime">
+              </mat-form-field>
+              <mat-form-field *ngIf="!tuesday.wholeDay" style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="tuesday.toTime">
+              </mat-form-field>
+            </div>
+            <div class="day-container">
+              <h3 class="day">Środa</h3>
+              <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="wednesday.wholeDay">Cały dzień</mat-checkbox>
+              <mat-form-field *ngIf="!wednesday.wholeDay" style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="wednesday.fromTime">
+              </mat-form-field>
+              <mat-form-field *ngIf="!wednesday.wholeDay" style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="wednesday.toTime">
+              </mat-form-field>
+            </div>
+            <div class="day-container">
+              <h3 class="day">Czwartek</h3>
+              <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="thursday.wholeDay">Cały dzień</mat-checkbox>
+              <mat-form-field *ngIf="!thursday.wholeDay" style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="thursday.fromTime">
+              </mat-form-field>
+              <mat-form-field *ngIf="!thursday.wholeDay" style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="thursday.toTime">
+              </mat-form-field>
+            </div>
+            <div class="day-container">
+              <h3 class="day">Piątek</h3>
+              <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="friday.wholeDay">Cały dzień</mat-checkbox>
+              <mat-form-field *ngIf="!friday.wholeDay" style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="friday.fromTime">
+              </mat-form-field>
+              <mat-form-field *ngIf="!friday.wholeDay" style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="friday.toTime">
+              </mat-form-field>
+            </div>
+            <div class="day-container">
+              <h3 class="day">Sobota</h3>
+              <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="saturday.wholeDay">Cały dzień</mat-checkbox>
+              <mat-form-field *ngIf="!saturday.wholeDay" style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="saturday.fromTime">
+              </mat-form-field>
+              <mat-form-field *ngIf="!saturday.wholeDay" style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="saturday.toTime">
+              </mat-form-field>
+            </div>
+            <div class="day-container">
+              <h3 class="day">Niedziela</h3>
+              <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="sunday.wholeDay">Cały dzień</mat-checkbox>
+              <mat-form-field *ngIf="!sunday.wholeDay" style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="sunday.fromTime">
+              </mat-form-field>
+              <mat-form-field *ngIf="!sunday.wholeDay" style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="sunday.toTime">
+              </mat-form-field>
+            </div>
+          </div>
+            <div>
+              <button style="margin-right: 20px" mat-raised-button matStepperPrevious>Powrót</button>
+              <button mat-raised-button matStepperNext>Dalej</button>
+            </div>
+          </ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Możliwości sędziowania - komentarz</ng-template>
+          <ng-template matStepContent>
+            <mat-form-field appearance="outline" style="width: 100%; padding-bottom: 0">
+              <textarea matInput [(ngModel)]="extraComment" placeholder="Proszę wypisać tutaj wszystkie ograniczenia i możliwości dotyczące sędziowania - ile razy w tygodniu chcesz sędziować, możliwości transportowe itp. Każda informacja bardzo pomoże." rows="8" maxlength="250"></textarea>
+            </mat-form-field>
+            <div style="text-align:center; padding-bottom: 20px">
+              <button *ngIf="!sentSuccessfully && !sentWithError" style="margin-right: 20px" mat-raised-button matStepperPrevious>Powrót</button>
+              <button *ngIf="!sentSuccessfully && !sentWithError" (click)="send()" mat-raised-button color="primary">
+                <mat-icon *ngIf="isSending"><mat-spinner color="warn" diameter="20"></mat-spinner></mat-icon>
+                {{surveyData.id ? 'Zaktualizuj ankietę' :'Wyślij ankietę'}}
+              </button>
+              <h3 *ngIf="sentSuccessfully" style="color: green; font-weight: bold">Pomyślnie wysłano ankietę. Pamiętaj, że do końca wskazanego terminu powyżej, możesz jeszcze ją edytować wracając tutaj. Dzięki :-)</h3>
+              <h3 *ngIf="sentWithError" style="color: red; font-weight: bold">Coś poszło nie tak z wysyłaniem ankiety. Skontaktuj się z Dawidem Marcinków (dawid.marcinkow@gmail.com).</h3>
+              <div *ngIf="errorMessage != ''" style="color: red; white-space: pre-line; padding-top: 10px">
+                {{errorMessage}}
+              </div>
+            </div>
+          </ng-template>
+        </mat-step>
+      </mat-stepper>
+    </div>
+  </div>
+</div>

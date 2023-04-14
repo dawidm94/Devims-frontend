@@ -34,7 +34,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import { EsorHomeComponent } from './esor/esor-home/esor-home.component';
 import { SinglePeriodComponent } from './esor/single-period/single-period.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {DateAdapter, MatNativeDateModule} from "@angular/material/core";
+import {DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
 
 import { MAT_DATE_LOCALE } from '@angular/material/core'
 import {MatDividerModule} from "@angular/material/divider";
@@ -54,6 +54,8 @@ import { TimetableGeneralComponent } from './esor/timetable-general/timetable-ge
 import {MatSelectModule} from "@angular/material/select";
 import {MatExpansionModule} from "@angular/material/expansion";
 import { TimetableGeneralAdvancedComponent } from './esor/timetable-general-advanced/timetable-general-advanced.component';
+import { PreSeasonSurveyComponent } from './esor/pre-season-survey/pre-season-survey.component';
+import {MatStepperModule} from "@angular/material/stepper";
 
 
 
@@ -78,7 +80,8 @@ import { TimetableGeneralAdvancedComponent } from './esor/timetable-general-adva
     SettlementMobileDetailsDialogComponent,
     PhonebookComponent,
     TimetableGeneralComponent,
-    TimetableGeneralAdvancedComponent
+    TimetableGeneralAdvancedComponent,
+    PreSeasonSurveyComponent
   ],
   imports: [
     BrowserModule,
@@ -111,12 +114,13 @@ import { TimetableGeneralAdvancedComponent } from './esor/timetable-general-adva
     ClipboardModule,
     MatSelectModule,
     MatExpansionModule,
+    MatStepperModule,
   ],
   providers: [
     Meta,
     { provide: MAT_DATE_LOCALE, useValue: 'pl-PL' },
-    { provide: DateAdapter, useClass: CustomDateAdapter},
-    { provide: MatPaginatorIntl, useValue: getPolishPaginatorIntl()}
+    { provide: DateAdapter, useClass: CustomDateAdapter, deps: [MAT_DATE_LOCALE]},
+    { provide: MatPaginatorIntl, useValue: getPolishPaginatorIntl()},
   ],
   bootstrap: [AppComponent]
 })
