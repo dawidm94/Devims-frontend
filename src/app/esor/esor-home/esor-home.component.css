@@ -17,3 +17,9 @@ button {
 .teams {
   line-height: 1em;
 }
+
+.mobile-img {
+  width:97%;
+  height:90%;
+  object-fit:cover;
+}
