@@ -17,11 +17,15 @@ import {
   TimetableGeneralAdvancedComponent
 } from "./esor/timetable-general-advanced/timetable-general-advanced.component";
 import {PreSeasonSurveyComponent} from "./esor/pre-season-survey/pre-season-survey.component";
+import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'privacy-policy', component: PrivacyPolicyComponent
   },
   {
     path: 'esor',

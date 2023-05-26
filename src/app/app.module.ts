@@ -34,7 +34,7 @@ import {MatMenuModule} from "@angular/material/menu";
 import { EsorHomeComponent } from './esor/esor-home/esor-home.component';
 import { SinglePeriodComponent } from './esor/single-period/single-period.component';
 import {MatDatepickerModule} from "@angular/material/datepicker";
-import {DateAdapter, MAT_DATE_FORMATS, MatNativeDateModule} from "@angular/material/core";
+import {DateAdapter, MatNativeDateModule} from "@angular/material/core";
 
 import { MAT_DATE_LOCALE } from '@angular/material/core'
 import {MatDividerModule} from "@angular/material/divider";
@@ -56,6 +56,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
 import { TimetableGeneralAdvancedComponent } from './esor/timetable-general-advanced/timetable-general-advanced.component';
 import { PreSeasonSurveyComponent } from './esor/pre-season-survey/pre-season-survey.component';
 import {MatStepperModule} from "@angular/material/stepper";
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 
@@ -81,7 +82,8 @@ import {MatStepperModule} from "@angular/material/stepper";
     PhonebookComponent,
     TimetableGeneralComponent,
     TimetableGeneralAdvancedComponent,
-    PreSeasonSurveyComponent
+    PreSeasonSurveyComponent,
+    PrivacyPolicyComponent
   ],
   imports: [
     BrowserModule,
