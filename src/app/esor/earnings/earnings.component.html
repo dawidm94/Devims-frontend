@@ -15,6 +15,7 @@
     <img [class]="isMobile ? 'mobile-img' : ''" src="assets/images/money.gif">
   </section>
   <section *ngIf="!isLoadingEarnings && !isError">
+    <h2>Ilość meczów: {{esorEarnings.matchCounter}}</h2>
     <h2>Dotychczasowe mecze: {{esorEarnings.alreadyEarnedAmount}}zł</h2>
     <h2>Przyszłe mecze: {{esorEarnings.futureNominationsAmount}}zł</h2>
     <h2 class="money">Suma: {{esorEarnings.alreadyEarnedAmount + esorEarnings.futureNominationsAmount}}zł</h2>
