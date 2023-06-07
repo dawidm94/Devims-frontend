@@ -26,10 +26,12 @@
   <section>
     <h4>Lista ulepszeń:</h4>
     <section style="font-style: italic">
-      <div>29.03.2023r. Poprawiony wygląd najbliższych meczów.</div>
+      <div>07.06.2023r. Dodano instrukcję przypinania strony jako ikonka w telefonie.</div>
       <button *ngIf="!showReleaseHistory" mat-stroked-button (click)="showReleaseHistory = true"
               [disabled]="!gotBackendHealthResponse" style="margin: 10px">Pokaż całą historię</button>
       <span *ngIf="showReleaseHistory">
+        <div>20.05.2023r. Utworzono ankietę przedsezonową.</div>
+        <div>29.03.2023r. Poprawiony wygląd najbliższych meczów.</div>
         <div>22.01.2023r. Zakładka 'Terminarz ogólny'.</div>
         <div>23.12.2022r. Zakładka 'Sędziowie'.</div>
         <div>20.12.2022r. Edycja nominacji z poziomu "Mój terminarz".</div>
@@ -144,6 +146,19 @@
 <!--      ❗ Wypróbuj nową zakładkę SĘDZIOWIE ❗-->
 <!--    </p>-->
 <!--  </div>-->
+  <div *ngIf="mobile && !temporaryHiddenMobileIcon && showMobileIconHint" class="announcement">
+    <div style="font-size: medium">
+      ❗ Dodaj tę stronę jako ikonka w telefonie. ❗
+    </div>
+    <div style="font-style: italic; padding: 5px">
+      <div style="display: inline; padding-right: 60px">
+        <button mat-stroked-button routerLink="mobile-icon" (click)="temporaryHiddenMobileIcon = true">Pokaż jak</button>
+      </div>
+      <div style="display: inline">
+        <button mat-stroked-button (click)="dontShowMobileIconHint()">Nie pokazuj ponownie</button>
+      </div>
+    </div>
+  </div>
   <router-outlet></router-outlet>
 </div>
 

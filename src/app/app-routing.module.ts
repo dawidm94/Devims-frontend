@@ -18,6 +18,7 @@ import {
 } from "./esor/timetable-general-advanced/timetable-general-advanced.component";
 import {PreSeasonSurveyComponent} from "./esor/pre-season-survey/pre-season-survey.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
+import {MobileIconComponent} from "./esor/mobile-icon/mobile-icon.component";
 
 const routes: Routes = [
   {
@@ -69,6 +70,9 @@ const routes: Routes = [
       },
       {
         path: 'pre-season-survey', component: PreSeasonSurveyComponent
+      },
+      {
+        path: 'mobile-icon', component: MobileIconComponent
       }
     ]},
 ];

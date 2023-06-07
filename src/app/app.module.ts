@@ -57,6 +57,8 @@ import { TimetableGeneralAdvancedComponent } from './esor/timetable-general-adva
 import { PreSeasonSurveyComponent } from './esor/pre-season-survey/pre-season-survey.component';
 import {MatStepperModule} from "@angular/material/stepper";
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
+import { MobileIconComponent } from './esor/mobile-icon/mobile-icon.component';
+import {MatTabsModule} from "@angular/material/tabs";
 
 
 
@@ -83,7 +85,8 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     TimetableGeneralComponent,
     TimetableGeneralAdvancedComponent,
     PreSeasonSurveyComponent,
-    PrivacyPolicyComponent
+    PrivacyPolicyComponent,
+    MobileIconComponent
   ],
   imports: [
     BrowserModule,
@@ -117,6 +120,7 @@ import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.componen
     MatSelectModule,
     MatExpansionModule,
     MatStepperModule,
+    MatTabsModule,
   ],
   providers: [
     Meta,

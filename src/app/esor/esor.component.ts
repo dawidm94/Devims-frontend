@@ -37,6 +37,8 @@ export class EsorComponent implements OnInit {
     'Sprawdzanie najbliższych meczów'
   ]
   nameClickCounter = 0;
+  temporaryHiddenMobileIcon = false;
+  showMobileIconHint = false;
 
   constructor(
     private metaService: Meta,
@@ -94,6 +96,7 @@ export class EsorComponent implements OnInit {
           this.loggedIn = true;
           this.username = response.username
           this.firstName = response.username.split(/(\s+)/)[0];
+          this.showMobileIconHint = response.user.showMobileIconHint;
           this.updateSeasonId(esorToken)
           return true
         },
@@ -111,6 +114,14 @@ export class EsorComponent implements OnInit {
       next: season => {sessionStorage.setItem('seasonId', season.id)},
       error: err => {console.log(err)}
     })
+  }
+
+  dontShowMobileIconHint(): void {
+    let esorToken = sessionStorage.getItem('esorToken') as string
+    this.temporaryHiddenMobileIcon = true;
+
+    let headers = new HttpHeaders({'Esor-Token': esorToken });
+    this.http.get<any>(this.baseUrl + 'esor/mobile-icon-hint', {headers: headers}).subscribe({})
   }
 
   openLoginDialog(): void {
