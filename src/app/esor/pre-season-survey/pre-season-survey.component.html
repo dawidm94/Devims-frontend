@@ -59,8 +59,20 @@
           <mat-error *ngIf="email.invalid">{{getErrorMessage('email')}}</mat-error>
         </mat-form-field>
       </div>
+      <h2>Możliwości sędziowania:</h2>
       <div>
-        <h2 class="header">Możliwości sędziowania</h2>
+        <h3 style="margin-bottom: 0">Odległość od miejsca zamieszkania</h3>
+        <h5>(Orientacyjnie dla referenta obsad)</h5>
+        <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color" [(ngModel)]="distancePreference">
+          <mat-button-toggle value="Tylko w moim miescie">Tylko w moim mieście</mat-button-toggle>
+          <mat-button-toggle value="Do 15 km">Do 15 km</mat-button-toggle>
+          <mat-button-toggle value="Do 30 km">Do 30 km</mat-button-toggle>
+          <mat-button-toggle value="Do 50 km">Do 50 km</mat-button-toggle>
+          <mat-button-toggle value="Wszedzie">Wszędzie</mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
+      <div style="padding-top: 20px">
+        <h3 class="header">Dni tygodnia</h3>
         <div class="container">
           <div class="day-container">
             <h3 class="day">Poniedziałek</h3>
@@ -237,6 +249,18 @@
           <ng-template matStepLabel>Możliwości sędziowania</ng-template>
           <ng-template matStepContent>
           <div class="container">
+            <div>
+              <h2 style="margin-bottom: 0">Odległość od miejsca zamieszkania</h2>
+              <h5>(Orientacyjnie dla referenta obsad)</h5>
+              <mat-radio-group class="example-radio-group" [(ngModel)]="distancePreference" color="primary">
+                <mat-radio-button class="example-radio-button" value="Tylko w moim miescie">Tylko w moim mieście</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Do 15 km">Do 15 km</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Do 30 km">Do 30 km</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Do 50 km">Do 50 km</mat-radio-button>
+                <mat-radio-button class="example-radio-button" value="Wszedzie">Wszędzie</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <h2 class="header">Dni tygodnia</h2>
             <div class="day-container">
               <h3 class="day">Poniedziałek</h3>
               <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="monday.wholeDay">Cały dzień</mat-checkbox>

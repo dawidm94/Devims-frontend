@@ -59,6 +59,8 @@ import {MatStepperModule} from "@angular/material/stepper";
 import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 import { MobileIconComponent } from './esor/mobile-icon/mobile-icon.component';
 import {MatTabsModule} from "@angular/material/tabs";
+import {MatButtonToggleModule} from "@angular/material/button-toggle";
+import {MatRadioModule} from "@angular/material/radio";
 
 
 
@@ -121,6 +123,8 @@ import {MatTabsModule} from "@angular/material/tabs";
     MatExpansionModule,
     MatStepperModule,
     MatTabsModule,
+    MatButtonToggleModule,
+    MatRadioModule,
   ],
   providers: [
     Meta,

@@ -49,6 +49,7 @@ export class PreSeasonSurveyComponent implements OnInit {
   refereeCourseYear = new FormControl('', [Validators.required]);
   phoneNumber = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
+  distancePreference: any;
 
   getPreSeasonSurveyData(): void {
     this.http.get<any>(this.baseUrl + 'esor/pre-season-survey', this.httpService.getOptionWithEsorToken()).subscribe({
@@ -64,6 +65,8 @@ export class PreSeasonSurveyComponent implements OnInit {
         this.residenceAddress.setValue(response.residenceAddress);
         this.phoneNumber.setValue(response.phoneNumber);
         this.email.setValue(response.email);
+
+        this.distancePreference = response.distancePreference;
 
         this.monday = response.daysPossibility.monday
         this.tuesday = response.daysPossibility.tuesday
@@ -99,6 +102,8 @@ export class PreSeasonSurveyComponent implements OnInit {
     request.residenceAddress = this.residenceAddress.value;
     request.phoneNumber = this.phoneNumber.value;
     request.email = this.email.value;
+
+    request.distancePreference = this.distancePreference;
 
     request.daysPossibility.monday = this.monday;
     request.daysPossibility.tuesday = this.tuesday;
@@ -168,7 +173,11 @@ export class PreSeasonSurveyComponent implements OnInit {
     }
 
     if (errorDays.length != 0) {
-      this.errorMessage = "Jeżeli jest odznaczone pole 'cały dzień', musisz uzupełnić przynajmniej jedno pole z godziną dla tego dnia. Błędne dni to: [" + errorDays.join(', ') + "]\n"
+      this.addErrorMessage("Jeżeli jest odznaczone pole 'cały dzień', musisz uzupełnić przynajmniej jedno pole z godziną dla tego dnia. Błędne dni to: [" + errorDays.join(', ') + "]")
+    }
+
+    if (!this.distancePreference) {
+      this.addErrorMessage(" Proszę wybrać preferencje dotyczące odległości sędziowania.")
     }
 
     this.firstName.markAllAsTouched();
@@ -188,9 +197,17 @@ export class PreSeasonSurveyComponent implements OnInit {
       || this.refereeCourseYear.invalid
       || this.phoneNumber.invalid
       || this.email.invalid) {
-      this.errorMessage += ' Błąd w sekcji "Dane sędziego"'
+      this.addErrorMessage(' Błąd w sekcji "Dane sędziego"');
     }
     return this.errorMessage == ''
+  }
+
+  addErrorMessage(newErrorMessage: string) {
+    if (this.errorMessage == undefined || this.errorMessage == '') {
+      this.errorMessage = newErrorMessage;
+    } else {
+      this.errorMessage+= '\n' + newErrorMessage;
+    }
   }
 
   getErrorMessage(label: string) {

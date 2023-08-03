@@ -26,10 +26,11 @@
   <section>
     <h4>Lista ulepszeń:</h4>
     <section style="font-style: italic">
-      <div>07.06.2023r. Dodano instrukcję przypinania strony jako ikonka w telefonie.</div>
+      <div>03.08.2023r. Ankieta przedsezonowa.</div>
       <button *ngIf="!showReleaseHistory" mat-stroked-button (click)="showReleaseHistory = true"
               [disabled]="!gotBackendHealthResponse" style="margin: 10px">Pokaż całą historię</button>
       <span *ngIf="showReleaseHistory">
+        <div>07.06.2023r. Dodano instrukcję przypinania strony jako ikonka w telefonie.</div>
         <div>20.05.2023r. Utworzono ankietę przedsezonową.</div>
         <div>29.03.2023r. Poprawiony wygląd najbliższych meczów.</div>
         <div>22.01.2023r. Zakładka 'Terminarz ogólny'.</div>
@@ -103,6 +104,7 @@
         <button mat-menu-item routerLink="earnings">Zarobki</button>
         <button mat-menu-item routerLink="phonebook">Sędziowie</button>
       </mat-menu>
+      <button mat-button routerLink="pre-season-survey" style="color: greenyellow">Ankieta przedsezonowa</button>
       <button mat-button color="accent" *ngIf="nameClickCounter > 5" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
 
       <span class="example-spacer"></span>
@@ -117,6 +119,7 @@
       </button>
       <mat-menu #menu>
         <button mat-menu-item class="mobile-menu-element" routerLink="home">Główna strona</button>
+        <button mat-menu-item class="mobile-menu-element" routerLink="pre-season-survey" style="color: green">Ankieta przedsezonowa</button>
         <button mat-menu-item class="mobile-menu-element" routerLink="nominations">Moje nominacje</button>
         <button mat-menu-item class="mobile-menu-element" disabled>Terminarz: </button>
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="timetable">Mój terminarz</button>

@@ -57,6 +57,13 @@ h3.day {
   justify-content: space-evenly;
 }
 
-/*.day-container {*/
-/*  padding-left: 30px;*/
-/*}*/
+.example-radio-group {
+  display: flex;
+  flex-direction: column;
+  margin: 15px 0;
+  align-items: center;
+}
+
+.example-radio-button {
+  margin: 10px;
+}
