@@ -50,9 +50,16 @@ h3.day {
   padding-right: 10px;
 }
 
-.container {
-  display: flex;
-  flex-direction: row;
+/*.container {*/
+/*  display: flex;*/
+/*  flex-direction: row;*/
+/*  flex-wrap: wrap;*/
+/*  justify-content: space-evenly;*/
+/*}*/
+
+.day-container {
+  display: block;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
