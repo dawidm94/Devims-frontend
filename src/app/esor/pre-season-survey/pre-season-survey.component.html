@@ -1,12 +1,12 @@
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 <div *ngIf="!isLoading">
   <div *ngIf="!mobile">
-    <div style="text-align: center">
-      <h1 style="margin-bottom: 0">Ankieta przedsezonowa 2023/2024</h1>
+    <div style="text-align: center; padding-bottom: 30px">
+      <h1 style="margin-bottom: 0; font-size: 35px">Ankieta przedsezonowa 2023/2024</h1>
       <h4 style="color: red">(należy wysłać do 31 sierpnia 2023r.)</h4>
       <h4 style="color: blue; font-style: italic" *ngIf="surveyData.id">Ankieta została już wysłana, ale możesz ją zaktualizować.</h4>
       <div>
-        <h2 class="header">Dane sędziego:</h2>
+        <h1 class="header">Dane sędziego:</h1>
         <mat-form-field class="firstName desktop-mat-form-field">
           <mat-label>Imię</mat-label>
           <input matInput [formControl]="firstName" required>
@@ -59,9 +59,9 @@
           <mat-error *ngIf="email.invalid">{{getErrorMessage('email')}}</mat-error>
         </mat-form-field>
       </div>
-      <h2>Możliwości sędziowania:</h2>
+      <h1>Możliwości sędziowania:</h1>
       <div>
-        <h3 style="margin-bottom: 0">Odległość od miejsca zamieszkania</h3>
+        <h2 style="margin-bottom: 0">Odległość od miejsca zamieszkania</h2>
         <h5>(Orientacyjnie dla referenta obsad)</h5>
         <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color" [(ngModel)]="distancePreference">
           <mat-button-toggle value="Tylko w moim miescie">Tylko w moim mieście</mat-button-toggle>
@@ -72,91 +72,160 @@
         </mat-button-toggle-group>
       </div>
       <div style="padding-top: 20px">
-        <h3 class="header">Dni tygodnia</h3>
+        <h2 class="header">Dni tygodnia</h2>
         <div class="container">
           <div class="day-container">
             <h3 class="day">Poniedziałek</h3>
-            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="monday.wholeDay">Cały dzień</mat-checkbox>
-            <mat-form-field *ngIf="!monday.wholeDay" style="padding-left: 20px">
-              <mat-label>Od:</mat-label>
-              <input type="time" matInput name="fromTime" [(ngModel)]="monday.fromTime">
-            </mat-form-field>
-            <mat-form-field *ngIf="!monday.wholeDay" style="padding-left: 20px">
-              <mat-label>Do:</mat-label>
-              <input type="time" matInput name="toTime" [(ngModel)]="monday.toTime">
-            </mat-form-field>
+            <mat-radio-group [(ngModel)]="monday.isChecked" color="primary">
+              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>
+              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>
+            </mat-radio-group>
+            <div>
+              <mat-checkbox class="wholeDayCheckbox" *ngIf="monday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="monday.wholeDay">Cały dzień</mat-checkbox>
+            </div>
+            <div *ngIf="monday.isChecked && !monday.wholeDay">
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="monday.fromTime">
+              </mat-form-field>
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="monday.toTime">
+              </mat-form-field>
+              <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
+            </div>
           </div>
+          <hr style="width: 40%"/>
           <div class="day-container">
             <h3 class="day">Wtorek</h3>
-            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="tuesday.wholeDay">Cały dzień</mat-checkbox>
-            <mat-form-field *ngIf="!tuesday.wholeDay" style="padding-left: 20px">
-              <mat-label>Od:</mat-label>
-              <input type="time" matInput name="fromTime" [(ngModel)]="tuesday.fromTime">
-            </mat-form-field>
-            <mat-form-field *ngIf="!tuesday.wholeDay" style="padding-left: 20px">
-              <mat-label>Do:</mat-label>
-              <input type="time" matInput name="toTime" [(ngModel)]="tuesday.toTime">
-            </mat-form-field>
+            <mat-radio-group [(ngModel)]="tuesday.isChecked" color="primary">
+              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>
+              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>
+            </mat-radio-group>
+            <div>
+              <mat-checkbox class="wholeDayCheckbox" *ngIf="tuesday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="tuesday.wholeDay">Cały dzień</mat-checkbox>
+            </div>
+            <div *ngIf="tuesday.isChecked && !tuesday.wholeDay">
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="tuesday.fromTime">
+              </mat-form-field>
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="tuesday.toTime">
+              </mat-form-field>
+              <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
+            </div>
           </div>
+          <hr style="width: 40%"/>
           <div class="day-container">
             <h3 class="day">Środa</h3>
-            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="wednesday.wholeDay">Cały dzień</mat-checkbox>
-            <mat-form-field *ngIf="!wednesday.wholeDay" style="padding-left: 20px">
-              <mat-label>Od:</mat-label>
-              <input type="time" matInput name="fromTime" [(ngModel)]="wednesday.fromTime">
-            </mat-form-field>
-            <mat-form-field *ngIf="!wednesday.wholeDay" style="padding-left: 20px">
-              <mat-label>Do:</mat-label>
-              <input type="time" matInput name="toTime" [(ngModel)]="wednesday.toTime">
-            </mat-form-field>
+            <mat-radio-group [(ngModel)]="wednesday.isChecked" color="primary">
+              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>
+              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>
+            </mat-radio-group>
+            <div>
+              <mat-checkbox class="wholeDayCheckbox" *ngIf="wednesday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="wednesday.wholeDay">Cały dzień</mat-checkbox>
+            </div>
+            <div *ngIf="wednesday.isChecked && !wednesday.wholeDay">
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="wednesday.fromTime">
+              </mat-form-field>
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="wednesday.toTime">
+              </mat-form-field>
+              <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
+            </div>
           </div>
+          <hr style="width: 40%"/>
           <div class="day-container">
             <h3 class="day">Czwartek</h3>
-            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="thursday.wholeDay">Cały dzień</mat-checkbox>
-            <mat-form-field *ngIf="!thursday.wholeDay" style="padding-left: 20px">
-              <mat-label>Od:</mat-label>
-              <input type="time" matInput name="fromTime" [(ngModel)]="thursday.fromTime">
-            </mat-form-field>
-            <mat-form-field *ngIf="!thursday.wholeDay" style="padding-left: 20px">
-              <mat-label>Do:</mat-label>
-              <input type="time" matInput name="toTime" [(ngModel)]="thursday.toTime">
-            </mat-form-field>
+            <mat-radio-group [(ngModel)]="thursday.isChecked" color="primary">
+              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>
+              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>
+            </mat-radio-group>
+            <div>
+              <mat-checkbox class="wholeDayCheckbox" *ngIf="thursday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="thursday.wholeDay">Cały dzień</mat-checkbox>
+            </div>
+            <div *ngIf="thursday.isChecked && !thursday.wholeDay">
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="thursday.fromTime">
+              </mat-form-field>
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="thursday.toTime">
+              </mat-form-field>
+              <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
+            </div>
           </div>
+          <hr style="width: 40%"/>
           <div class="day-container">
             <h3 class="day">Piątek</h3>
-            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="friday.wholeDay">Cały dzień</mat-checkbox>
-            <mat-form-field *ngIf="!friday.wholeDay" style="padding-left: 20px">
-              <mat-label>Od:</mat-label>
-              <input type="time" matInput name="fromTime" [(ngModel)]="friday.fromTime">
-            </mat-form-field>
-            <mat-form-field *ngIf="!friday.wholeDay" style="padding-left: 20px">
-              <mat-label>Do:</mat-label>
-              <input type="time" matInput name="toTime" [(ngModel)]="friday.toTime">
-            </mat-form-field>
+            <mat-radio-group [(ngModel)]="friday.isChecked" color="primary">
+              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>
+              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>
+            </mat-radio-group>
+            <div>
+              <mat-checkbox class="wholeDayCheckbox" *ngIf="friday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="friday.wholeDay">Cały dzień</mat-checkbox>
+            </div>
+            <div *ngIf="friday.isChecked && !friday.wholeDay">
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="friday.fromTime">
+              </mat-form-field>
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="friday.toTime">
+              </mat-form-field>
+              <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
+            </div>
           </div>
+          <hr style="width: 40%"/>
           <div class="day-container">
             <h3 class="day">Sobota</h3>
-            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="saturday.wholeDay">Cały dzień</mat-checkbox>
-            <mat-form-field *ngIf="!saturday.wholeDay" style="padding-left: 20px">
-              <mat-label>Od:</mat-label>
-              <input type="time" matInput name="fromTime" [(ngModel)]="saturday.fromTime">
-            </mat-form-field>
-            <mat-form-field *ngIf="!saturday.wholeDay" style="padding-left: 20px">
-              <mat-label>Do:</mat-label>
-              <input type="time" matInput name="toTime" [(ngModel)]="saturday.toTime">
-            </mat-form-field>
+            <mat-radio-group [(ngModel)]="saturday.isChecked" color="primary">
+              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>
+              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>
+            </mat-radio-group>
+            <div>
+              <mat-checkbox class="wholeDayCheckbox" *ngIf="saturday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="saturday.wholeDay">Cały dzień</mat-checkbox>
+            </div>
+            <div *ngIf="saturday.isChecked && !saturday.wholeDay">
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="saturday.fromTime">
+              </mat-form-field>
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="saturday.toTime">
+              </mat-form-field>
+              <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
+            </div>
           </div>
+          <hr style="width: 40%"/>
           <div class="day-container">
             <h3 class="day">Niedziela</h3>
-            <mat-checkbox style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="sunday.wholeDay">Cały dzień</mat-checkbox>
-            <mat-form-field *ngIf="!sunday.wholeDay" style="padding-left: 20px">
-              <mat-label>Od:</mat-label>
-              <input type="time" matInput name="fromTime" [(ngModel)]="sunday.fromTime">
-            </mat-form-field>
-            <mat-form-field *ngIf="!sunday.wholeDay" style="padding-left: 20px">
-              <mat-label>Do:</mat-label>
-              <input type="time" matInput name="toTime" [(ngModel)]="sunday.toTime">
-            </mat-form-field>
+            <mat-radio-group [(ngModel)]="sunday.isChecked" color="primary">
+              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>
+              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>
+            </mat-radio-group>
+            <div>
+              <mat-checkbox class="wholeDayCheckbox" *ngIf="sunday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="sunday.wholeDay">Cały dzień</mat-checkbox>
+            </div>
+            <div *ngIf="sunday.isChecked && !sunday.wholeDay">
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Od:</mat-label>
+                <input type="time" matInput name="fromTime" [(ngModel)]="sunday.fromTime">
+              </mat-form-field>
+              <mat-form-field style="padding-left: 20px">
+                <mat-label>Do:</mat-label>
+                <input type="time" matInput name="toTime" [(ngModel)]="sunday.toTime">
+              </mat-form-field>
+              <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
+            </div>
           </div>
         </div>
       </div>
@@ -166,7 +235,7 @@
             <textarea [(ngModel)]="extraComment" matInput placeholder="Proszę wypisać wszystkie ograniczenia i możliwości dotyczące sędziowania - ile razy w tygodniu chcesz sędziować, możliwości transportowe itp. Każda informacja bardzo pomoże." rows="5" maxlength="250"></textarea>
           </mat-form-field>
         </div>
-        <div *ngIf="errorMessage != ''" style="color: red; white-space: pre-line">
+        <div *ngIf="errorMessage != ''" style="color: red; white-space: pre-line; padding-bottom: 10px">
           {{errorMessage}}
         </div>
         <button *ngIf="!sentSuccessfully && !sentWithError" (click)="send()" mat-raised-button color="primary">
@@ -281,7 +350,7 @@
                     <input type="time" matInput name="toTime" [(ngModel)]="monday.toTime" autocomplete="off">
                   </mat-form-field>
                   <div>
-                    <span><h5>(Możesz uzupełnić tylko jedną godzinę)</h5></span>
+                    <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
                   </div>
                 </div>
               </div>
@@ -305,9 +374,7 @@
                   <mat-label>Do:</mat-label>
                   <input type="time" matInput name="toTime" [(ngModel)]="tuesday.toTime" autocomplete="off">
                 </mat-form-field>
-                <div>
-                  <span><h5>(Możesz uzupełnić tylko jedną godzinę)</h5></span>
-                </div>
+                <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
               </div>
             </div>
             <hr/>
@@ -329,9 +396,7 @@
                   <mat-label>Do:</mat-label>
                   <input type="time" matInput name="toTime" [(ngModel)]="wednesday.toTime" autocomplete="off">
                 </mat-form-field>
-                <div>
-                  <span><h5>(Możesz uzupełnić tylko jedną godzinę)</h5></span>
-                </div>
+                <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
               </div>
             </div>
             <hr/>
@@ -353,9 +418,7 @@
                   <mat-label>Do:</mat-label>
                   <input type="time" matInput name="toTime" [(ngModel)]="thursday.toTime" autocomplete="off">
                 </mat-form-field>
-                <div>
-                  <span><h5>(Możesz uzupełnić tylko jedną godzinę)</h5></span>
-                </div>
+                <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
               </div>
             </div>
             <hr/>
@@ -377,9 +440,7 @@
                   <mat-label>Do:</mat-label>
                   <input type="time" matInput name="toTime" [(ngModel)]="friday.toTime" autocomplete="off">
                 </mat-form-field>
-                <div>
-                  <span><h5>(Możesz uzupełnić tylko jedną godzinę)</h5></span>
-                </div>
+                <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
               </div>
             </div>
             <hr/>
@@ -401,9 +462,7 @@
                   <mat-label>Do:</mat-label>
                   <input type="time" matInput name="toTime" [(ngModel)]="saturday.toTime" autocomplete="off">
                 </mat-form-field>
-                <div>
-                  <span><h5>(Możesz uzupełnić tylko jedną godzinę)</h5></span>
-                </div>
+                <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
               </div>
             </div>
             <hr/>
@@ -425,9 +484,7 @@
                   <mat-label>Do:</mat-label>
                   <input type="time" matInput name="toTime" [(ngModel)]="sunday.toTime" autocomplete="off">
                 </mat-form-field>
-                <div>
-                  <span><h5>(Możesz uzupełnić tylko jedną godzinę)</h5></span>
-                </div>
+                <h5>(Możesz uzupełnić tylko jedną godzinę)</h5>
               </div>
             </div>
           </div>
