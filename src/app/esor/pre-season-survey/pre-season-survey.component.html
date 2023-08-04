@@ -272,7 +272,7 @@
                   <mat-label>Od:</mat-label>
                   <input type="time" matInput name="fromTime" [(ngModel)]="monday.fromTime" autocomplete="off">
                 </mat-form-field>
-                <mat-form-field *ngIf="!monday.wholeDay" style="padding-left: 20px">
+                <mat-form-field *ngIf="monday.isChecked && !monday.wholeDay" style="padding-left: 20px">
                   <mat-label>Do:</mat-label>
                   <input type="time" matInput name="toTime" [(ngModel)]="monday.toTime" autocomplete="off">
                 </mat-form-field>
@@ -280,16 +280,16 @@
             </div>
             <div class="day-container">
               <h3 class="day">Wtorek</h3>
-              <mat-radio-group [(ngModel)]="tuesday.isChecked">
+              <mat-radio-group [(ngModel)]="tuesday.isChecked" color="primary">
                 <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>
                 <mat-radio-button [value]="false">Nie mogę</mat-radio-button>
               </mat-radio-group>
-              <mat-checkbox *ngIf="tuesday.isChecked" style="padding-left: 5px;padding-bottom: 20px" class="example-margin" color="primary" [(ngModel)]="tuesday.wholeDay">Cały dzień</mat-checkbox>
+              <mat-checkbox *ngIf="tuesday.isChecked" style="padding-left: 5px; padding-top: 10px" class="example-margin" color="primary" [(ngModel)]="tuesday.wholeDay">Cały dzień</mat-checkbox>
               <mat-form-field *ngIf="tuesday.isChecked && !tuesday.wholeDay" style="padding-left: 20px">
                 <mat-label>Od:</mat-label>
                 <input type="time" matInput name="fromTime" [(ngModel)]="tuesday.fromTime" autocomplete="off">
               </mat-form-field>
-              <mat-form-field *ngIf="!tuesday.wholeDay" style="padding-left: 20px">
+              <mat-form-field *ngIf="tuesday.isChecked &&!tuesday.wholeDay" style="padding-left: 20px">
                 <mat-label>Do:</mat-label>
                 <input type="time" matInput name="toTime" [(ngModel)]="tuesday.toTime" autocomplete="off">
               </mat-form-field>
