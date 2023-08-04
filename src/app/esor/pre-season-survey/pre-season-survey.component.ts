@@ -3,7 +3,6 @@ import {FormControl, Validators} from "@angular/forms";
 import {HttpService} from "../http.service";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
-import {PeriodRequest} from "../date.service";
 
 @Component({
   selector: 'app-pre-season-survey',
@@ -93,6 +92,7 @@ export class PreSeasonSurveyComponent implements OnInit {
   }
 
   private sendSurvey() {
+    console.log(this.monday)
     let request = this.surveyData;
     request.firstName = this.firstName.value;
     request.lastName = this.lastName.value;
