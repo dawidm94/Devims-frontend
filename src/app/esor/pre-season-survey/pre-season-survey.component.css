@@ -62,7 +62,7 @@ h3.day {
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  padding-bottom: 15px;
+  /*padding-bottom: 15px;*/
 }
 
 .example-radio-group {

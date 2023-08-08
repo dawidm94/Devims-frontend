@@ -77,12 +77,8 @@
           <div class="day-container">
             <mat-checkbox [(ngModel)]="monday.isChecked" color="primary"></mat-checkbox>
             <h3 class="day">Poniedziałek</h3>
-<!--            <mat-radio-group [(ngModel)]="monday.isChecked" color="primary">-->
-<!--              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--            </mat-radio-group>-->
             <div>
-              <mat-checkbox class="wholeDayCheckbox" *ngIf="monday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="monday.wholeDay">Cały dzień</mat-checkbox>
+              <mat-checkbox class="wholeDayCheckbox" *ngIf="monday.isChecked" style="padding-left: 5px;padding-bottom: 10px" color="primary" [(ngModel)]="monday.wholeDay">Cały dzień</mat-checkbox>
             </div>
             <div *ngIf="monday.isChecked && !monday.wholeDay">
               <mat-form-field style="padding-left: 20px">
@@ -100,10 +96,6 @@
           <div class="day-container">
             <mat-checkbox [(ngModel)]="tuesday.isChecked" color="primary"></mat-checkbox>
             <h3 class="day">Wtorek</h3>
-<!--            <mat-radio-group [(ngModel)]="tuesday.isChecked" color="primary">-->
-<!--              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--            </mat-radio-group>-->
             <div>
               <mat-checkbox class="wholeDayCheckbox" *ngIf="tuesday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="tuesday.wholeDay">Cały dzień</mat-checkbox>
             </div>
@@ -123,10 +115,6 @@
           <div class="day-container">
             <mat-checkbox [(ngModel)]="wednesday.isChecked" color="primary"></mat-checkbox>
             <h3 class="day">Środa</h3>
-<!--            <mat-radio-group [(ngModel)]="wednesday.isChecked" color="primary">-->
-<!--              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--            </mat-radio-group>-->
             <div>
               <mat-checkbox class="wholeDayCheckbox" *ngIf="wednesday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="wednesday.wholeDay">Cały dzień</mat-checkbox>
             </div>
@@ -146,10 +134,6 @@
           <div class="day-container">
             <mat-checkbox [(ngModel)]="thursday.isChecked" color="primary"></mat-checkbox>
             <h3 class="day">Czwartek</h3>
-<!--            <mat-radio-group [(ngModel)]="thursday.isChecked" color="primary">-->
-<!--              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--            </mat-radio-group>-->
             <div>
               <mat-checkbox class="wholeDayCheckbox" *ngIf="thursday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="thursday.wholeDay">Cały dzień</mat-checkbox>
             </div>
@@ -169,10 +153,6 @@
           <div class="day-container">
             <mat-checkbox [(ngModel)]="friday.isChecked" color="primary"></mat-checkbox>
             <h3 class="day">Piątek</h3>
-<!--            <mat-radio-group [(ngModel)]="friday.isChecked" color="primary">-->
-<!--              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--            </mat-radio-group>-->
             <div>
               <mat-checkbox class="wholeDayCheckbox" *ngIf="friday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="friday.wholeDay">Cały dzień</mat-checkbox>
             </div>
@@ -192,10 +172,6 @@
           <div class="day-container">
             <mat-checkbox [(ngModel)]="saturday.isChecked" color="primary"></mat-checkbox>
             <h3 class="day">Sobota</h3>
-<!--            <mat-radio-group [(ngModel)]="saturday.isChecked" color="primary">-->
-<!--              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--            </mat-radio-group>-->
             <div>
               <mat-checkbox class="wholeDayCheckbox" *ngIf="saturday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="saturday.wholeDay">Cały dzień</mat-checkbox>
             </div>
@@ -215,10 +191,6 @@
           <div class="day-container">
             <mat-checkbox [(ngModel)]="sunday.isChecked" color="primary"></mat-checkbox>
             <h3 class="day">Niedziela</h3>
-<!--            <mat-radio-group [(ngModel)]="sunday.isChecked" color="primary">-->
-<!--              <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--              <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--            </mat-radio-group>-->
             <div>
               <mat-checkbox class="wholeDayCheckbox" *ngIf="sunday.isChecked" style="padding-left: 5px;padding-bottom: 20px" color="primary" [(ngModel)]="sunday.wholeDay">Cały dzień</mat-checkbox>
             </div>
@@ -340,10 +312,6 @@
             <div class="day-container">
               <mat-checkbox [(ngModel)]="monday.isChecked" color="primary"></mat-checkbox>
               <h3 class="day">Poniedziałek</h3>
-<!--              <mat-radio-group [(ngModel)]="monday.isChecked" color="primary">-->
-<!--                <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--                <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--              </mat-radio-group>-->
               <div>
                 <div>
                   <mat-checkbox class="wholeDayCheckbox" *ngIf="monday.isChecked" color="primary" [(ngModel)]="monday.wholeDay">Cały dzień</mat-checkbox>
@@ -367,10 +335,6 @@
             <div class="day-container">
               <mat-checkbox [(ngModel)]="tuesday.isChecked" color="primary"></mat-checkbox>
               <h3 class="day">Wtorek</h3>
-<!--              <mat-radio-group [(ngModel)]="tuesday.isChecked" color="primary">-->
-<!--                <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--                <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--              </mat-radio-group>-->
               <div>
                 <mat-checkbox class="wholeDayCheckbox" *ngIf="tuesday.isChecked" color="primary" [(ngModel)]="tuesday.wholeDay">Cały dzień</mat-checkbox>
               </div>
@@ -390,10 +354,6 @@
             <div class="day-container">
               <mat-checkbox [(ngModel)]="wednesday.isChecked" color="primary"></mat-checkbox>
               <h3 class="day">Środa</h3>
-<!--              <mat-radio-group [(ngModel)]="wednesday.isChecked" color="primary">-->
-<!--                <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--                <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--              </mat-radio-group>-->
               <div>
                 <mat-checkbox class="wholeDayCheckbox" *ngIf="wednesday.isChecked" color="primary" [(ngModel)]="wednesday.wholeDay">Cały dzień</mat-checkbox>
               </div>
@@ -413,10 +373,6 @@
             <div class="day-container">
               <mat-checkbox [(ngModel)]="thursday.isChecked" color="primary"></mat-checkbox>
               <h3 class="day">Czwartek</h3>
-<!--              <mat-radio-group [(ngModel)]="thursday.isChecked" color="primary">-->
-<!--                <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--                <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--              </mat-radio-group>-->
               <div>
                 <mat-checkbox class="wholeDayCheckbox" *ngIf="thursday.isChecked" color="primary" [(ngModel)]="thursday.wholeDay">Cały dzień</mat-checkbox>
               </div>
@@ -436,10 +392,6 @@
             <div class="day-container">
               <mat-checkbox [(ngModel)]="friday.isChecked" color="primary"></mat-checkbox>
               <h3 class="day">Piątek</h3>
-<!--              <mat-radio-group [(ngModel)]="friday.isChecked" color="primary">-->
-<!--                <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--                <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--              </mat-radio-group>-->
               <div>
                 <mat-checkbox class="wholeDayCheckbox" *ngIf="friday.isChecked" color="primary" [(ngModel)]="friday.wholeDay">Cały dzień</mat-checkbox>
               </div>
@@ -459,10 +411,6 @@
             <div class="day-container">
               <mat-checkbox [(ngModel)]="saturday.isChecked" color="primary"></mat-checkbox>
               <h3 class="day">Sobota</h3>
-<!--              <mat-radio-group [(ngModel)]="saturday.isChecked" color="primary">-->
-<!--                <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--                <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--              </mat-radio-group>-->
               <div>
                 <mat-checkbox class="wholeDayCheckbox" *ngIf="saturday.isChecked" color="primary" [(ngModel)]="saturday.wholeDay">Cały dzień</mat-checkbox>
               </div>
@@ -482,10 +430,6 @@
             <div class="day-container">
               <mat-checkbox [(ngModel)]="sunday.isChecked" color="primary"></mat-checkbox>
               <h3 class="day">Niedziela</h3>
-<!--              <mat-radio-group [(ngModel)]="sunday.isChecked" color="primary">-->
-<!--                <mat-radio-button style="margin-right: 10px" [value]="true">Mogę</mat-radio-button>-->
-<!--                <mat-radio-button [value]="false">Nie mogę</mat-radio-button>-->
-<!--              </mat-radio-group>-->
               <div>
                 <mat-checkbox class="wholeDayCheckbox" *ngIf="sunday.isChecked" color="primary" [(ngModel)]="sunday.wholeDay">Cały dzień</mat-checkbox>
               </div>
@@ -502,10 +446,10 @@
               </div>
             </div>
           </div>
-            <div>
-              <button style="margin-right: 20px" mat-raised-button matStepperPrevious>Powrót</button>
-              <button mat-raised-button matStepperNext>Dalej</button>
-            </div>
+          <div style="padding-top: 30px">
+            <button style="margin-right: 20px" mat-raised-button matStepperPrevious>Powrót</button>
+            <button mat-raised-button matStepperNext>Dalej</button>
+          </div>
           </ng-template>
         </mat-step>
         <mat-step>
