@@ -97,12 +97,13 @@
         <button mat-menu-item routerLink="periodically">Uzupełnij cyklicznie przyszły miesiąc</button>
         <button mat-menu-item routerLink="delete-all">Usuń wszystkie zajęte terminy</button>
       </mat-menu>
-      <button mat-button (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>
+<!--      <button mat-button (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>-->
+      <button style="color: gray" mat-button (click)="downloadBlankDelegation()" [disabled]="true">Pusta delegacja</button>
       <button mat-button [matMenuTriggerFor]="others">Inne ↓</button>
       <mat-menu #others>
         <button mat-menu-item routerLink="settlements">Rozliczenia</button>
         <button mat-menu-item routerLink="earnings">Zarobki</button>
-        <button mat-menu-item routerLink="phonebook">Sędziowie</button>
+        <button mat-menu-item routerLink="phonebook" disabled>Sędziowie</button>
       </mat-menu>
       <button mat-button routerLink="pre-season-survey" style="color: greenyellow">Ankieta przedsezonowa</button>
       <button mat-button color="accent" *ngIf="nameClickCounter > 5" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
@@ -130,10 +131,11 @@
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="periodically">Uzupełnij cyklicznie przyszły miesiąc</button>
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="delete-all">Usuń wszystkie zajęte terminy</button>
         <button mat-menu-item class="mobile-menu-element" disabled>Inne: </button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>
+<!--        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" (click)="downloadBlankDelegation()" [disabled]="isBlankDelegationDownloading">Pusta delegacja</button>-->
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" (click)="downloadBlankDelegation()" [disabled]="true">Pusta delegacja</button>
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="settlements">Rozliczenia</button>
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="earnings">Zarobki</button>
-        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="phonebook">Sędziowie</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="phonebook" disabled>Sędziowie</button>
         <button *ngIf="nameClickCounter > 5" mat-menu-item class="mobile-menu-element" style="color: darkorange" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
         <button mat-menu-item class="mobile-menu-element" (click)="logout()">Wyloguj</button>
       </mat-menu>
