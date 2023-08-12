@@ -24,6 +24,7 @@ export class PreSeasonSurveyComponent implements OnInit {
   mobile = window.screen.width < 500;
 
   isLoading = true;
+  isError = false;
   surveyData: any;
   errorMessage = '';
   isSending = false;
@@ -79,6 +80,7 @@ export class PreSeasonSurveyComponent implements OnInit {
       },
       error: err => {
         this.isLoading = false;
+        this.isError = true;
         console.log(err)
       }
     })

@@ -1,5 +1,8 @@
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-<div *ngIf="!isLoading">
+<div *ngIf="isError">
+  <h1>Niestety wystąpił błąd w ładowaniu danych. Proszę skontaktuj się z właścicielem tej strony - Dawidem Marcinków (dawid.marcinkow@gmail.com)</h1>
+</div>
+<div *ngIf="!isLoading && !isError">
   <div *ngIf="!mobile">
     <div style="text-align: center; padding-bottom: 30px">
       <h1 style="margin-bottom: 0; font-size: 35px">Ankieta przedsezonowa 2023/2024</h1>
