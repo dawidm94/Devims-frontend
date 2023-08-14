@@ -40,6 +40,10 @@ export class FileService {
     this.downloadFile(url, blanketName);
   }
 
+  downloadAllSurveys(password: string) {
+    this.downloadFile(this.baseUrl + 'esor/all-surveys?password=' + password, 'Ankiety')
+  }
+
   downloadMetric(matchId: number | undefined) {
     this.http.get<any>(this.baseUrl + 'esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
       next: response => {

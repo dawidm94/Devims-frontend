@@ -3,6 +3,7 @@ import {FormControl, Validators} from "@angular/forms";
 import {HttpService} from "../http.service";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
+import {FileService} from "../file.service";
 
 @Component({
   selector: 'app-pre-season-survey',
@@ -13,7 +14,8 @@ export class PreSeasonSurveyComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private httpService: HttpService
+    private httpService: HttpService,
+    private fileService: FileService
   ) { }
 
   ngOnInit(): void {
@@ -46,10 +48,14 @@ export class PreSeasonSurveyComponent implements OnInit {
   registrationAddress = new FormControl('', [Validators.required]);
   residenceAddress = new FormControl('', [Validators.required]);
   birthDate = new FormControl('', [Validators.required]);
-  refereeCourseYear = new FormControl('', [Validators.required]);
+  refereeCourseYear = new FormControl('', [Validators.required, Validators.pattern("^[0-9]*$"),
+    Validators.min(new Date().getFullYear() - 100), Validators.max(new Date().getFullYear())]);
   phoneNumber = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
   distancePreference: any;
+
+  topSecretCounter = 0;
+  topSecretPassword: any;
 
   getPreSeasonSurveyData(): void {
     this.http.get<any>(this.baseUrl + 'esor/pre-season-survey', this.httpService.getOptionWithEsorToken()).subscribe({
@@ -94,7 +100,6 @@ export class PreSeasonSurveyComponent implements OnInit {
   }
 
   private sendSurvey() {
-    console.log(this.monday)
     let request = this.surveyData;
     request.firstName = this.firstName.value;
     request.lastName = this.lastName.value;
@@ -199,7 +204,7 @@ export class PreSeasonSurveyComponent implements OnInit {
       || this.refereeCourseYear.invalid
       || this.phoneNumber.invalid
       || this.email.invalid) {
-      this.addErrorMessage(' Błąd w sekcji "Dane sędziego"');
+      this.addErrorMessage('Błąd w sekcji "Dane sędziego"');
     }
     return this.errorMessage == ''
   }
@@ -221,16 +226,22 @@ export class PreSeasonSurveyComponent implements OnInit {
           return 'Pole obowiązkowe'
         }
       }
+      case 'refereeCourseYear': {
+        if (this.refereeCourseYear.value) {
+          return 'Niepoprawny rok sędziowania';
+        } else {
+          return 'Pole obowiązkowe'
+        }
+      }
     }
     return 'Pole obowiązkowe';
   }
-}
 
-export class DayAvailability {
-  constructor(
-    public fromTime: string,
-    public toTime: string,
-    public wholeDay: boolean
-  ) {
+  increaseTopSecretCounter() {
+    this.topSecretCounter++;
+  }
+
+  downloadAllSurveys() {
+    this.fileService.downloadAllSurveys(btoa(this.topSecretPassword));
   }
 }

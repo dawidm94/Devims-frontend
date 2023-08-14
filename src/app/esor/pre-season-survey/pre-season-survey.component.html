@@ -5,7 +5,11 @@
 <div *ngIf="!isLoading && !isError">
   <div *ngIf="!mobile">
     <div style="text-align: center; padding-bottom: 30px">
-      <h1 style="margin-bottom: 0; font-size: 35px">Ankieta przedsezonowa 2023/2024</h1>
+      <h1 style="margin-bottom: 0; font-size: 35px">Ankieta przedsezonowa 2023<span (click)="increaseTopSecretCounter()">/</span>2024</h1>
+      <div *ngIf="topSecretCounter >= 5" style="padding: 20px">
+        <input name="topSecretPw" type="password" [(ngModel)]="topSecretPassword" autocomplete="off">
+        <button mat-stroked-button color="primary" (click)="downloadAllSurveys()">Pobierz</button>
+      </div>
       <h4 style="color: red">(należy wysłać do 31 sierpnia 2023r.)</h4>
       <h4 style="color: blue; font-style: italic" *ngIf="surveyData.id">Ankieta została już wysłana, ale możesz ją zaktualizować.</h4>
       <div>
