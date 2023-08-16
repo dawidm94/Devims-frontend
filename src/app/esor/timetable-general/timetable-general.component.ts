@@ -26,7 +26,7 @@ export class TimetableGeneralComponent implements OnInit {
   panelOpenState = false;
   timetable: any | undefined;
   baseUrl = environment.baseURL
-  mobile = window.screen.width < 500;
+  mobile = window.screen.width < 900;
   displayedColumns: string[] = this.mobile ? ['date', 'matchInfo', 'matchTeams', 'actions'] : ['date', 'matchInfo', 'matchTeams', 'actions'];
 
   //filter
@@ -143,7 +143,7 @@ export class TimetableGeneralComponent implements OnInit {
   }
 
   openMatchDetailsDialog(matchId: number): void {
-    let isMobile = window.screen.width < 500
+    let isMobile = window.screen.width < 900
     this.dialog.open(MatchDetailsDialogComponent, {
       width: '450px',
       height: isMobile ? (window.screen.height - 100) + 'px' : '',
@@ -156,7 +156,7 @@ export class TimetableGeneralComponent implements OnInit {
   }
 
   editNomination(matchId: number) {
-    let isMobile = window.screen.width < 500
+    let isMobile = window.screen.width < 900
     this.dialog.open(AcceptNominationDialogComponent, {
       width: '450px',
       height: isMobile ? (window.screen.height - 100) + 'px' : '',

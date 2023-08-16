@@ -23,7 +23,7 @@ export class PreSeasonSurveyComponent implements OnInit {
   }
 
   baseUrl = environment.baseURL
-  mobile = window.screen.width < 500;
+  mobile = window.screen.width < 900;
 
   isLoading = true;
   isError = false;

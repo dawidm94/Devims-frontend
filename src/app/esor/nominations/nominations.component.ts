@@ -26,7 +26,7 @@ export class NominationsComponent implements OnInit {
 
   nominations: any | undefined;
   baseUrl = environment.baseURL
-  mobile = window.screen.width < 500;
+  mobile = window.screen.width < 900;
   displayedColumns: string[] = this.mobile ? ['date', 'matchInfo', 'matchTeams', 'actions'] : ['position', 'date', 'matchInfo', 'matchTeams', 'actions'];
   reloading = false;
 
@@ -45,7 +45,7 @@ export class NominationsComponent implements OnInit {
   }
 
   openMatchDetailsDialog(matchId: number): void {
-    let isMobile = window.screen.width < 500
+    let isMobile = window.screen.width < 900
     this.dialog.open(MatchDetailsDialogComponent, {
       width: '450px',
       height: isMobile ? (window.screen.height - 100) + 'px' : '',
@@ -54,7 +54,7 @@ export class NominationsComponent implements OnInit {
   }
 
   openAcceptNominationDialog(matchId: number): void {
-    let isMobile = window.screen.width < 500
+    let isMobile = window.screen.width < 900
     this.dialog.open(AcceptNominationDialogComponent, {
       width: '450px',
       height: isMobile ? (window.screen.height - 100) + 'px' : '',
@@ -68,7 +68,7 @@ export class NominationsComponent implements OnInit {
   }
 
   openRejectNominationDialog(matchId: number): void {
-    let isMobile = window.screen.width < 500
+    let isMobile = window.screen.width < 900
     this.dialog.open(RejectNominationDialogComponent, {
       width: '450px',
       height: isMobile ? (window.screen.height - 500) + 'px' : '',

@@ -30,7 +30,7 @@ export class SettlementsComponent implements OnInit {
   showMobileHelp = false;
   isVeryLongLoading = false;
   baseUrl = environment.baseURL
-  mobile = window.screen.width < 500;
+  mobile = window.screen.width < 900;
   displayedColumns: string[] = ['position', 'paid', 'date', 'league', 'matchTeams', 'toPay', 'comment'];
   displayedMobileColumns: string[] = ['mobile-paid', 'mobile-date','mobile-teamHome', 'mobile-toPay', 'mobile-details'];
   isError = false;

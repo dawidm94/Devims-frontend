@@ -38,7 +38,7 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
   timetable: any | undefined;
   panelOpenState = false;
   baseUrl = environment.baseURL
-  mobile = window.screen.width < 500;
+  mobile = window.screen.width < 900;
   displayedColumns: string[] = this.mobile ? ['date', 'matchInfo', 'matchTeams', 'actions'] : ['date', 'matchInfo', 'matchTeams', 'actions'];
   displayedDictionaryColumns: string[] = ['example', 'description'];
   searchingValue = "";
@@ -103,7 +103,7 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
   }
 
   openMatchDetailsDialog(matchId: number): void {
-    let isMobile = window.screen.width < 500
+    let isMobile = window.screen.width < 900
     this.dialog.open(MatchDetailsDialogComponent, {
       width: '450px',
       height: isMobile ? (window.screen.height - 100) + 'px' : '',
@@ -116,7 +116,7 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
   }
 
   editNomination(matchId: number) {
-    let isMobile = window.screen.width < 500
+    let isMobile = window.screen.width < 900
     this.dialog.open(AcceptNominationDialogComponent, {
       width: '450px',
       height: isMobile ? (window.screen.height - 100) + 'px' : '',

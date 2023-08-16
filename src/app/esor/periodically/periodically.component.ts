@@ -177,7 +177,7 @@ export class PeriodicallyComponent implements OnInit {
   }
 
   getLeftPaddingToSendButton() {
-    if (window.screen.width > 500) {
+    if (window.screen.width > 900) {
       return "padding-left: 300px";
     } else {
       return "";

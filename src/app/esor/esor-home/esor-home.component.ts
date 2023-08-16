@@ -19,7 +19,7 @@ export class EsorHomeComponent implements OnInit {
   upcomingMatchLoaded = false;
   nominations = 0;
   baseUrl = environment.baseURL
-  mobile = window.screen.width < 500;
+  mobile = window.screen.width < 900;
   screenWidth = window.screen.width;
 
   ngOnInit(): void {

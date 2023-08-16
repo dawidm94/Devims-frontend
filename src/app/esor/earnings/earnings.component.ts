@@ -12,7 +12,7 @@ import {Platform} from "@angular/cdk/platform";
 export class EarningsComponent implements OnInit {
 
   baseUrl = environment.baseURL
-  isMobile = window.screen.width < 500
+  isMobile = window.screen.width < 900
   seasons: any = []
   firstEsorSeasonId = 17
   selectedSeasonId: number | undefined;

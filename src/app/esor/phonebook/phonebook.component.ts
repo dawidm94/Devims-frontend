@@ -24,7 +24,7 @@ export interface RefereeData {
 })
 export class PhonebookComponent implements OnInit  {
   baseUrl = environment.baseURL
-  mobile = window.screen.width < 500;
+  mobile = window.screen.width < 900;
 
   displayedColumns: string[] = this.mobile ? ['nazwisko', 'imie', 'mobile-actions'] : ['nazwisko', 'imie', 'miasto', 'telefon', 'email'];
   dataSource: MatTableDataSource<RefereeData> | any;

@@ -26,7 +26,7 @@ export class AcceptNominationDialogComponent implements OnInit {
   }
 
   baseUrl = environment.baseURL
-  mobile = window.screen.width < 500;
+  mobile = window.screen.width < 900;
   financialData: any;
   match: any = '';
   nomination: any = '';

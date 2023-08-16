@@ -21,7 +21,7 @@ export class EsorComponent implements OnInit {
   seasonId: number | undefined;
   baseUrl = environment.baseURL
   isBlankDelegationDownloading = false;
-  mobile = window.screen.width < 500;
+  mobile = window.screen.width < 900;
   gotBackendHealthResponse = false;
   showReleaseHistory = false;
   isHealthCheckError = false;
