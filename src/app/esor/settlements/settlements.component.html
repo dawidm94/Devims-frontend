@@ -1,6 +1,7 @@
 <section *ngIf="!timetable">
   <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    <h3 *ngIf="isLongLoading">Jak doszły nowe mecze, ładowanie trwa troszkę dłużej.</h3>
+    <h3 *ngIf="isLongLoading && isActualSeason()">Jak doszły nowe mecze, ładowanie trwa troszkę dłużej.</h3>
+    <h3 *ngIf="isLongLoading && !isActualSeason()">Wczytywanie wszystkich meczów z poprzednich sezonów trwa troszkę dłużej.</h3>
   <section *ngIf="isVeryLongLoading">
     <h3>... a za pierwszym razem jeszcze dłużej :) Spokojnie - to tylko raz.</h3>
   </section>
@@ -19,6 +20,14 @@
   <mat-icon *ngIf="!mobile" style="padding-left: 5px" color="primary" matTooltipClass="info-tooltip" matTooltip="Kontroluj przelewy od klubów za wszystkie mecze. Każdy mecz będzie pojawiać się dzień po rozegraniu. Uwaga - automatyczne zapisywanie przy każdorazowej zmianie. Nie musisz klikać nic dodatkowego :)" matTooltipPosition="right">
     info
   </mat-icon>
+  <span>
+    <mat-form-field appearance="fill" [style]="!mobile ? 'float: right' : ''" [class]="!mobile ? '' : 'longMatFormField'">
+      <mat-label>Sezon</mat-label>
+      <select matNativeControl [(ngModel)]="selectedSeasonId" (change)="getSettlements()" [disabled]="isLoadingSettlements">
+        <option *ngFor="let season of seasons" [value]="season.id">{{season.nazwa}}</option>
+      </select>
+    </mat-form-field>
+  </span>
 </div>
 <table *ngIf="!mobile && timetable" mat-table [dataSource]="timetable" class="mat-elevation-z8">
   <!-- Position Column -->
@@ -69,7 +78,7 @@
       </sup>
     </th>
     <td class=""  mat-cell *matCellDef="let timetable">
-      <mat-form-field appearance="standard">
+      <mat-form-field class="longMatFormField" appearance="standard">
         <textarea matInput [(ngModel)]="timetable.settlement.comment" placeholder="<brak uwag>" rows="1" maxlength="250" (blur)="updateSettlements()"></textarea>
       </mat-form-field>
     </td>

@@ -20,9 +20,9 @@ export class SettlementsComponent implements OnInit {
     public httpService: HttpService) { }
 
   ngOnInit(): void {
+    this.getSeasons()
     this.getSettlements();
 
-    this.handleLongLoading();
   }
 
   timetable: any | undefined;
@@ -31,12 +31,28 @@ export class SettlementsComponent implements OnInit {
   isVeryLongLoading = false;
   baseUrl = environment.baseURL
   mobile = window.screen.width < 900;
+  firstEsorSeasonId = 17
   displayedColumns: string[] = ['position', 'paid', 'date', 'league', 'matchTeams', 'toPay', 'comment'];
   displayedMobileColumns: string[] = ['mobile-paid', 'mobile-date','mobile-teamHome', 'mobile-toPay', 'mobile-details'];
   isError = false;
+  isLoadingSettlements = false;
+  selectedSeasonId = environment.currentSeasonId;
+  seasons: any = []
 
-  private getSettlements() {
-    this.http.get<any>(this.baseUrl + 'esor/settlement', this.httpService.getOptionsWithSeasonId()).subscribe({
+  getSeasons(): void {
+    this.http.get<any>(this.baseUrl + 'esor/seasons', this.httpService.getOptionWithEsorToken()).subscribe({
+      next: response => {
+        let seasons = response.reverse();
+        let firstEsorSeasonIndex = seasons.findIndex((x: { id: number; }) => x.id == this.firstEsorSeasonId)
+        this.seasons = seasons.slice(0, firstEsorSeasonIndex + 1)},
+      error: err => {console.log(err)}
+    })
+  }
+
+  getSettlements() {
+    this.handleLongLoading();
+
+    this.http.get<any>(this.baseUrl + 'esor/settlement?seasonId=' + this.selectedSeasonId, this.httpService.getOptionWithEsorTokenAndContentTypeJson()).subscribe({
       next: response => {
         this.timetable = response
       },
@@ -53,11 +69,21 @@ export class SettlementsComponent implements OnInit {
   }
 
   private handleLongLoading() {
+    this.isLongLoading = false;
+    this.isVeryLongLoading = false;
+    this.timetable = undefined;
+
     setTimeout( ()=>{
+      if (this.timetable) {
+        return
+      }
       this.isLongLoading = true;
     }, 3 * 1000) // 3 sec
 
     setTimeout( ()=>{
+      if (this.timetable) {
+        return
+      }
       this.isVeryLongLoading = true;
     }, 7 * 1000) // 7 sec
   }
@@ -79,5 +105,9 @@ export class SettlementsComponent implements OnInit {
 
       this.updateSettlements();
     })
+  }
+
+  isActualSeason() {
+    return environment.currentSeasonId == this.selectedSeasonId;
   }
 }
