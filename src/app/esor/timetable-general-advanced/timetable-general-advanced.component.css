@@ -2,7 +2,7 @@
   width: 100%;
 }
 
-.mat-form-field {
+.longMatFormField {
   font-size: 14px;
   width: 95%;
 }
@@ -18,10 +18,6 @@
 td {
   padding-top: 5px !important;
   padding-bottom: 5px !important;
-}
-
-mat-form-field {
-  padding-right: 20px;
 }
 
 mat-panel-title {

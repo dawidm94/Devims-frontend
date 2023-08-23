@@ -1,7 +1,15 @@
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
-<h1 style="text-align: center; font-weight: bold">ZAAWANSOWANY TERMINARZ OGÓLNY</h1>
+<div style="text-align: center">
+  <h1 style="font-weight: bold; display: inline; padding-left: 150px">ZAAWANSOWANY TERMINARZ OGÓLNY</h1>
+  <mat-form-field appearance="fill" [style]="!mobile ? 'float: right' : 'display: inline'">
+    <mat-label>Sezon</mat-label>
+    <select matNativeControl [(ngModel)]="selectedSeasonId" (change)="updateTimetable()" [disabled]="isLoading">
+      <option *ngFor="let season of seasons" [value]="season.id">{{season.nazwa}}</option>
+    </select>
+  </mat-form-field>
+</div>
 <div *ngIf="!isLoading" class="center" [style]="mobile ? 'width: 75%;' : 'width: 50%;'">
-  <mat-form-field>
+  <mat-form-field class="longMatFormField">
     <mat-label>Wyszukaj</mat-label>
     <input matInput [(ngModel)]="searchingValue" (keyup)="applyFilter($event)" [placeholder]="mobile ? 'Szukaj po czym chcesz lub słowniczek :)' : 'Możesz szukać po wszystkim co widzisz, albo słowa klucz ze słowniczka :)'" #input>
   </mat-form-field>

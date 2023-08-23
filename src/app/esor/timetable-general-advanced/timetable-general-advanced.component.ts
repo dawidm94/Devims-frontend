@@ -28,6 +28,7 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
   paginator!: MatPaginator;
 
   ngOnInit(): void {
+    this.getSeasons();
     this.updateTimetable();
   }
 
@@ -42,6 +43,9 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
   displayedColumns: string[] = this.mobile ? ['date', 'matchInfo', 'matchTeams', 'actions'] : ['date', 'matchInfo', 'matchTeams', 'actions'];
   displayedDictionaryColumns: string[] = ['example', 'description'];
   searchingValue = "";
+  selectedSeasonId = environment.currentSeasonId;
+  seasons: any = []
+  firstEsorSeasonId = 17
   dictionaryData : any = [
     {example: 'brak', description: 'Wyświetla mecze, gdzie brakuje obsady.'},
     {example: 'zaakceptowana', description: 'Wyświetla mecze, gdzie wszyscy sędziowie zaakceptowali.'},
@@ -63,10 +67,20 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
     }
   }
 
+  getSeasons(): void {
+    this.http.get<any>(this.baseUrl + 'esor/seasons', this.httpService.getOptionWithEsorToken()).subscribe({
+      next: response => {
+        let seasons = response.reverse();
+        let firstEsorSeasonIndex = seasons.findIndex((x: { id: number; }) => x.id == this.firstEsorSeasonId)
+        this.seasons = seasons.slice(0, firstEsorSeasonIndex + 1)},
+      error: err => {console.log(err)}
+    })
+  }
+
   updateTimetable() {
     this.isLoading = true
     let params = this.getAllTimetableParams();
-    this.http.get<any>(this.baseUrl + 'esor/timetable', this.httpService.getOptionWithSeasonIdAndCustomParams(params)).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/timetable/all', this.httpService.getOptionWithCustomParams(params)).subscribe({
       next: response => {
         this.timetable = new MatTableDataSource(response.items);
 
@@ -87,10 +101,8 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
 
   private getAllTimetableParams() {
     let params = new HttpParams();
-    params = params.append('page', 1);
-    params = params.append('perPage', 1000);
-
-    params = params.append('dateFrom', new Date().toISOString().split('T')[0]);
+    params = params.append('seasonId', this.selectedSeasonId);
+    params = params.append('dateFrom', this.selectedSeasonId == environment.currentSeasonId ? new Date().toISOString().split('T')[0] : '');
     return params;
   }
 

@@ -54,6 +54,13 @@ export class HttpService {
     return params;
   }
 
+  getOptionWithCustomParams(customParams: HttpParams) {
+    let esorToken = sessionStorage.getItem('esorToken') as string
+    let headers = new HttpHeaders({'Esor-Token': esorToken});
+
+    return {headers: headers, params: customParams};
+  }
+
   getOptionWithSeasonIdAndCustomParams(params: HttpParams) {
     let optionsWithSeasonId = this.getOptionsWithSeasonId();
     params.keys().forEach(key => {
