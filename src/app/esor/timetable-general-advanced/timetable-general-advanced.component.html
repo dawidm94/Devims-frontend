@@ -1,6 +1,6 @@
 <mat-progress-bar *ngIf="isLoading" mode="indeterminate"></mat-progress-bar>
 <div style="text-align: center">
-  <h1 style="font-weight: bold; display: inline; padding-left: 150px">ZAAWANSOWANY TERMINARZ OGÓLNY</h1>
+  <h1 [style]="mobile ? '' : 'padding-left: 150px'">ZAAWANSOWANY TERMINARZ OGÓLNY</h1>
   <mat-form-field appearance="fill" [style]="!mobile ? 'float: right' : 'display: inline'">
     <mat-label>Sezon</mat-label>
     <select matNativeControl [(ngModel)]="selectedSeasonId" (change)="updateTimetable()" [disabled]="isLoading">

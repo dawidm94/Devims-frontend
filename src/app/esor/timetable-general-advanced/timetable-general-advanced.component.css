@@ -1,3 +1,8 @@
+h1 {
+  font-weight: bold;
+  display: inline;
+}
+
 .full-table {
   width: 100%;
 }
