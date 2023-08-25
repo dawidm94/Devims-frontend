@@ -137,43 +137,43 @@ export class PreSeasonSurveyComponent implements OnInit {
 
   private isAllValid() {
     let errorDays = [];
-    if (!this.monday.wholeDay) {
+    if (this.monday.isChecked && !this.monday.wholeDay) {
       if (!this.monday.fromTime && !this.monday.toTime) {
         errorDays.push('poniedziałek')
       }
     }
 
-    if (!this.tuesday.wholeDay) {
+    if (this.tuesday.isChecked && !this.tuesday.wholeDay) {
       if (!this.tuesday.fromTime && !this.tuesday.toTime) {
         errorDays.push('wtorek')
       }
     }
 
-    if (!this.wednesday.wholeDay) {
+    if (this.wednesday.isChecked && !this.wednesday.wholeDay) {
       if (!this.wednesday.fromTime && !this.wednesday.toTime) {
         errorDays.push('środa')
       }
     }
 
-    if (!this.thursday.wholeDay) {
+    if (this.thursday.isChecked && !this.thursday.wholeDay) {
       if (!this.thursday.fromTime && !this.thursday.toTime) {
         errorDays.push('czwartek')
       }
     }
 
-    if (!this.friday.wholeDay) {
+    if (this.friday.isChecked && !this.friday.wholeDay) {
       if (!this.friday.fromTime && !this.friday.toTime) {
         errorDays.push('piątek')
       }
     }
 
-    if (!this.saturday.wholeDay) {
+    if (this.saturday.isChecked && !this.saturday.wholeDay) {
       if (!this.saturday.fromTime && !this.saturday.toTime) {
         errorDays.push('sobota')
       }
     }
 
-    if (!this.sunday.wholeDay) {
+    if (this.sunday.isChecked && !this.sunday.wholeDay) {
       if (!this.sunday.fromTime && !this.sunday.toTime) {
         errorDays.push('niedziela')
       }
