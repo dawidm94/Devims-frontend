@@ -218,7 +218,7 @@
       <div style="padding-top: 20px">
         <div>
           <mat-form-field appearance="outline" style="width: 800px">
-            <textarea [(ngModel)]="extraComment" matInput placeholder="Proszę wypisać wszystkie ograniczenia i możliwości dotyczące sędziowania - ile razy w tygodniu chcesz sędziować, możliwości transportowe itp. Każda informacja bardzo pomoże." rows="5" maxlength="1000"></textarea>
+            <textarea [(ngModel)]="extraComment" matInput placeholder="Proszę wypisać wszystkie ograniczenia i możliwości dotyczące sędziowania - ile razy w tygodniu chcesz sędziować, możliwości transportowe itp. Każda informacja bardzo pomoże." rows="5" maxlength="3000"></textarea>
           </mat-form-field>
         </div>
         <div *ngIf="errorMessage != ''" style="color: red; white-space: pre-line; padding-bottom: 10px">
@@ -463,7 +463,7 @@
           <ng-template matStepLabel>Możliwości sędziowania - komentarz</ng-template>
           <ng-template matStepContent>
             <mat-form-field appearance="outline" style="width: 100%; padding-bottom: 0">
-              <textarea matInput [(ngModel)]="extraComment" placeholder="Proszę wypisać tutaj wszystkie ograniczenia i możliwości dotyczące sędziowania - ile razy w tygodniu chcesz sędziować, możliwości transportowe itp. Każda informacja bardzo pomoże." rows="8" maxlength="1000"></textarea>
+              <textarea matInput [(ngModel)]="extraComment" placeholder="Proszę wypisać tutaj wszystkie ograniczenia i możliwości dotyczące sędziowania - ile razy w tygodniu chcesz sędziować, możliwości transportowe itp. Każda informacja bardzo pomoże." rows="8" maxlength="3000"></textarea>
             </mat-form-field>
             <div style="text-align:center; padding-bottom: 20px">
               <button *ngIf="!sentSuccessfully && !sentWithError" style="margin-right: 20px" mat-raised-button matStepperPrevious>Powrót</button>
