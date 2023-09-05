@@ -105,8 +105,8 @@
         <button mat-menu-item routerLink="settlements">Rozliczenia</button>
         <button mat-menu-item routerLink="earnings">Zarobki</button>
         <button mat-menu-item routerLink="phonebook" disabled>Sędziowie</button>
+        <button mat-menu-item routerLink="pre-season-survey">Ankieta</button>
       </mat-menu>
-      <button mat-button routerLink="pre-season-survey" style="color: greenyellow">Ankieta przedsezonowa</button>
       <button mat-button color="accent" *ngIf="nameClickCounter > 5" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
 
       <span class="example-spacer"></span>
@@ -121,7 +121,6 @@
       </button>
       <mat-menu #menu>
         <button mat-menu-item class="mobile-menu-element" routerLink="home">Główna strona</button>
-        <button mat-menu-item class="mobile-menu-element" routerLink="pre-season-survey" style="color: green">Ankieta przedsezonowa</button>
         <button mat-menu-item class="mobile-menu-element" routerLink="nominations">Moje nominacje</button>
         <button mat-menu-item class="mobile-menu-element" disabled>Terminarz: </button>
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="timetable">Mój terminarz</button>
@@ -137,6 +136,7 @@
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="settlements">Rozliczenia</button>
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="earnings">Zarobki</button>
         <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="phonebook" disabled>Sędziowie</button>
+        <button mat-menu-item class="mobile-menu-element mobile-menu-subelement" routerLink="pre-season-survey">Ankieta</button>
         <button *ngIf="nameClickCounter > 5" mat-menu-item class="mobile-menu-element" style="color: darkorange" (click)="gotToLink('https://docs.google.com/spreadsheets/d/1Xffbx5fcRe-krGf_0r95uaPiPjBIMZwCSY5KE2UiLJE/edit?usp=sharing')">Uwagi excel</button>
         <button mat-menu-item class="mobile-menu-element" (click)="logout()">Wyloguj</button>
       </mat-menu>

@@ -10,7 +10,7 @@
         <input name="topSecretPw" type="password" [(ngModel)]="topSecretPassword" autocomplete="off">
         <button mat-stroked-button color="primary" (click)="downloadAllSurveys()">Pobierz</button>
       </div>
-      <h4 style="color: red">(należy wysłać do 31 sierpnia 2023r.)</h4>
+<!--      <h4 style="color: red">(należy wysłać do 31 sierpnia 2024r.)</h4>-->
       <h4 style="color: blue; font-style: italic" *ngIf="surveyData.id">Ankieta została już wysłana, ale możesz ją zaktualizować.</h4>
       <div>
         <h1 class="header">Dane sędziego:</h1>
@@ -236,7 +236,7 @@
   <div *ngIf="mobile">
     <div style="text-align: center">
       <h1 style="margin-bottom: 0">Ankieta przedsezonowa 2023/2024</h1>
-      <h4 style="color: red">(należy wysłać do 31 sierpnia 2023r.)</h4>
+<!--      <h4 style="color: red">(należy wysłać do 31 sierpnia 2024r.)</h4>-->
       <h4 style="color: blue; font-style: italic" *ngIf="surveyData.id">Ankieta została już wysłana, ale możesz ją nadal zaktualizować.</h4>
       <mat-stepper orientation="vertical">
         <mat-step>
