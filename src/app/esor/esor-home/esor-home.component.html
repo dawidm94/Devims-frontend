@@ -11,7 +11,7 @@
 <!--  <h1 class="holiday" *ngIf="!upcomingMatches && upcomingMatchLoaded">Witamy w sezonie 2023/2024!</h1>-->
 <!--  <h1 class="holiday" *ngIf="!upcomingMatches && upcomingMatchLoaded">Na początek prosimy o uzupełnienie ankiety w zakładce "Ankieta przedsezonowa"</h1>-->
 <!--  <img [class]="mobile ? 'mobile-img' : ''" *ngIf="!upcomingMatches && upcomingMatchLoaded" src="assets/images/survey.jpg">-->
-  <h5 class="holiday" *ngIf="!upcomingMatches && upcomingMatchLoaded">Ps. Podczas przygotowań do sezonu 2023/2024 niektóre funkcjonalności mogą działać nieprawidłowo.</h5>
+<!--  <h5 class="holiday" *ngIf="!upcomingMatches && upcomingMatchLoaded">Ps. Podczas przygotowań do sezonu 2023/2024 niektóre funkcjonalności mogą działać nieprawidłowo.</h5>-->
   <div class="container">
     <div *ngFor="let upcomingMatch of upcomingMatches">
       <mat-card [style]="mobile ? 'width: ' + (screenWidth - 50)  + 'px' : 'width:' + ((screenWidth / 3) - 50) + 'px; height: 170px'">
