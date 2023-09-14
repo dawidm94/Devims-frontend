@@ -1,7 +1,19 @@
+<div class="manifest" style="text-align: center">
+  <h1 style="font-weight: bold">Koniec przygody</h1>
+  <p>Wpis z dnia 14.09.2023r.</p>
+  <p>Drodzy... z ogromną przykrością muszę powiadomić Was, że zostałem właśnie przyblokowany przez firmę, która napisała esora.</p>
+  <p>Pomimo braku rzetelnych podstaw do zablokowania, nie spodobał im się fakt, że ulepszyłem korzystanie z ICH produktu.</p>
+  <p>W przyszłym tygodniu mam z nimi rozmowę. Zobaczymy co uda się ugrać. Na chwilę obecną, pomimo znanych mi obejść, jestem zmuszony zawiesić działanie aplikacji.</p>
+  <p>Jest mi ogromnie przykro z tego powodu, bo włożyłem w to bardzo dużo czasu jak i pieniędzy, bo z własnej kieszeni utrzymywałem serwer itp.</p>
+  <p>Żeby pokazać jak mi jest smutno, wstawiam zdjęcie kota, który oddaje tylko 10% moich emocji.</p>
+  <p>Pozdrawiam, Dawid Marcinków - zwykły człowiek, który chciał pomóc innym sędziom i oszczędzić ich czas.</p>
+  <img [class]="mobile ? 'mobile-img' : ''" src="assets/images/sadcat.jpg">
+</div>
 <div *ngIf="!loggedIn" class="center">
   <section class="login">
     <span style="margin-right: 10px">W tej chwili nie jesteś zalogowany.</span>
-    <button mat-raised-button color="primary" (click)="openLoginDialog()" [disabled]="!gotBackendHealthResponse || isHealthCheckError">Kliknij tutaj aby zalogować się do esora</button>
+    <button disabled mat-raised-button color="primary" (click)="openLoginDialog()">Niestety już się nie zalogujesz :(</button>
+<!--    <button mat-raised-button color="primary" (click)="openLoginDialog()" [disabled]="!gotBackendHealthResponse || isHealthCheckError">Kliknij tutaj aby zalogować się do esora</button>-->
     <div *ngIf="!gotBackendHealthResponse" style="margin-top: 20px"> <b>{{loadingMessage}}</b>
       <mat-progress-bar mode="indeterminate" *ngIf="!gotBackendHealthResponse"></mat-progress-bar>
     </div>
