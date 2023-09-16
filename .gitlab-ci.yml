@@ -74,8 +74,8 @@ Publish:
   script:
     - sshpass -V
     - export SSHPASS=$CI_USER_PASS
-    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 rm -r /home/gitlab-ci/dist || true
-    - sshpass -e scp -r -o StrictHostKeyChecking=no $CI_PROJECT_DIR/dist gitlab-ci@146.59.94.173:/home/gitlab-ci
-    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 rm -r /var/www/html || true
-    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 cp -r /home/gitlab-ci/dist/devims /var/www/html
-    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@146.59.94.173 sudo systemctl restart nginx.service
+    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@54.37.137.112 rm -r /home/gitlab-ci/dist || true
+    - sshpass -e scp -r -o StrictHostKeyChecking=no $CI_PROJECT_DIR/dist gitlab-ci@54.37.137.112:/home/gitlab-ci
+    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@54.37.137.112 rm -r /var/www/html || true
+    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@54.37.137.112 cp -r /home/gitlab-ci/dist/devims /var/www/html
+    - sshpass -e ssh -tt -o StrictHostKeyChecking=no gitlab-ci@54.37.137.112 sudo systemctl restart nginx.service
