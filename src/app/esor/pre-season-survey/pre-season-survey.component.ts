@@ -86,6 +86,7 @@ export class PreSeasonSurveyComponent implements OnInit {
   }
 
   getSurveyByPw() {
+    this.isLoading = true;
     this.surveyByPwNotFound = false;
     this.http.get<any>(this.baseUrl + 'esor/pre-season-survey/' + this.surveyPassword).subscribe({
       next: (response) => {
