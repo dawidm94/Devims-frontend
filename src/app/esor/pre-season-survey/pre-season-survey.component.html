@@ -232,7 +232,7 @@
         <div *ngIf="errorMessage != ''" style="color: red; white-space: pre-line; padding-bottom: 10px">
           {{errorMessage}}
         </div>
-        <button *ngIf="!sentSuccessfully && !sentWithError" (click)="send()" mat-raised-button color="primary" [disabled]="!gotSurveyByPassword && mailIsUsed">
+        <button *ngIf="!sentSuccessfully && !sentWithError" (click)="send()" mat-raised-button color="primary" [disabled]="(!gotSurveyByPassword && mailIsUsed) || isSending">
           <mat-icon *ngIf="isSending"><mat-spinner color="warn" diameter="20"></mat-spinner></mat-icon>
           {{surveyData.id ? 'Zaktualizuj ankietę' :'Wyślij ankietę'}}
         </button>
@@ -484,7 +484,7 @@
             </mat-form-field>
             <div style="text-align:center; padding-bottom: 20px">
               <button *ngIf="!sentSuccessfully && !sentWithError" style="margin-right: 20px" mat-raised-button matStepperPrevious>Powrót</button>
-              <button *ngIf="!sentSuccessfully && !sentWithError" (click)="send()" mat-raised-button color="primary" [disabled]="!gotSurveyByPassword && mailIsUsed">
+              <button *ngIf="!sentSuccessfully && !sentWithError" (click)="send()" mat-raised-button color="primary" [disabled]="(!gotSurveyByPassword && mailIsUsed) || isSending">
                 <mat-icon *ngIf="isSending"><mat-spinner color="warn" diameter="20"></mat-spinner></mat-icon>
                 {{surveyData.id ? 'Zaktualizuj ankietę' :'Wyślij ankietę'}}
               </button>

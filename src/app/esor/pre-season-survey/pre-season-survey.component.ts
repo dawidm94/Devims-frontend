@@ -105,10 +105,13 @@ export class PreSeasonSurveyComponent implements OnInit {
   }
 
   send() {
+    this.isSending = true;
     this.surveyByPwNotFound = false;
     this.errorMessage = ''
     if (this.isAllValid()) {
       this.sendSurvey()
+    } else {
+      this.isSending = false;
     }
   }
 
@@ -117,13 +120,15 @@ export class PreSeasonSurveyComponent implements OnInit {
       this.http.get<any>(this.baseUrl + 'esor/pre-season-survey/mail-check/' + this.email.value).subscribe({
         next: () => {
           this.mailIsUsed = true;
+        },
+        error: () => {
+          this.mailIsUsed = false;
         }
       })
     }
   }
 
   private sendSurvey() {
-    this.isSending = true;
     let request = this.surveyData;
     request.firstName = this.firstName.value;
     request.lastName = this.lastName.value;
