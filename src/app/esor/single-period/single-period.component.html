@@ -35,7 +35,7 @@
   <button (click)="send()" mat-raised-button color="primary" *ngIf="reasonFilled" [disabled]="isSending" style="margin-left: 20px"> Wyślij
     <mat-icon *ngIf="isSending"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
   </button>
-  <h2 *ngIf="sentSuccessfully" style="color: green">Termin dodany!</h2>
-  <h2 *ngIf="sentButTimeout" style="color: orange">Esor jeszcze procesuje. Zerknij za minutę czy masz wszystkie terminy i najlepiej nie dodawaj nic w tym czasie!</h2>
-  <h2 *ngIf="sentWithError" style="color: red">Wystąpił błąd przy dodawaniu terminu!</h2>
+  <h2 *ngIf="sentSuccessfully && !isSending" style="color: green">Termin dodany!</h2>
+  <h2 *ngIf="sentButTimeout && !isSending" style="color: orange">Esor jeszcze procesuje. Zerknij za minutę czy masz wszystkie terminy i najlepiej nie dodawaj nic w tym czasie!</h2>
+  <h2 *ngIf="sentWithError && !isSending" style="color: red">Wystąpił błąd przy dodawaniu terminu!</h2>
 </section>

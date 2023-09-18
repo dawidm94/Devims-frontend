@@ -29,6 +29,9 @@ const routes: Routes = [
     path: 'privacy-policy', component: PrivacyPolicyComponent
   },
   {
+    path: 'survey', component: PreSeasonSurveyComponent
+  },
+  {
     path: 'esor',
     component: EsorComponent,
     children : [

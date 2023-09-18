@@ -19,12 +19,20 @@ export class PreSeasonSurveyComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getPreSeasonSurveyData();
+    let esorToken = sessionStorage.getItem('esorToken')
+
+    if (esorToken) {
+      this.isLoggedIn = true
+      this.getPreSeasonSurveyData();
+    } else {
+      this.prepareBlankSurveyData();
+    }
   }
 
   baseUrl = environment.baseURL
   mobile = window.screen.width < 900;
 
+  isLoggedIn = false;
   isLoading = true;
   isError = false;
   surveyData: any;
@@ -32,6 +40,9 @@ export class PreSeasonSurveyComponent implements OnInit {
   isSending = false;
   sentSuccessfully = false;
   sentWithError = false;
+  gotSurveyByPassword = false;
+  mailIsUsed = false;
+  surveyByPwNotFound = false;
 
   monday: any;
   tuesday: any;
@@ -55,34 +66,16 @@ export class PreSeasonSurveyComponent implements OnInit {
   distancePreference: any;
 
   topSecretCounter = 0;
+  surveyPassword = '';
   topSecretPassword: any;
 
   getPreSeasonSurveyData(): void {
     this.http.get<any>(this.baseUrl + 'esor/pre-season-survey', this.httpService.getOptionWithEsorToken()).subscribe({
       next: (response) => {
         this.surveyData = response;
+        this.fillFields(response);
 
         this.isLoading = false;
-        this.firstName.setValue(response.firstName);
-        this.lastName.setValue(response.lastName);
-        this.birthDate.setValue(response.birthDate);
-        this.refereeCourseYear.setValue(response.refereeCourseYear);
-        this.registrationAddress.setValue(response.registrationAddress);
-        this.residenceAddress.setValue(response.residenceAddress);
-        this.phoneNumber.setValue(response.phoneNumber);
-        this.email.setValue(response.email);
-
-        this.distancePreference = response.distancePreference;
-
-        this.monday = response.daysPossibility.monday
-        this.tuesday = response.daysPossibility.tuesday
-        this.wednesday = response.daysPossibility.wednesday
-        this.thursday = response.daysPossibility.thursday
-        this.friday = response.daysPossibility.friday
-        this.saturday = response.daysPossibility.saturday
-        this.sunday = response.daysPossibility.sunday
-
-        this.extraComment = response.extraComment;
       },
       error: err => {
         this.isLoading = false;
@@ -92,14 +85,45 @@ export class PreSeasonSurveyComponent implements OnInit {
     })
   }
 
+  getSurveyByPw() {
+    this.surveyByPwNotFound = false;
+    this.http.get<any>(this.baseUrl + 'esor/pre-season-survey/' + this.surveyPassword).subscribe({
+      next: (response) => {
+        this.gotSurveyByPassword = true;
+        this.surveyData = response;
+        this.fillFields(response);
+
+        this.isLoading = false;
+      },
+      error: err => {
+        this.isLoading = false;
+        if (err.status == 404) {
+          this.surveyByPwNotFound = true;
+        }
+      }
+    })
+  }
+
   send() {
+    this.surveyByPwNotFound = false;
     this.errorMessage = ''
     if (this.isAllValid()) {
       this.sendSurvey()
     }
   }
 
+  checkMail() {
+    if (!this.isLoggedIn && !this.email.invalid) {
+      this.http.get<any>(this.baseUrl + 'esor/pre-season-survey/mail-check/' + this.email.value).subscribe({
+        next: () => {
+          this.mailIsUsed = true;
+        }
+      })
+    }
+  }
+
   private sendSurvey() {
+    this.isSending = true;
     let request = this.surveyData;
     request.firstName = this.firstName.value;
     request.lastName = this.lastName.value;
@@ -122,7 +146,7 @@ export class PreSeasonSurveyComponent implements OnInit {
 
     request.extraComment = this.extraComment;
 
-    this.http.put<any>(this.baseUrl + 'esor/pre-season-survey', request, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.put<any>(this.baseUrl + 'esor/pre-season-survey', request, this.isLoggedIn ? this.httpService.getOptionWithEsorToken() : {}).subscribe({
       next: () => {
         this.sentSuccessfully = true;
         this.isSending = false;
@@ -243,5 +267,93 @@ export class PreSeasonSurveyComponent implements OnInit {
 
   downloadAllSurveys() {
     this.fileService.downloadAllSurveys(btoa(this.topSecretPassword));
+  }
+
+  private prepareBlankSurveyData() {
+   this.surveyData = {
+     "id": null,
+     "firstName": "",
+     "lastName": "",
+     "birthDate": "",
+     "refereeCourseYear": null,
+     "registrationAddress": "",
+     "residenceAddress": "",
+     "phoneNumber": "",
+     "email": "",
+     "distancePreference": null,
+     "daysPossibility": {
+       "sunday": {
+         "isChecked": null,
+         "wholeDay": true,
+         "fromTime": null,
+         "toTime": null
+       },
+       "saturday": {
+         "isChecked": null,
+         "wholeDay": true,
+         "fromTime": null,
+         "toTime": null
+       },
+       "tuesday": {
+         "isChecked": null,
+         "wholeDay": true,
+         "fromTime": null,
+         "toTime": null
+       },
+       "wednesday": {
+         "isChecked": null,
+         "wholeDay": true,
+         "fromTime": null,
+         "toTime": null
+       },
+       "thursday": {
+         "isChecked": null,
+         "wholeDay": true,
+         "fromTime": null,
+         "toTime": null
+       },
+       "friday": {
+         "isChecked": null,
+         "wholeDay": true,
+         "fromTime": null,
+         "toTime": null
+       },
+       "monday": {
+         "isChecked": null,
+         "wholeDay": true,
+         "fromTime": null,
+         "toTime": null
+       }
+     },
+     "extraComment": null,
+     "lastModifiedDate": null
+   }
+
+   this.fillFields(this.surveyData)
+
+   this.isLoading = false;
+  }
+
+  private fillFields(response: any) {
+    this.firstName.setValue(response.firstName);
+    this.lastName.setValue(response.lastName);
+    this.birthDate.setValue(response.birthDate);
+    this.refereeCourseYear.setValue(response.refereeCourseYear);
+    this.registrationAddress.setValue(response.registrationAddress);
+    this.residenceAddress.setValue(response.residenceAddress);
+    this.phoneNumber.setValue(response.phoneNumber);
+    this.email.setValue(response.email);
+
+    this.distancePreference = response.distancePreference;
+
+    this.monday = response.daysPossibility.monday
+    this.tuesday = response.daysPossibility.tuesday
+    this.wednesday = response.daysPossibility.wednesday
+    this.thursday = response.daysPossibility.thursday
+    this.friday = response.daysPossibility.friday
+    this.saturday = response.daysPossibility.saturday
+    this.sunday = response.daysPossibility.sunday
+
+    this.extraComment = response.extraComment;
   }
 }
