@@ -13,6 +13,7 @@
           <mat-icon *ngIf="isGettingSurveyData"><mat-spinner diameter="20"></mat-spinner></mat-icon> Wczytaj ankietę
         </button>
         <p *ngIf="surveyByPwNotFound" style="color: blue"> Nie znaleziono takiej ankiety.</p>
+        <p *ngIf="surveyByPwForbidden" style="color: red"> Zablokowano dostęp. Zbyt dużo nieudanych prób - skontaktuj się z Dawidem Marcinków.</p>
         <p style="margin-top: 5px"> Jeżeli jesteś tu pierwszy raz, wypełnij po prostu poniższą ankietę. :-)</p>
       </div>
       <div *ngIf="isLoggedIn && topSecretCounter >= 5" style="padding: 20px">
@@ -255,6 +256,7 @@
           Wczytaj ankietę
         </button>
         <p *ngIf="surveyByPwNotFound" style="color: blue"> Nie znaleziono takiej ankiety.</p>
+        <p *ngIf="surveyByPwForbidden" style="color: red"> Zablokowano dostęp. Zbyt dużo nieudanych prób - skontaktuj się z Dawidem Marcinków.</p>
         <p style="margin-top: 5px"> Jeżeli jesteś tu pierwszy raz, wypełnij po prostu poniższą ankietę. :-)</p>
       </div>
 <!--      <h4 style="color: red">(należy wysłać do 31 sierpnia 2024r.)</h4>-->
