@@ -43,6 +43,7 @@ export class PreSeasonSurveyComponent implements OnInit {
   gotSurveyByPassword = false;
   mailIsUsed = false;
   surveyByPwNotFound = false;
+  isGettingSurveyData = false;
 
   monday: any;
   tuesday: any;
@@ -86,6 +87,7 @@ export class PreSeasonSurveyComponent implements OnInit {
   }
 
   getSurveyByPw() {
+    this.isGettingSurveyData = true;
     this.surveyByPwNotFound = false;
     this.http.get<any>(this.baseUrl + 'esor/pre-season-survey/' + this.surveyPassword).subscribe({
       next: (response) => {
@@ -93,10 +95,10 @@ export class PreSeasonSurveyComponent implements OnInit {
         this.surveyData = response;
         this.fillFields(response);
 
-        this.isLoading = false;
+        this.isGettingSurveyData = false;
       },
       error: err => {
-        this.isLoading = false;
+        this.isGettingSurveyData = false;
         if (err.status == 404) {
           this.surveyByPwNotFound = true;
         }

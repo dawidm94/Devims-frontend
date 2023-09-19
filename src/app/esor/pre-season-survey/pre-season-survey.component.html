@@ -9,7 +9,9 @@
       <div *ngIf="!isLoggedIn && !gotSurveyByPassword" style="padding: 20px">
         <p style="margin-bottom: 5px">Cześć, jeżeli chcesz zaktualizować utworzoną wcześniej ankietę wpisz poniżej hasło z maila.</p>
         <input name="surveyPassword" [(ngModel)]="surveyPassword" autocomplete="off">
-        <button style="margin-left: 10px" mat-stroked-button color="primary" (click)="getSurveyByPw()" [disabled]="surveyPassword.length==0 || isLoading">Wczytaj ankietę</button>
+        <button style="margin-left: 10px" mat-stroked-button color="primary" (click)="getSurveyByPw()" [disabled]="surveyPassword.length==0 || isGettingSurveyData">
+          <mat-icon *ngIf="isGettingSurveyData"><mat-spinner diameter="20"></mat-spinner></mat-icon> Wczytaj ankietę
+        </button>
         <p *ngIf="surveyByPwNotFound" style="color: blue"> Nie znaleziono takiej ankiety.</p>
         <p style="margin-top: 5px"> Jeżeli jesteś tu pierwszy raz, wypełnij po prostu poniższą ankietę. :-)</p>
       </div>
@@ -248,7 +250,10 @@
       <div *ngIf="!isLoggedIn && !gotSurveyByPassword" style="padding: 20px">
         <p style="margin-bottom: 5px">Cześć, jeżeli chcesz zaktualizować utworzoną wcześniej ankietę wpisz poniżej hasło z maila.</p>
         <input name="surveyPassword" [(ngModel)]="surveyPassword" autocomplete="off">
-        <button style="margin-left: 10px" mat-stroked-button color="primary" (click)="getSurveyByPw()" [disabled]="surveyPassword.length==0 || isLoading">Wczytaj ankietę</button>
+        <button style="margin-left: 10px" mat-stroked-button color="primary" (click)="getSurveyByPw()" [disabled]="surveyPassword.length==0 || isGettingSurveyData">
+          <mat-icon *ngIf="isGettingSurveyData"><mat-spinner diameter="20"></mat-spinner></mat-icon>
+          Wczytaj ankietę
+        </button>
         <p *ngIf="surveyByPwNotFound" style="color: blue"> Nie znaleziono takiej ankiety.</p>
         <p style="margin-top: 5px"> Jeżeli jesteś tu pierwszy raz, wypełnij po prostu poniższą ankietę. :-)</p>
       </div>
