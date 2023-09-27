@@ -1,11 +1,13 @@
 <div *ngIf="!loggedIn && secretModeCounter < 3" class="manifest" style="text-align: center">
   <h1 style="font-weight: bold">Koniec przygody</h1>
   <p (click)="secretTap()">Wpis z dnia 14.09.2023r.</p>
-  <p>Drodzy... z ogromną przykrością muszę powiadomić Was, że zostałem właśnie przyblokowany przez firmę, która napisała esora.</p>
+  <p>Drodzy... z ogromną przykrością muszę powiadomić Was, że zostałem przyblokowany przez firmę, która napisała esora.</p>
   <p>Pomimo braku rzetelnych podstaw do zablokowania, nie spodobał im się fakt, że ulepszyłem korzystanie z ICH produktu.</p>
-  <p>W przyszłym tygodniu mam z nimi rozmowę. Zobaczymy co uda się ugrać. Na chwilę obecną, pomimo znanych mi obejść, jestem zmuszony zawiesić działanie aplikacji.</p>
+  <p>W dużym skrócie "mamy odmienne zdanie" w kwestii etyczności i bezpieczeństwa(?) tej aplikacji.</p>
+  <p>Niestety w związku z tym, jestem zmuszony zawiesić działanie aplikacji.</p>
   <p>Jest mi ogromnie przykro z tego powodu, bo włożyłem w to bardzo dużo czasu jak i pieniędzy, bo z własnej kieszeni utrzymywałem serwer itp.</p>
   <p>Żeby pokazać jak mi jest smutno, wstawiam zdjęcie kota, który oddaje tylko 10% moich emocji.</p>
+  <p>Dziękuję wszystkim, którzy korzystali z tej aplikacji i za każde dobre słowo na jej temat.</p>
   <p>Pozdrawiam, Dawid Marcinków - zwykły człowiek, który chciał pomóc innym sędziom oszczędzić ich czas.</p>
   <img [class]="mobile ? 'mobile-img' : ''" src="assets/images/sadcat.jpg">
 </div>
