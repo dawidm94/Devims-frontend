@@ -4,6 +4,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpService} from "../http.service";
 import {environment} from "../../../environments/environment";
 import {ConfirmedNomination} from "../date.service";
+import {FileService} from "../file.service";
 
 @Component({
   selector: 'app-accept-nomination-dialog',
@@ -15,6 +16,7 @@ export class AcceptNominationDialogComponent implements OnInit {
   constructor(
     private http: HttpClient,
     public dialogRef: MatDialogRef<AcceptNominationDialogComponent>,
+    public fileService: FileService,
     @Inject(MAT_DIALOG_DATA) public matchId: number,
     private httpService: HttpService
   ) { }
@@ -38,6 +40,7 @@ export class AcceptNominationDialogComponent implements OnInit {
   showTransportRates = false;
   showGrossRates = false;
   buy = 0;
+  isAccepted = true;
 
   closeDialog(): void {
     this.dialogRef.close(false)
@@ -123,11 +126,19 @@ export class AcceptNominationDialogComponent implements OnInit {
   private sendNomination(request: ConfirmedNomination) {
     this.http.post<any>(this.baseUrl + 'esor/nominations/' + this.matchId + '/confirm', request, this.httpService.getOptionWithEsorToken()).subscribe({
       next: () => {
-        this.dialogRef.close(true)
+        this.isAccepted = true;
       },
       error: err => {
         console.log(err)
       }
     })
+  }
+
+  getIcal() {
+    this.fileService.downloadIcal(this.nomination.matchId);
+  }
+
+  getDelegation() {
+    this.fileService.downloadDelegationWithFilename(this.nomination.matchId, this.nomination.date + '-' + this.nomination.teamHome)
   }
 }

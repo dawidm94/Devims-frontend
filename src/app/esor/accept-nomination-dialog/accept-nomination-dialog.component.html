@@ -1,154 +1,181 @@
-<h1>Potwierdź nominację:</h1>
-<h3>{{nominationHeader}}</h3>
-<h1 style="font-weight: bold">{{match.teamHome}} - {{match.teamVisitor}}</h1>
-<mat-form-field appearance="fill">
-  <mat-label>Kwota brutto (podstawa)</mat-label>
-  <span matPrefix><mat-icon>attach_money</mat-icon> &nbsp;</span>
-  <span matSuffix>ZŁ</span>
-  <input type="number" matInput [(ngModel)]="grossAmount" (change)="calculateNetAmount()" autocomplete="off">
-</mat-form-field>
-  <button [style]="mobile ? 'margin-bottom: 20px' : 'margin-left: 40px'" [class]="mobile ? 'gross-rate-button center' : 'gross-rate-button'" mat-raised-button (click)="toggleGrossRates()">{{showGrossRates ? 'Ukryj stawki' : 'Pokaż stawki'}}</button>
-<table *ngIf="showGrossRates && !mobile">
-  <tr>
-    <th>sędzia boiskowy</th>
-    <th>sędzia funkcyjny</th>
-  </tr>
-  <tr>
-    <td>3LM - 180zł</td>
-    <td>Ślzkosz 3LM/2LK - 65zł</td>
-  </tr>
-  <tr>
-    <td>2LK - 160zł</td>
-    <td>Ślzkosz reszta - 60zł</td>
-  </tr>
-  <tr>
-    <td>U19M - 120zł</td>
-    <td>PLK - 150zł</td>
-  </tr>
-  <tr>
-    <td>U19K, U17M - 110zł</td>
-    <td>PLKK - 120zł</td>
-  </tr>
-  <tr>
-    <td>U17K, U15M, U14M - 90zł</td>
-    <td>1LM - 100zł</td>
-  </tr>
-  <tr>
-    <td>U15K, U14K, U13M - 80zł</td>
-    <td>1LK, 2LM - 80zł</td>
-  </tr>
-  <tr>
-    <td>Minikoszykówka - n x 50zł</td>
-  </tr>
-</table>
-<table *ngIf="showGrossRates && mobile">
-  <tr>
-    <th>s. boiskowy</th>
-    <th>s. funkcyjny</th>
-  </tr>
-  <tr>
-    <td>3LM - 180zł</td>
-    <td>PLK - 150zł</td>
-  </tr>
-  <tr>
-    <td>MU-19 - 120zł</td>
-    <td>PLKK - 120zł</td>
-  </tr>
-  <tr>
-    <td>MU-17- 110zł</td>
-    <td>1LM - 100zł</td>
-  </tr>
-  <tr>
-    <td>MU-15 - 90zł</td>
-    <td>2LM - 80zł</td>
-  </tr>
-  <tr>
-    <td>MU-14 - 90zł</td>
-    <td>1LK - 80zł</td>
-  </tr>
-  <tr>
-    <td>MU-13 - 80zł</td>
-    <td><b>ŚLZKOSZ:</b></td>
-  </tr>
-  <tr>
-    <td>2LK - 160zł</td>
-    <td>3LM - 65zł</td>
-  </tr>
-  <tr>
-    <td>KU-19 - 110zł</td>
-    <td>2LK - 65zł</td>
-  </tr>
-  <tr>
-    <td>KU-17 - 90zł</td>
-    <td style="padding-right: 0">Reszta - 60zł</td>
-  </tr>
-    <td>KU-15 - 80zł</td>
-  <tr>
-    <td>KU-14 - 80zł</td>
-  </tr>
-  <tr>
-    <td>KU-13 - 80zł</td>
-  </tr>
-  <tr>
-    <td>Minikosz - n x 50zł</td>
-  </tr>
-</table>
-<mat-form-field appearance="fill">
-  <mat-label>Dojazd</mat-label>
-  <span matPrefix><mat-icon>directions_car</mat-icon> &nbsp;</span>
-  <span matSuffix>ZŁ</span>
-  <input type="number" matInput [(ngModel)]="transportAmount" (change)="calculateNetAmount()" autocomplete="off">
-</mat-form-field>
-<button *ngIf="!mobile" [style]="mobile ? 'margin-bottom: 20px' : ''" class="input-button" mat-icon-button (click)="goToGoogleMaps()"
-        matTooltip="Sprawdź odległość"><mat-icon style="color: red">location_on</mat-icon></button>
-<button *ngIf="!mobile" class="" mat-raised-button (click)="toggleTransportRates()">{{showTransportRates ? 'Ukryj stawki' : 'Pokaż stawki'}}</button>
-<button *ngIf="mobile" class="" mat-raised-button (click)="toggleTransportRates()">{{showTransportRates ? 'Ukryj stawki' : 'Pokaż stawki'}}</button>
-<button *ngIf="mobile" class="" mat-raised-button (click)="goToGoogleMaps()"><mat-icon style="color: red">location_on</mat-icon>Odległość</button>
-<table *ngIf="showTransportRates && !mobile">
-  <tr>
-    <th colspan="2">Wszystkie rozgrywki (Ślzkosz + RC)</th>
-  </tr>
-  <tr>
-    <td>Do 10km - 10zł</td>
-    <td>Do 45km - 45zł</td>
-  </tr>
-  <tr>
-    <td>Do 20km - 20zł</td>
-    <td>Do 60km - 60zł</td>
-  </tr>
-  <tr>
-    <td>Do 30km - 30zł</td>
-    <td>Powyżej 60km - 100zł</td>
-  </tr>
-</table>
-<table *ngIf="showTransportRates && mobile" style="margin-top: 20px">
-  <tr>
-    <th colspan="2">Wszystkie mecze Ślzkosz + RC</th>
-  <tr>
-    <td>Do 10km - 10zł</td>
-  </tr>
-  <tr>
-    <td>Do 20km - 20zł</td>
-  </tr>
-  <tr>
-    <td>Do 30km - 30zł</td> </tr>
-  <tr>
-    <td>Do 45km - 45zł</td>
-  </tr>
-  <tr>
-    <td>Do 60km - 60zł</td>
-  </tr>
-  <tr>
-    <td>Powyżej 60km - 100zł</td>
-  </tr>
-</table>
-<mat-form-field appearance="fill" [style]="mobile ? 'margin-top: 20px' : ''">
-  <mat-label>Do wypłaty</mat-label>
-  <span matPrefix><mat-icon>payments</mat-icon> &nbsp;</span>
-  <span matSuffix>ZŁ</span>
-  <input matInput disabled [(ngModel)]="toPay">
-</mat-form-field>
-<section [style]="mobile ? 'padding-bottom: 20px' : ''">
-  <button class="decision-button" mat-raised-button (click)="closeDialog()">Anuluj</button>
-  <button class="decision-button" mat-raised-button color="primary" (click)="acceptNomination()">Potwierdź</button>
+<section *ngIf="!isAccepted">
+  <h1>Potwierdź nominację:</h1>
+  <h3>{{nominationHeader}}</h3>
+  <h1 style="font-weight: bold">{{match.teamHome}} - {{match.teamVisitor}}</h1>
+  <mat-form-field appearance="fill">
+    <mat-label>Kwota brutto (podstawa)</mat-label>
+    <span matPrefix><mat-icon>attach_money</mat-icon> &nbsp;</span>
+    <span matSuffix>ZŁ</span>
+    <input type="number" matInput [(ngModel)]="grossAmount" (change)="calculateNetAmount()" autocomplete="off">
+  </mat-form-field>
+    <button [style]="mobile ? 'margin-bottom: 20px' : 'margin-left: 40px'" [class]="mobile ? 'gross-rate-button center' : 'gross-rate-button'" mat-raised-button (click)="toggleGrossRates()">{{showGrossRates ? 'Ukryj stawki' : 'Pokaż stawki'}}</button>
+  <table *ngIf="showGrossRates && !mobile">
+    <tr>
+      <th>sędzia boiskowy</th>
+      <th>sędzia funkcyjny</th>
+    </tr>
+    <tr>
+      <td>3LM - 180zł</td>
+      <td>Ślzkosz 3LM/2LK - 65zł</td>
+    </tr>
+    <tr>
+      <td>2LK - 160zł</td>
+      <td>Ślzkosz reszta - 60zł</td>
+    </tr>
+    <tr>
+      <td>U19M - 120zł</td>
+      <td>PLK - 150zł</td>
+    </tr>
+    <tr>
+      <td>U19K, U17M - 110zł</td>
+      <td>PLKK - 120zł</td>
+    </tr>
+    <tr>
+      <td>U17K, U15M, U14M - 90zł</td>
+      <td>1LM - 100zł</td>
+    </tr>
+    <tr>
+      <td>U15K, U14K, U13M - 80zł</td>
+      <td>1LK, 2LM - 80zł</td>
+    </tr>
+    <tr>
+      <td>Minikoszykówka - n x 50zł</td>
+    </tr>
+  </table>
+  <table *ngIf="showGrossRates && mobile">
+    <tr>
+      <th>s. boiskowy</th>
+      <th>s. funkcyjny</th>
+    </tr>
+    <tr>
+      <td>3LM - 180zł</td>
+      <td>PLK - 150zł</td>
+    </tr>
+    <tr>
+      <td>MU-19 - 120zł</td>
+      <td>PLKK - 120zł</td>
+    </tr>
+    <tr>
+      <td>MU-17- 110zł</td>
+      <td>1LM - 100zł</td>
+    </tr>
+    <tr>
+      <td>MU-15 - 90zł</td>
+      <td>2LM - 80zł</td>
+    </tr>
+    <tr>
+      <td>MU-14 - 90zł</td>
+      <td>1LK - 80zł</td>
+    </tr>
+    <tr>
+      <td>MU-13 - 80zł</td>
+      <td><b>ŚLZKOSZ:</b></td>
+    </tr>
+    <tr>
+      <td>2LK - 160zł</td>
+      <td>3LM - 65zł</td>
+    </tr>
+    <tr>
+      <td>KU-19 - 110zł</td>
+      <td>2LK - 65zł</td>
+    </tr>
+    <tr>
+      <td>KU-17 - 90zł</td>
+      <td style="padding-right: 0">Reszta - 60zł</td>
+    </tr>
+      <td>KU-15 - 80zł</td>
+    <tr>
+      <td>KU-14 - 80zł</td>
+    </tr>
+    <tr>
+      <td>KU-13 - 80zł</td>
+    </tr>
+    <tr>
+      <td>Minikosz - n x 50zł</td>
+    </tr>
+  </table>
+  <mat-form-field appearance="fill">
+    <mat-label>Dojazd</mat-label>
+    <span matPrefix><mat-icon>directions_car</mat-icon> &nbsp;</span>
+    <span matSuffix>ZŁ</span>
+    <input type="number" matInput [(ngModel)]="transportAmount" (change)="calculateNetAmount()" autocomplete="off">
+  </mat-form-field>
+  <button *ngIf="!mobile" [style]="mobile ? 'margin-bottom: 20px' : ''" class="input-button" mat-icon-button (click)="goToGoogleMaps()"
+          matTooltip="Sprawdź odległość"><mat-icon style="color: red">location_on</mat-icon></button>
+  <button *ngIf="!mobile" class="" mat-raised-button (click)="toggleTransportRates()">{{showTransportRates ? 'Ukryj stawki' : 'Pokaż stawki'}}</button>
+  <button *ngIf="mobile" class="" mat-raised-button (click)="toggleTransportRates()">{{showTransportRates ? 'Ukryj stawki' : 'Pokaż stawki'}}</button>
+  <button *ngIf="mobile" class="" mat-raised-button (click)="goToGoogleMaps()"><mat-icon style="color: red">location_on</mat-icon>Odległość</button>
+  <table *ngIf="showTransportRates && !mobile">
+    <tr>
+      <th colspan="2">Wszystkie rozgrywki (Ślzkosz + RC)</th>
+    </tr>
+    <tr>
+      <td>Do 10km - 10zł</td>
+      <td>Do 45km - 45zł</td>
+    </tr>
+    <tr>
+      <td>Do 20km - 20zł</td>
+      <td>Do 60km - 60zł</td>
+    </tr>
+    <tr>
+      <td>Do 30km - 30zł</td>
+      <td>Powyżej 60km - 100zł</td>
+    </tr>
+  </table>
+  <table *ngIf="showTransportRates && mobile" style="margin-top: 20px">
+    <tr>
+      <th colspan="2">Wszystkie mecze Ślzkosz + RC</th>
+    <tr>
+      <td>Do 10km - 10zł</td>
+    </tr>
+    <tr>
+      <td>Do 20km - 20zł</td>
+    </tr>
+    <tr>
+      <td>Do 30km - 30zł</td> </tr>
+    <tr>
+      <td>Do 45km - 45zł</td>
+    </tr>
+    <tr>
+      <td>Do 60km - 60zł</td>
+    </tr>
+    <tr>
+      <td>Powyżej 60km - 100zł</td>
+    </tr>
+  </table>
+  <mat-form-field appearance="fill" [style]="mobile ? 'margin-top: 20px' : ''">
+    <mat-label>Do wypłaty</mat-label>
+    <span matPrefix><mat-icon>payments</mat-icon> &nbsp;</span>
+    <span matSuffix>ZŁ</span>
+    <input matInput disabled [(ngModel)]="toPay">
+  </mat-form-field>
+  <section [style]="mobile ? 'padding-bottom: 20px' : ''">
+    <button class="decision-button" mat-raised-button (click)="closeDialog()">Anuluj</button>
+    <button class="decision-button" mat-raised-button color="primary" (click)="acceptNomination()">Potwierdź</button>
+  </section>
+</section>
+<section *ngIf="isAccepted">
+  <h1 style="text-align: center; color: green; font-weight: bold">Zaakceptowano!</h1>
+  <div class="example-button-row">
+    <div class="example-flex-container">
+      <div class="example-button-container">
+        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="getIcal()">
+          <mat-icon>insert_invitation</mat-icon>
+        </button>
+        <h1 class="acceptedOptionLabel">Kalendarz</h1>
+      </div>
+      <div class="example-button-container">
+        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="getDelegation()">
+          <mat-icon>sim_card_download</mat-icon>
+        </button>
+        <h1 class="acceptedOptionLabel">Delegacja</h1>
+      </div>
+      <div class="example-button-container">
+        <button mat-fab color="warn" aria-label="Example icon button with a delete icon" (click)="closeDialog()">
+          <mat-icon>exit_to_app</mat-icon>
+        </button>
+        <h1 class="acceptedOptionLabel"> &nbsp;&nbsp;Zamknij </h1>
+      </div>
+    </div>
+  </div>
 </section>
