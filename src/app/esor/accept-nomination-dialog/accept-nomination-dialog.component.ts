@@ -40,7 +40,7 @@ export class AcceptNominationDialogComponent implements OnInit {
   showTransportRates = false;
   showGrossRates = false;
   buy = 0;
-  isAccepted = true;
+  isAccepted = false;
 
   closeDialog(): void {
     this.dialogRef.close(false)
