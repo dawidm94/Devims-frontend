@@ -158,20 +158,20 @@
   <h1 style="text-align: center; color: green; font-weight: bold">Zaakceptowano!</h1>
   <div class="example-button-row">
     <div class="example-flex-container">
-      <div class="example-button-container">
-        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="getIcal()">
+      <div class="example-button-container" (click)="getIcal()">
+        <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
           <mat-icon>insert_invitation</mat-icon>
         </button>
         <h1 class="acceptedOptionLabel">Kalendarz</h1>
       </div>
-      <div class="example-button-container">
-        <button mat-fab color="primary" aria-label="Example icon button with a delete icon" (click)="getDelegation()">
+      <div class="example-button-container" (click)="getDelegation()">
+        <button mat-fab color="primary" aria-label="Example icon button with a delete icon">
           <mat-icon>sim_card_download</mat-icon>
         </button>
         <h1 class="acceptedOptionLabel">Delegacja</h1>
       </div>
-      <div class="example-button-container">
-        <button mat-fab color="warn" aria-label="Example icon button with a delete icon" (click)="closeDialog()">
+      <div class="example-button-container" (click)="closeDialog()">
+        <button mat-fab color="warn" aria-label="Example icon button with a delete icon">
           <mat-icon>exit_to_app</mat-icon>
         </button>
         <h1 class="acceptedOptionLabel"> &nbsp;&nbsp;Zamknij </h1>
