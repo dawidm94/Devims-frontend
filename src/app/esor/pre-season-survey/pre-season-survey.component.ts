@@ -54,7 +54,9 @@ export class PreSeasonSurveyComponent implements OnInit {
   saturday: any;
   sunday: any;
 
+  hasCar: any;
   extraComment: any;
+  feedback: any;
 
   firstName = new FormControl('', [Validators.required]);
   lastName = new FormControl('', [Validators.required]);
@@ -65,6 +67,7 @@ export class PreSeasonSurveyComponent implements OnInit {
     Validators.min(new Date().getFullYear() - 100), Validators.max(new Date().getFullYear())]);
   phoneNumber = new FormControl('', [Validators.required]);
   email = new FormControl('', [Validators.required, Validators.email]);
+  shirtSize: any;
   distancePreference: any;
 
   topSecretCounter = 0;
@@ -72,7 +75,7 @@ export class PreSeasonSurveyComponent implements OnInit {
   topSecretPassword: any;
 
   getPreSeasonSurveyData(): void {
-    this.http.get<any>(this.baseUrl + 'esor/pre-season-survey', this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/pre-season-survey?seasonId=' + environment.currentSeasonId, this.httpService.getOptionWithEsorToken()).subscribe({
       next: (response) => {
         this.surveyData = response;
         this.fillFields(response);
@@ -145,6 +148,7 @@ export class PreSeasonSurveyComponent implements OnInit {
     request.residenceAddress = this.residenceAddress.value;
     request.phoneNumber = this.phoneNumber.value;
     request.email = this.email.value;
+    request.shirtSize = this.shirtSize;
 
     request.distancePreference = this.distancePreference;
 
@@ -157,6 +161,9 @@ export class PreSeasonSurveyComponent implements OnInit {
     request.daysPossibility.sunday = this.sunday;
 
     request.extraComment = this.extraComment;
+    request.feedback = this.feedback;
+
+    request.seasonId = environment.currentSeasonId;
 
     this.http.put<any>(this.baseUrl + 'esor/pre-season-survey', request, this.isLoggedIn ? this.httpService.getOptionWithEsorToken() : {}).subscribe({
       next: () => {
@@ -172,51 +179,19 @@ export class PreSeasonSurveyComponent implements OnInit {
   }
 
   private isAllValid() {
-    let errorDays = [];
-    if (this.monday.isChecked && !this.monday.wholeDay) {
-      if (!this.monday.fromTime && !this.monday.toTime) {
-        errorDays.push('poniedziałek')
-      }
+    if (!this.monday.isChecked
+      && !this.tuesday.isChecked
+      && !this.wednesday.isChecked
+      && !this.thursday.isChecked
+      && !this.friday.isChecked
+      && !this.saturday.isChecked
+      && !this.sunday.isChecked
+    ) {
+      this.addErrorMessage("Ani jeden dzień nie jest zaznaczony, na pewno nie chcesz w ogóle sędziować? :-)")
     }
 
-    if (this.tuesday.isChecked && !this.tuesday.wholeDay) {
-      if (!this.tuesday.fromTime && !this.tuesday.toTime) {
-        errorDays.push('wtorek')
-      }
-    }
-
-    if (this.wednesday.isChecked && !this.wednesday.wholeDay) {
-      if (!this.wednesday.fromTime && !this.wednesday.toTime) {
-        errorDays.push('środa')
-      }
-    }
-
-    if (this.thursday.isChecked && !this.thursday.wholeDay) {
-      if (!this.thursday.fromTime && !this.thursday.toTime) {
-        errorDays.push('czwartek')
-      }
-    }
-
-    if (this.friday.isChecked && !this.friday.wholeDay) {
-      if (!this.friday.fromTime && !this.friday.toTime) {
-        errorDays.push('piątek')
-      }
-    }
-
-    if (this.saturday.isChecked && !this.saturday.wholeDay) {
-      if (!this.saturday.fromTime && !this.saturday.toTime) {
-        errorDays.push('sobota')
-      }
-    }
-
-    if (this.sunday.isChecked && !this.sunday.wholeDay) {
-      if (!this.sunday.fromTime && !this.sunday.toTime) {
-        errorDays.push('niedziela')
-      }
-    }
-
-    if (errorDays.length != 0) {
-      this.addErrorMessage("Jeżeli jest odznaczone pole 'cały dzień', musisz uzupełnić przynajmniej jedno pole z godziną dla tego dnia. Błędne dni to: [" + errorDays.join(', ') + "]")
+    if (!this.shirtSize) {
+      this.addErrorMessage(" Proszę wybrać rozmiar koszulki.")
     }
 
     if (!this.distancePreference) {
@@ -355,6 +330,7 @@ export class PreSeasonSurveyComponent implements OnInit {
     this.residenceAddress.setValue(response.residenceAddress);
     this.phoneNumber.setValue(response.phoneNumber);
     this.email.setValue(response.email);
+    this.shirtSize = response.shirtSize;
 
     this.distancePreference = response.distancePreference;
 
@@ -367,5 +343,6 @@ export class PreSeasonSurveyComponent implements OnInit {
     this.sunday = response.daysPossibility.sunday
 
     this.extraComment = response.extraComment;
+    this.feedback = response.feedback;
   }
 }

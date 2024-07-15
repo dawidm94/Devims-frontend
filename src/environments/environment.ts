@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   baseURL: 'http://localhost:8080/',
-  currentSeasonId: 26 // 2023/2024
+  currentSeasonId: 27 // 2024/2025
 };
 
 /*
