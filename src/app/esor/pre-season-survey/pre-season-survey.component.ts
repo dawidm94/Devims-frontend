@@ -94,7 +94,7 @@ export class PreSeasonSurveyComponent implements OnInit {
     this.isGettingSurveyData = true;
     this.surveyByPwNotFound = false;
     this.surveyByPwForbidden = false;
-    this.http.get<any>(this.baseUrl + 'esor/pre-season-survey/' + this.surveyPassword).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/pre-season-survey/' + this.surveyPassword + '?seasonId=' + environment.currentSeasonId).subscribe({
       next: (response) => {
         this.gotSurveyByPassword = true;
         this.surveyData = response;
@@ -127,7 +127,7 @@ export class PreSeasonSurveyComponent implements OnInit {
 
   checkMail() {
     if (!this.isLoggedIn && !this.email.invalid) {
-      this.http.get<any>(this.baseUrl + 'esor/pre-season-survey/mail-check/' + this.email.value).subscribe({
+      this.http.get<any>(this.baseUrl + 'esor/pre-season-survey/mail-check/' + this.email.value + '?seasonId=' + environment.currentSeasonId).subscribe({
         next: () => {
           this.mailIsUsed = true;
         },
