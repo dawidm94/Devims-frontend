@@ -54,7 +54,7 @@ export class PreSeasonSurveyComponent implements OnInit {
   saturday: any;
   sunday: any;
 
-  hasCar: any;
+  hasCar: any = true;
   extraComment: any;
   feedback: any;
 
@@ -151,6 +151,7 @@ export class PreSeasonSurveyComponent implements OnInit {
     request.shirtSize = this.shirtSize;
 
     request.distancePreference = this.distancePreference;
+    request.hasCar = this.hasCar;
 
     request.daysPossibility.monday = this.monday;
     request.daysPossibility.tuesday = this.tuesday;
@@ -196,6 +197,10 @@ export class PreSeasonSurveyComponent implements OnInit {
 
     if (!this.distancePreference) {
       this.addErrorMessage(" Proszę wybrać preferencje dotyczące odległości sędziowania.")
+    }
+
+    if (this.mobile && this.hasCar == null) {
+      this.addErrorMessage(" Proszę wybrać czy posiadasz samochód.")
     }
 
     this.firstName.markAllAsTouched();
@@ -333,6 +338,7 @@ export class PreSeasonSurveyComponent implements OnInit {
     this.shirtSize = response.shirtSize;
 
     this.distancePreference = response.distancePreference;
+    this.hasCar = response.hasCar;
 
     this.monday = response.daysPossibility.monday
     this.tuesday = response.daysPossibility.tuesday
