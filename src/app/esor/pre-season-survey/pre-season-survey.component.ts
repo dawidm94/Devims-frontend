@@ -153,14 +153,6 @@ export class PreSeasonSurveyComponent implements OnInit {
     request.distancePreference = this.distancePreference;
     request.hasCar = this.hasCar;
 
-    request.daysPossibility.monday = this.monday;
-    request.daysPossibility.tuesday = this.tuesday;
-    request.daysPossibility.wednesday = this.wednesday;
-    request.daysPossibility.thursday = this.thursday;
-    request.daysPossibility.friday = this.friday;
-    request.daysPossibility.saturday = this.saturday;
-    request.daysPossibility.sunday = this.sunday;
-
     request.extraComment = this.extraComment;
     request.feedback = this.feedback;
 
@@ -180,17 +172,6 @@ export class PreSeasonSurveyComponent implements OnInit {
   }
 
   private isAllValid() {
-    if (!this.monday.isChecked
-      && !this.tuesday.isChecked
-      && !this.wednesday.isChecked
-      && !this.thursday.isChecked
-      && !this.friday.isChecked
-      && !this.saturday.isChecked
-      && !this.sunday.isChecked
-    ) {
-      this.addErrorMessage("Ani jeden dzień nie jest zaznaczony, na pewno nie chcesz w ogóle sędziować? :-)")
-    }
-
     if (!this.shirtSize) {
       this.addErrorMessage(" Proszę wybrać rozmiar koszulki.")
     }
@@ -199,7 +180,7 @@ export class PreSeasonSurveyComponent implements OnInit {
       this.addErrorMessage(" Proszę wybrać preferencje dotyczące odległości sędziowania.")
     }
 
-    if (this.mobile && this.hasCar == null) {
+    if (this.hasCar == null) {
       this.addErrorMessage(" Proszę wybrać czy posiadasz samochód.")
     }
 
@@ -262,68 +243,9 @@ export class PreSeasonSurveyComponent implements OnInit {
   }
 
   private prepareBlankSurveyData() {
-   this.surveyData = {
-     "id": null,
-     "firstName": "",
-     "lastName": "",
-     "birthDate": "",
-     "refereeCourseYear": null,
-     "registrationAddress": "",
-     "residenceAddress": "",
-     "phoneNumber": "",
-     "email": "",
-     "distancePreference": null,
-     "daysPossibility": {
-       "sunday": {
-         "isChecked": null,
-         "wholeDay": true,
-         "fromTime": null,
-         "toTime": null
-       },
-       "saturday": {
-         "isChecked": null,
-         "wholeDay": true,
-         "fromTime": null,
-         "toTime": null
-       },
-       "tuesday": {
-         "isChecked": null,
-         "wholeDay": true,
-         "fromTime": null,
-         "toTime": null
-       },
-       "wednesday": {
-         "isChecked": null,
-         "wholeDay": true,
-         "fromTime": null,
-         "toTime": null
-       },
-       "thursday": {
-         "isChecked": null,
-         "wholeDay": true,
-         "fromTime": null,
-         "toTime": null
-       },
-       "friday": {
-         "isChecked": null,
-         "wholeDay": true,
-         "fromTime": null,
-         "toTime": null
-       },
-       "monday": {
-         "isChecked": null,
-         "wholeDay": true,
-         "fromTime": null,
-         "toTime": null
-       }
-     },
-     "extraComment": null,
-     "lastModifiedDate": null
-   }
-
-   this.fillFields(this.surveyData)
-
-   this.isLoading = false;
+    this.surveyData = {"id": null}
+    this.hasCar = null;
+    this.isLoading = false;
   }
 
   private fillFields(response: any) {
@@ -339,14 +261,6 @@ export class PreSeasonSurveyComponent implements OnInit {
 
     this.distancePreference = response.distancePreference;
     this.hasCar = response.hasCar;
-
-    this.monday = response.daysPossibility.monday
-    this.tuesday = response.daysPossibility.tuesday
-    this.wednesday = response.daysPossibility.wednesday
-    this.thursday = response.daysPossibility.thursday
-    this.friday = response.daysPossibility.friday
-    this.saturday = response.daysPossibility.saturday
-    this.sunday = response.daysPossibility.sunday
 
     this.extraComment = response.extraComment;
     this.feedback = response.feedback;

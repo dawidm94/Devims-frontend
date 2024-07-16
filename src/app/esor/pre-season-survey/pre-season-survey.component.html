@@ -102,47 +102,11 @@
         </mat-button-toggle-group>
       </div>
       <div style="padding-top: 10px">
-        <mat-checkbox [(ngModel)]="hasCar" color="primary"></mat-checkbox>
-        <h3 class="day">Czy posiadasz samochód (zaznacz jeżeli TAK)</h3>
-      </div>
-      <div style="padding-top: 20px">
-        <h2 class="header">Dni tygodnia</h2>
-        <div class="container">
-          <div class="day-container">
-            <mat-checkbox [(ngModel)]="monday.isChecked" color="primary"></mat-checkbox>
-            <h3 class="day">Poniedziałek</h3>
-          </div>
-          <hr style="width: 40%"/>
-          <div class="day-container">
-            <mat-checkbox [(ngModel)]="tuesday.isChecked" color="primary"></mat-checkbox>
-            <h3 class="day">Wtorek</h3>
-          </div>
-          <hr style="width: 40%"/>
-          <div class="day-container">
-            <mat-checkbox [(ngModel)]="wednesday.isChecked" color="primary"></mat-checkbox>
-            <h3 class="day">Środa</h3>
-          </div>
-          <hr style="width: 40%"/>
-          <div class="day-container">
-            <mat-checkbox [(ngModel)]="thursday.isChecked" color="primary"></mat-checkbox>
-            <h3 class="day">Czwartek</h3>
-          </div>
-          <hr style="width: 40%"/>
-          <div class="day-container">
-            <mat-checkbox [(ngModel)]="friday.isChecked" color="primary"></mat-checkbox>
-            <h3 class="day">Piątek</h3>
-          </div>
-          <hr style="width: 40%"/>
-          <div class="day-container">
-            <mat-checkbox [(ngModel)]="saturday.isChecked" color="primary"></mat-checkbox>
-            <h3 class="day">Sobota</h3>
-          </div>
-          <hr style="width: 40%"/>
-          <div class="day-container">
-            <mat-checkbox [(ngModel)]="sunday.isChecked" color="primary"></mat-checkbox>
-            <h3 class="day">Niedziela</h3>
-          </div>
-        </div>
+        <h2 style="margin-bottom: 0px">Czy posiadasz samochód?</h2>
+        <mat-button-toggle-group name="favoriteColor" aria-label="Favorite Color" [(ngModel)]="hasCar">
+          <mat-button-toggle [value]="true">Tak</mat-button-toggle>
+          <mat-button-toggle [value]="false">Nie</mat-button-toggle>
+        </mat-button-toggle-group>
       </div>
       <div style="padding-top: 20px">
         <div>
@@ -283,41 +247,6 @@
                 <mat-button-toggle [value]="true">Tak</mat-button-toggle>
                 <mat-button-toggle [value]="false">Nie</mat-button-toggle>
               </mat-button-toggle-group>
-            </div>
-            <h2 class="header">Dni tygodnia</h2>
-            <div class="day-container">
-              <mat-checkbox [(ngModel)]="monday.isChecked" color="primary"></mat-checkbox>
-              <h3 class="day">Poniedziałek</h3>
-            </div>
-            <hr/>
-            <div class="day-container">
-              <mat-checkbox [(ngModel)]="tuesday.isChecked" color="primary"></mat-checkbox>
-              <h3 class="day">Wtorek</h3>
-            </div>
-            <hr/>
-            <div class="day-container">
-              <mat-checkbox [(ngModel)]="wednesday.isChecked" color="primary"></mat-checkbox>
-              <h3 class="day">Środa</h3>
-            </div>
-            <hr/>
-            <div class="day-container">
-              <mat-checkbox [(ngModel)]="thursday.isChecked" color="primary"></mat-checkbox>
-              <h3 class="day">Czwartek</h3>
-            </div>
-            <hr/>
-            <div class="day-container">
-              <mat-checkbox [(ngModel)]="friday.isChecked" color="primary"></mat-checkbox>
-              <h3 class="day">Piątek</h3>
-            </div>
-            <hr/>
-            <div class="day-container">
-              <mat-checkbox [(ngModel)]="saturday.isChecked" color="primary"></mat-checkbox>
-              <h3 class="day">Sobota</h3>
-            </div>
-            <hr/>
-            <div class="day-container">
-              <mat-checkbox [(ngModel)]="sunday.isChecked" color="primary"></mat-checkbox>
-              <h3 class="day">Niedziela</h3>
             </div>
           </div>
           <div style="padding-top: 30px">
