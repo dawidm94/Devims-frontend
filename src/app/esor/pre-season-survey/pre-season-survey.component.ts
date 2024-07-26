@@ -73,6 +73,8 @@ export class PreSeasonSurveyComponent implements OnInit {
   topSecretCounter = 0;
   surveyPassword = '';
   topSecretPassword: any;
+  showErrMsg = false;
+  errorMsg: any;
 
   getPreSeasonSurveyData(): void {
     this.http.get<any>(this.baseUrl + 'esor/pre-season-survey?seasonId=' + environment.currentSeasonId, this.httpService.getOptionWithEsorToken()).subscribe({
@@ -167,6 +169,7 @@ export class PreSeasonSurveyComponent implements OnInit {
         console.log(err)
         this.isSending = false;
         this.sentWithError = true
+        this.errorMsg = err
       }
     })
   }
@@ -240,6 +243,10 @@ export class PreSeasonSurveyComponent implements OnInit {
 
   downloadAllSurveys() {
     this.fileService.downloadAllSurveys(btoa(this.topSecretPassword));
+  }
+
+  showErrorMsg() {
+    this.showErrMsg = true;
   }
 
   private prepareBlankSurveyData() {
