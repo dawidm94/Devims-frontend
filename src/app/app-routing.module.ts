@@ -19,6 +19,7 @@ import {
 import {PreSeasonSurveyComponent} from "./esor/pre-season-survey/pre-season-survey.component";
 import {PrivacyPolicyComponent} from "./privacy-policy/privacy-policy.component";
 import {MobileIconComponent} from "./esor/mobile-icon/mobile-icon.component";
+import {TestComponent} from "./esor/test/test.component";
 
 const routes: Routes = [
   {
@@ -30,6 +31,9 @@ const routes: Routes = [
   },
   {
     path: 'survey', component: PreSeasonSurveyComponent
+  },
+  {
+    path: 'test', component: TestComponent
   },
   {
     path: 'esor',

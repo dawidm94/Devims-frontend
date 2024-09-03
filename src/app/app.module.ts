@@ -61,6 +61,7 @@ import { MobileIconComponent } from './esor/mobile-icon/mobile-icon.component';
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatRadioModule} from "@angular/material/radio";
+import { TestComponent } from './esor/test/test.component';
 
 
 
@@ -88,7 +89,8 @@ import {MatRadioModule} from "@angular/material/radio";
     TimetableGeneralAdvancedComponent,
     PreSeasonSurveyComponent,
     PrivacyPolicyComponent,
-    MobileIconComponent
+    MobileIconComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,

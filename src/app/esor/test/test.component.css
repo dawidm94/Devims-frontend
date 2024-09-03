@@ -1,0 +1,30 @@
+.example-full-width {
+  width: 100%;
+}
+
+.example-radio-button {
+  margin: 15px
+}
+
+.example-card {
+  width: 700px;
+}
+.main-div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.font-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  column-gap: 10px;
+}
+
+.font-icon {
+  font-size: 40px;
+  padding-right: 20px;
+}
+
+
