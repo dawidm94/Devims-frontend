@@ -1,5 +1,27 @@
+export interface User {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+}
+
+export interface Question {
+  id: number;
+  question: string;
+  correctAnswer: boolean;
+}
+
+export interface Test {
+  question: Question;
+  user: User;
+  userAnswer: boolean;
+}
+
 import { Component, OnInit } from '@angular/core';
 import {interval, Subscription} from "rxjs";
+import {HttpClient} from "@angular/common/http";
+import {environment} from "../../../environments/environment";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-test',
@@ -11,33 +33,59 @@ export class TestComponent implements OnInit {
   public minutes: number = 2;
   public seconds: number = 0;
   public score: number = 0;
+  baseUrl = environment.baseURL
   isWelcomePage = true;
   isTestPage = false;
   isTestPreparation = true;
   isTimeUp = false;
   isTestFinished = false;
+  sentWithError = false;
   titleFontSize = 20;
   questionFontSize = 15;
   fontSizeChangeNo = 0;
   currentQuestionIndex = 0;
-  questions = [
-    {question:'Czy przewodniczący ma włosy?', correctAnswer: false, answer: null},
-    {question:'Czy Radek wrócił do picia?', correctAnswer: true, answer: null},
-    {question:'Czy Jasina spada do drugiego koszyka?', correctAnswer: true, answer: null},
-    {question:'Czy Agata przeczytała wszystkie maile na ks@slzkosz?', correctAnswer: true, answer: null},
-    {question:'Czy Sims jest upośledzony?', correctAnswer: true, answer: null},
-  ]
+  test: any;
+  questionsNo = 5 //25
+  correctAnswersToPass = 4; //17
+  myForm: FormGroup;
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder
+    ) {
+    this.myForm = this.fb.group({
+      firstName: ['', [Validators.required, Validators.minLength(3)]],
+      lastName: ['', [Validators.required, Validators.minLength(3)]],
+      email: ['', [Validators.required, Validators.email]]
+    });
+  }
 
   ngOnInit(): void {
   }
 
-  getQuestions() {
-    //pobiera z API pytania - w API sprawdzam czy ten mail ma juz wygenerowane pytania, jak tak to pobieram je, jak nie - to generuje.
-    this.isWelcomePage = false;
-    this.isTestPreparation = true;
-    this.isTestPage = true;
+  getTest() {
+    if (this.myForm.valid) {
+      this.http.post<any>(this.baseUrl + 'test/questions', this.myForm.value).subscribe({
+        next: test => {
+          this.test = test;
+          this.isWelcomePage = false;
+
+          if (this.testHasAnsweredQuestions()) {
+            this.finishAndSendTest();
+          } else {
+            this.isTestPreparation = true;
+            this.isTestPage = true;
+          }
+        },
+        error: err => {
+          this.sentWithError = true
+        }
+      })
+    }
+  }
+
+  testHasAnsweredQuestions() {
+    return this.test.some((question: { userAnswer: null; }) => question.userAnswer !== null);
   }
 
   fontIncrease() {
@@ -65,14 +113,17 @@ export class TestComponent implements OnInit {
     this.currentQuestionIndex += 1;
   }
 
-  finishTest() {
-    this.questions.forEach(question => {
-      if (question.answer == question.correctAnswer) {
-        this.score++;
+  finishAndSendTest() {
+    this.http.post<any>(this.baseUrl + 'test/resolve', this.test).subscribe({
+      next: () => {
+        this.finishTest();
+      },
+      error: err => {
+        console.log(err)
+        this.sentWithError = true
       }
     })
-    this.isTestPage = false;
-    this.isTestFinished = true;
+
   }
 
   startTimer(): void {
@@ -83,7 +134,7 @@ export class TestComponent implements OnInit {
           this.subscription.unsubscribe();
           if (!this.isTestFinished) {
             this.isTimeUp = true;
-            this.finishTest();
+            this.finishAndSendTest();
           }
         } else {
           this.minutes--;
@@ -95,11 +146,17 @@ export class TestComponent implements OnInit {
     });
   }
 
-  calculatePercent() {
-    return Math.floor((this.score / this.questions.length) * 100)
+  isTestPassed() {
+    return this.score >= this.correctAnswersToPass
   }
 
-  isTestPassed() {
-    return this.calculatePercent() >= 80;
+  private finishTest() {
+    this.test.forEach((question: Test) => {
+      if (question.userAnswer == question.question.correctAnswer) {
+        this.score++;
+      }
+    })
+    this.isTestPage = false;
+    this.isTestFinished = true;
   }
 }

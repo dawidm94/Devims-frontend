@@ -2,31 +2,49 @@
   <div *ngIf="isWelcomePage">
     <div>
       <h2>Witaj na teście przedsezonowym ŚLZKosz!</h2>
-      <h3>Za chwilę dostaniesz losowo wybrane 25 pytań. Aby zaliczyć test będziesz potrzebował 20 poprawnych odpowiedzi, czyli 80%.</h3>
-      <h3>Na wykonanie testu masz {{minutes}} minut{{minutes == 1 ? 'ę' : minutes < 5 ? 'y' : ''}}. Czas będzie odliczany na górze ekranu.</h3>
+      <h3>Za chwilę dostaniesz losowo wybrane <strong>{{questionsNo}}</strong> pyta{{questionsNo == 1 ? 'nie' : questionsNo < 5 ? 'nia' : 'ń'}}. Aby zaliczyć test będziesz potrzebował <strong>{{correctAnswersToPass}}</strong> poprawnych odpowiedzi.</h3>
+      <h3>Na wykonanie testu masz <strong>{{minutes}}</strong> minut{{minutes == 1 ? 'ę' : minutes < 5 ? 'y' : ''}}. Czas będzie odliczany na górze ekranu.</h3>
       <h3>Aby wygenerować Ci listę pytań, proszę o podanie imienia, nazwiska oraz adresu email.</h3>
       <h3>Po kliknięciu przycisku "dalej" <b><u>nie rozpoczniesz jeszcze testu.</u></b></h3>
 
     </div>
     <div style="padding: 20px;display: inline-block">
-      <form class="example-form">
+      <form [formGroup]="myForm" (ngSubmit)="getTest()" class="example-form">
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Imię</mat-label>
-          <input matInput placeholder="Imię">
+          <input matInput placeholder="Imię" formControlName="firstName">
+          <mat-error *ngIf="myForm.get('firstName')?.hasError('required')">
+            Imię jest wymagane
+          </mat-error>
+          <mat-error *ngIf="myForm.get('firstName')?.hasError('minlength')">
+            Imię musi mieć co najmniej 3 znaki
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Nazwisko</mat-label>
-          <input matInput placeholder="Nazwisko">
+          <input matInput placeholder="Nazwisko" formControlName="lastName">
+          <mat-error *ngIf="myForm.get('lastName')?.hasError('required')">
+            Nazwisko jest wymagane
+          </mat-error>
+          <mat-error *ngIf="myForm.get('lastName')?.hasError('minlength')">
+            Nazwisko musi mieć co najmniej 3 znaki
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field class="example-full-width" appearance="fill">
           <mat-label>Email</mat-label>
-          <input matInput placeholder="Email">
+          <input matInput placeholder="Email" formControlName="email">
+          <mat-error *ngIf="myForm.get('email')?.hasError('required')">
+            Email jest wymagany
+          </mat-error>
+          <mat-error *ngIf="myForm.get('email')?.hasError('email')">
+            Wprowadź poprawny email
+          </mat-error>
         </mat-form-field>
 
         <br/>
-        <button mat-stroked-button color="primary" (click)="getQuestions()">Dalej</button>
+        <button type="submit" mat-stroked-button color="primary">Dalej</button>
       </form>
     </div>
   </div>
@@ -37,8 +55,8 @@
       <mat-icon class="font-icon" (click)="fontIncrease()">text_increase</mat-icon>
     </div>
     <div style="padding-bottom: 20px">
-      Pytanie {{isTestPreparation ? 0 : currentQuestionIndex + 1}} z {{questions.length}}
-      <mat-progress-bar mode="determinate" [value]="isTestPreparation ? 40 : (currentQuestionIndex / questions.length) * 100"></mat-progress-bar>
+      Pytanie {{isTestPreparation ? 0 : currentQuestionIndex + 1}} z {{test.length}}
+      <mat-progress-bar mode="determinate" [value]="isTestPreparation ? 40 : (currentQuestionIndex / test.length) * 100"></mat-progress-bar>
     </div>
     <div class="main-div">
       <mat-card class="example-card">
@@ -47,8 +65,8 @@
           <mat-card-title *ngIf="!isTestPreparation" [ngStyle]="{'font-size': titleFontSize + fontSizeChangeNo +'px', 'line-height' : 1.25}">Pytanie nr {{currentQuestionIndex + 1}}</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <p *ngIf="isTestPreparation" [ngStyle]="{'font-size': questionFontSize + fontSizeChangeNo +'px', 'line-height' : 1.5}">Tutaj pojawi się Twoje pytanie. Czas jeszcze nie jest włączony. Na górze masz dwa przyciski do ustawienia odpowiedniego rozmiaru czcionki. Pytanie będzie znajdować się właśnie w tym miejscu. Ustaw taką wielkość, żebyś mógł wygodnie przeczytać pytanie. Wielkość zostanie zapamiętana do wszystkich kolejnych pytań. </p>
-          <p *ngIf="!isTestPreparation" [ngStyle]="{'font-size': questionFontSize + fontSizeChangeNo +'px', 'line-height' : 1.5}">{{questions[currentQuestionIndex].question}}</p>
+          <p *ngIf="isTestPreparation" [ngStyle]="{'font-size': questionFontSize + fontSizeChangeNo +'px', 'line-height' : 1.5}">Tutaj pojawi się Twoje pytanie. Czas jeszcze nie jest włączony. Na górze masz dwa przyciski do ustawienia odpowiedniego rozmiaru czcionki. Pytanie będzie znajdować się właśnie w tym miejscu. Ustaw taką wielkość, żebyś mógł wygodnie przeczytać pytanie. Wielkość zostanie zapamiętana do wszystkich kolejnych pytań. Pamiętaj, że będzie możliwość powrotu do poprzednich pytań przyciskiem na dole. </p>
+          <p *ngIf="!isTestPreparation" [ngStyle]="{'font-size': questionFontSize + fontSizeChangeNo +'px', 'line-height' : 1.5}">{{test[currentQuestionIndex].question.question}}</p>
         </mat-card-content>
         <mat-card-footer class="example-card-footer">
           <div *ngIf="isTestPreparation">
@@ -62,7 +80,7 @@
             </mat-radio-group>
           </div>
           <div *ngIf="!isTestPreparation">
-            <mat-radio-group class="example-radio-group" color="primary" [(ngModel)]="questions[currentQuestionIndex].answer">
+            <mat-radio-group class="example-radio-group" color="primary" [(ngModel)]="test[currentQuestionIndex].userAnswer">
               <mat-radio-button class="example-radio-button" [value]="true">
                 Tak
               </mat-radio-button>
@@ -78,8 +96,8 @@
     <div style="padding-top: 30px">
       <div *ngIf="!isTestPreparation">
         <button mat-raised-button style="margin-right: 20px" *ngIf="currentQuestionIndex > 0" (click)="previousQuestion()">Powrót</button>
-        <button mat-raised-button *ngIf="currentQuestionIndex < questions.length - 1" (click)="nextQuestion()">Dalej</button>
-        <button mat-raised-button *ngIf="currentQuestionIndex == questions.length - 1" (click)="finishTest()" color="primary">ZAKOŃCZ TEST</button>
+        <button mat-raised-button *ngIf="currentQuestionIndex < test.length - 1" (click)="nextQuestion()">Dalej</button>
+        <button mat-raised-button *ngIf="currentQuestionIndex == test.length - 1" (click)="finishAndSendTest()" color="primary">ZAKOŃCZ TEST</button>
       </div>
       <div *ngIf="isTestPreparation">
         <button mat-flat-button color="warn" (click)="startTest()">ROZPOCZNIJ TEST</button>
@@ -92,8 +110,7 @@
     </div>
     <div>
       <h2>Koniec testu!</h2>
-      <h3>Twój wynik to: {{score}}/{{questions.length}}</h3>
-      <h3>Daje to: {{calculatePercent()}}%</h3>
+      <h3>Twój wynik to: {{score}}/{{test.length}}</h3>
       <h2 *ngIf="isTestPassed()" style="color: green">Zdałeś, gratulujemy! :)</h2>
       <h2 *ngIf="!isTestPassed()" style="color: darkred">Niestety nie udało się zaliczyć testu.</h2>
     </div>
