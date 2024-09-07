@@ -1,7 +1,3 @@
-import {NavigationStart, Router} from "@angular/router";
-import { HostListener } from '@angular/core';
-import { Location } from '@angular/common';
-
 export interface User {
   id: number;
   firstName: string;
@@ -28,12 +24,10 @@ export interface Test {
 }
 
 import { Component, OnInit } from '@angular/core';
-import {filter, interval, Subscription} from "rxjs";
+import {interval, Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {MatDialog} from "@angular/material/dialog";
-import {TestBackDialogComponent} from "../test-back-dialog/test-back-dialog.component";
 
 @Component({
   selector: 'app-test',
@@ -42,7 +36,6 @@ import {TestBackDialogComponent} from "../test-back-dialog/test-back-dialog.comp
 })
 export class TestComponent implements OnInit {
   private subscription: Subscription = new Subscription();
-  private isNavigatingBack: boolean = false;
   public minutes: number = 30;
   public seconds: number = 0;
   public score: number = 0;
@@ -65,10 +58,7 @@ export class TestComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private fb: FormBuilder,
-    private location: Location,
-    private router: Router,
-    public dialog: MatDialog
+    private fb: FormBuilder
     ) {
     this.myForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
@@ -78,39 +68,7 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Subskrybuj zmiany w nawigacji, zwłaszcza zdarzenie "NavigationStart"
-    this.router.events
-      .pipe(
-        filter(event => event instanceof NavigationStart) // Filtrowanie tylko NavigationStart
-      )
-      .subscribe((event: any) => {
-        // Sprawdź, czy to jest nawigacja wstecz
-        if (event.navigationTrigger === 'popstate' && !this.isNavigatingBack) {
-          // Zatrzymaj nawigację poprzez ponowne nawigowanie na obecną stronę
-          this.router.navigateByUrl(this.router.url);
-
-          // Otwórz modal z potwierdzeniem
-          this.openConfirmationDialog();
-        }
-      });
   }
-
-  // Sprawdzamy, czy zdarzenie to próba cofnięcia się
-  isBackNavigation(event: any): boolean {
-    return event.restoredState && event.navigationTrigger === 'popstate';
-  }
-
-  // Otwórz modal z potwierdzeniem
-  openConfirmationDialog(): void {
-    const dialogRef = this.dialog.open(TestBackDialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'yes') {
-        this.location.back();
-      }
-    });
-  }
-
 
   getTest() {
     if (this.myForm.valid) {
