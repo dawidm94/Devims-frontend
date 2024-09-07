@@ -23,7 +23,7 @@ export interface Test {
   answers: Answer[]
 }
 
-import { Component, OnInit } from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {interval, Subscription} from "rxjs";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
@@ -68,6 +68,13 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  unloadNotification($event: any): void {
+    if (!this.isWelcomePage && !this.isTestFinished) {
+      $event.returnValue = true;
+    }
   }
 
   getTest() {
