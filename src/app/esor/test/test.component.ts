@@ -78,6 +78,8 @@ export class TestComponent implements OnInit {
           this.test = test;
           this.isWelcomePage = false;
 
+          this.loadAnswersFromLocalStorage();
+
           if (this.test.finishedDateTime || this.isTimeExpired()) {
             this.finishAndSendTest();
             this.isGettingQuestions = false
@@ -207,5 +209,28 @@ export class TestComponent implements OnInit {
     })
     this.isTestPage = false;
     this.isTestFinished = true;
+
+    localStorage.removeItem('testAnswers');
+  }
+
+  saveAnswersToLocalStorage() {
+    const answers = this.test.answers.map((answer: Answer) => ({
+      id: answer.id,
+      userAnswer: answer.userAnswer
+    }));
+    localStorage.setItem('testAnswers', JSON.stringify(answers));
+  }
+
+  loadAnswersFromLocalStorage() {
+    const savedAnswers = localStorage.getItem('testAnswers');
+    if (savedAnswers) {
+      const parsedAnswers = JSON.parse(savedAnswers);
+      parsedAnswers.forEach((savedAnswer: { id: number, userAnswer: boolean }) => {
+        const answer = this.test.answers.find((a: Answer) => a.id === savedAnswer.id);
+        if (answer) {
+          answer.userAnswer = savedAnswer.userAnswer;
+        }
+      });
+    }
   }
 }
