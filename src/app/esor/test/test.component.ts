@@ -78,13 +78,19 @@ export class TestComponent implements OnInit {
           this.test = test;
           this.isWelcomePage = false;
 
-          if (this.testHasAnsweredQuestions()) {
+          if (this.test.finishedDateTime || this.isTimeExpired()) {
             this.finishAndSendTest();
             this.isGettingQuestions = false
           } else {
-            this.isTestPreparation = true;
             this.isTestPage = true;
             this.isGettingQuestions = false
+
+            if (this.test.startTestDateTime) {
+              this.runLeftTimeInTimer();
+              this.isTestPreparation = false;
+            } else {
+              this.isTestPreparation = true;
+            }
           }
         },
         error: err => {
@@ -94,8 +100,30 @@ export class TestComponent implements OnInit {
     }
   }
 
-  testHasAnsweredQuestions() {
-    return this.test.answers.some((question: { userAnswer: null; }) => question.userAnswer !== null);
+  runLeftTimeInTimer() {
+    const createDate = new Date(this.test.startTestDateTime);
+    const now = new Date();
+    const diffInMilliseconds = now.getTime() - createDate.getTime();
+    const diffInMinutes = diffInMilliseconds / (1000 * 60);
+    const diffInSeconds = diffInMilliseconds / 1000;
+    const minutesLeft = Math.floor(30 - diffInMinutes);
+    const secondsLeft = Math.floor((30 * 60) - diffInSeconds) % 60;
+
+    this.minutes = minutesLeft;
+    this.seconds = secondsLeft;
+
+    this.startTimer();
+  }
+
+  isTimeExpired() {
+    if (!this.test.startTestDateTime) {
+      return;
+    }
+    const createDate = new Date(this.test.startTestDateTime);
+    const now = new Date();
+    const diffInMilliseconds = now.getTime() - createDate.getTime();
+    const diffInMinutes = diffInMilliseconds / (1000 * 60);
+    return diffInMinutes > this.minutes;
   }
 
   fontIncrease() {
@@ -112,7 +140,18 @@ export class TestComponent implements OnInit {
 
   startTest() {
     this.isTestPreparation = false;
-    this.startTimer();
+    if (!this.test.startTestDateTime) {
+      this.startTimer();
+
+      this.http.get<any>(this.baseUrl + 'test/start?email=' + this.test.user.email).subscribe({
+        next: () => {
+        },
+        error: err => {
+          console.log(err)
+          this.sentWithError = true
+        }
+      })
+    }
   }
 
   previousQuestion() {
