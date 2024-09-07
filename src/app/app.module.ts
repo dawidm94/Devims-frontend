@@ -62,6 +62,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatRadioModule} from "@angular/material/radio";
 import { TestComponent } from './esor/test/test.component';
+import { TestBackDialogComponent } from './esor/test-back-dialog/test-back-dialog.component';
 
 
 
@@ -90,7 +91,8 @@ import { TestComponent } from './esor/test/test.component';
     PreSeasonSurveyComponent,
     PrivacyPolicyComponent,
     MobileIconComponent,
-    TestComponent
+    TestComponent,
+    TestBackDialogComponent
   ],
   imports: [
     BrowserModule,
