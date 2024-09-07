@@ -5,6 +5,12 @@ export interface User {
   email: string;
 }
 
+export interface Answer {
+  id: number;
+  question: Question;
+  userAnswer: boolean;
+}
+
 export interface Question {
   id: number;
   question: string;
@@ -14,7 +20,7 @@ export interface Question {
 export interface Test {
   question: Question;
   user: User;
-  userAnswer: boolean;
+  answers: Answer[]
 }
 
 import { Component, OnInit } from '@angular/core';
@@ -30,11 +36,12 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class TestComponent implements OnInit {
   private subscription: Subscription = new Subscription();
-  public minutes: number = 2;
+  public minutes: number = 30;
   public seconds: number = 0;
   public score: number = 0;
   baseUrl = environment.baseURL
   isWelcomePage = true;
+  isGettingQuestions = false
   isTestPage = false;
   isTestPreparation = true;
   isTimeUp = false;
@@ -45,8 +52,8 @@ export class TestComponent implements OnInit {
   fontSizeChangeNo = 0;
   currentQuestionIndex = 0;
   test: any;
-  questionsNo = 5 //25
-  correctAnswersToPass = 4; //17
+  questionsNo = 25
+  correctAnswersToPass = 17;
   myForm: FormGroup;
 
   constructor(
@@ -65,6 +72,7 @@ export class TestComponent implements OnInit {
 
   getTest() {
     if (this.myForm.valid) {
+      this.isGettingQuestions = true
       this.http.post<any>(this.baseUrl + 'test/questions', this.myForm.value).subscribe({
         next: test => {
           this.test = test;
@@ -72,9 +80,11 @@ export class TestComponent implements OnInit {
 
           if (this.testHasAnsweredQuestions()) {
             this.finishAndSendTest();
+            this.isGettingQuestions = false
           } else {
             this.isTestPreparation = true;
             this.isTestPage = true;
+            this.isGettingQuestions = false
           }
         },
         error: err => {
@@ -85,7 +95,7 @@ export class TestComponent implements OnInit {
   }
 
   testHasAnsweredQuestions() {
-    return this.test.some((question: { userAnswer: null; }) => question.userAnswer !== null);
+    return this.test.answers.some((question: { userAnswer: null; }) => question.userAnswer !== null);
   }
 
   fontIncrease() {
@@ -151,8 +161,8 @@ export class TestComponent implements OnInit {
   }
 
   private finishTest() {
-    this.test.forEach((question: Test) => {
-      if (question.userAnswer == question.question.correctAnswer) {
+    this.test.answers.forEach((answer: Answer) => {
+      if (answer.userAnswer == answer.question.correctAnswer) {
         this.score++;
       }
     })
