@@ -36,7 +36,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class TestComponent implements OnInit {
   private subscription: Subscription = new Subscription();
-  public minutes: number = 30;
+  public minutes: number = 25;
   public seconds: number = 0;
   public score: number = 0;
   baseUrl = environment.baseURL
@@ -115,8 +115,8 @@ export class TestComponent implements OnInit {
     const diffInMilliseconds = now.getTime() - createDate.getTime();
     const diffInMinutes = diffInMilliseconds / (1000 * 60);
     const diffInSeconds = diffInMilliseconds / 1000;
-    const minutesLeft = Math.floor(30 - diffInMinutes);
-    const secondsLeft = Math.floor((30 * 60) - diffInSeconds) % 60;
+    const minutesLeft = Math.floor(this.minutes - diffInMinutes);
+    const secondsLeft = Math.floor((this.minutes * 60) - diffInSeconds) % 60;
 
     this.minutes = minutesLeft;
     this.seconds = secondsLeft;
