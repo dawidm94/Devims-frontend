@@ -31,7 +31,7 @@
   <div style="text-align: center">
     <div *ngIf="isWelcomePage">
       <div>
-        <h2>Witaj na teście: ,,{{test.name}}"!</h2>
+        <h1 style="font-weight: bold">{{test.name}}</h1>
         <h3>Za chwilę dostaniesz losowo wybrane <strong>{{test.questionsNoInSingleTest}}</strong> pyta{{test.questionsNoInSingleTest == 1 ? 'nie' : test.questionsNoInSingleTest < 5 ? 'nia' : 'ń'}}. Aby zaliczyć test będziesz potrzebował <strong>{{test.questionsNoToPass}}</strong> {{test.questionsNoToPass == 1 ? 'poprawną odpowiedź' : test.questionsNoToPass < 5 ? 'poprawne odpowiedzi' : 'poprawnych odpowiedzi'}}.</h3>
         <h3>Na wykonanie testu masz <strong>{{minutes}}</strong> minut{{minutes == 1 ? 'ę' : minutes < 5 ? 'y' : ''}}. Czas będzie odliczany na górze ekranu.</h3>
         <h3>Aby wygenerować Ci listę pytań, proszę o podanie imienia, nazwiska oraz adresu email.</h3>
