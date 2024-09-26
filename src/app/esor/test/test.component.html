@@ -30,9 +30,9 @@
 <div *ngIf="testId">
   <div style="text-align: center">
     <div *ngIf="isWelcomePage">
-      <div *ngIf="isLoadTestErr" style="font-weight: bold; color: red">
-        <h1 *ngIf="!isTestActive">Test nie jest aktywny.</h1>
-        <h1 *ngIf="!isTestExist">Nie ma takiego testu.</h1>
+      <div *ngIf="isLoadTestErr" style="color: red">
+        <h1 *ngIf="!isTestActive" style="font-weight: bold">Test nie jest aktywny.</h1>
+        <h1 *ngIf="!isTestExist" style="font-weight: bold">Nie ma takiego testu.</h1>
       </div>
       <div *ngIf="!isLoadTestErr">
         <div>
