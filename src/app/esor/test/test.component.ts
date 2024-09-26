@@ -55,6 +55,9 @@ export class TestComponent implements OnInit {
   fontSizeChangeNo = 0;
   currentQuestionIndex = 0;
   test: any;
+  isTestExist = true;
+  isTestActive = true;
+  isLoadTestErr = false;
   availableTests: any;
   userTest: any;
   testId: any;
@@ -259,10 +262,20 @@ export class TestComponent implements OnInit {
   private getTest(testId: any) {
     this.http.get<any>(this.baseUrl + 'test/' + testId).subscribe({
       next: test => {
+        console.log(test)
         this.test = test;
-        this.minutes = test.minutesToResolve;
+        if (test) {
+          this.minutes = test.minutesToResolve;
+        }
       },
       error: err => {
+        this.isLoadTestErr = true;
+        if (err.status == 404) {
+          this.isTestExist = false;
+        }
+        if (err.status == 403) {
+          this.isTestActive = false;
+        }
         console.log(err)
       }
     })

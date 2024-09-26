@@ -30,55 +30,61 @@
 <div *ngIf="testId">
   <div style="text-align: center">
     <div *ngIf="isWelcomePage">
-      <div>
-        <h1 style="font-weight: bold">{{test.name}}</h1>
-        <h3>Za chwilę dostaniesz losowo wybrane <strong>{{test.questionsNoInSingleTest}}</strong> pyta{{test.questionsNoInSingleTest == 1 ? 'nie' : test.questionsNoInSingleTest < 5 ? 'nia' : 'ń'}}. Aby zaliczyć test będziesz potrzebował <strong>{{test.questionsNoToPass}}</strong> {{test.questionsNoToPass == 1 ? 'poprawną odpowiedź' : test.questionsNoToPass < 5 ? 'poprawne odpowiedzi' : 'poprawnych odpowiedzi'}}.</h3>
-        <h3>Na wykonanie testu masz <strong>{{minutes}}</strong> minut{{minutes == 1 ? 'ę' : minutes < 5 ? 'y' : ''}}. Czas będzie odliczany na górze ekranu.</h3>
-        <h3>Aby wygenerować Ci listę pytań, proszę o podanie imienia, nazwiska oraz adresu email.</h3>
-        <h3>Po kliknięciu przycisku "dalej" <b><u>nie rozpoczniesz jeszcze testu.</u></b></h3>
-
+      <div *ngIf="isLoadTestErr" style="font-weight: bold; color: red">
+        <h1 *ngIf="!isTestActive">Test nie jest aktywny.</h1>
+        <h1 *ngIf="!isTestExist">Nie ma takiego testu.</h1>
       </div>
-      <div style="padding: 20px;display: inline-block">
-        <form [formGroup]="myForm" (ngSubmit)="getUserTest()" class="example-form">
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Imię</mat-label>
-            <input matInput placeholder="Imię" formControlName="firstName">
-            <mat-error *ngIf="myForm.get('firstName')?.hasError('required')">
-              Imię jest wymagane
-            </mat-error>
-            <mat-error *ngIf="myForm.get('firstName')?.hasError('minlength')">
-              Imię musi mieć co najmniej 3 znaki
-            </mat-error>
-          </mat-form-field>
+      <div *ngIf="!isLoadTestErr">
+        <div>
+          <h1 style="font-weight: bold">{{test.name}}</h1>
+          <h3>Za chwilę dostaniesz losowo wybrane <strong>{{test.questionsNoInSingleTest}}</strong> pyta{{test.questionsNoInSingleTest == 1 ? 'nie' : test.questionsNoInSingleTest < 5 ? 'nia' : 'ń'}}. Aby zaliczyć test będziesz potrzebował <strong>{{test.questionsNoToPass}}</strong> {{test.questionsNoToPass == 1 ? 'poprawną odpowiedź' : test.questionsNoToPass < 5 ? 'poprawne odpowiedzi' : 'poprawnych odpowiedzi'}}.</h3>
+          <h3>Na wykonanie testu masz <strong>{{minutes}}</strong> minut{{minutes == 1 ? 'ę' : minutes < 5 ? 'y' : ''}}. Czas będzie odliczany na górze ekranu.</h3>
+          <h3>Aby wygenerować Ci listę pytań, proszę o podanie imienia, nazwiska oraz adresu email.</h3>
+          <h3>Po kliknięciu przycisku "dalej" <b><u>nie rozpoczniesz jeszcze testu.</u></b></h3>
 
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Nazwisko</mat-label>
-            <input matInput placeholder="Nazwisko" formControlName="lastName">
-            <mat-error *ngIf="myForm.get('lastName')?.hasError('required')">
-              Nazwisko jest wymagane
-            </mat-error>
-            <mat-error *ngIf="myForm.get('lastName')?.hasError('minlength')">
-              Nazwisko musi mieć co najmniej 3 znaki
-            </mat-error>
-          </mat-form-field>
+        </div>
+        <div style="padding: 20px;display: inline-block">
+          <form [formGroup]="myForm" (ngSubmit)="getUserTest()" class="example-form">
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Imię</mat-label>
+              <input matInput placeholder="Imię" formControlName="firstName">
+              <mat-error *ngIf="myForm.get('firstName')?.hasError('required')">
+                Imię jest wymagane
+              </mat-error>
+              <mat-error *ngIf="myForm.get('firstName')?.hasError('minlength')">
+                Imię musi mieć co najmniej 3 znaki
+              </mat-error>
+            </mat-form-field>
 
-          <mat-form-field class="example-full-width" appearance="fill">
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="Email" formControlName="email">
-            <mat-error *ngIf="myForm.get('email')?.hasError('required')">
-              Email jest wymagany
-            </mat-error>
-            <mat-error *ngIf="myForm.get('email')?.hasError('email')">
-              Wprowadź poprawny email
-            </mat-error>
-          </mat-form-field>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Nazwisko</mat-label>
+              <input matInput placeholder="Nazwisko" formControlName="lastName">
+              <mat-error *ngIf="myForm.get('lastName')?.hasError('required')">
+                Nazwisko jest wymagane
+              </mat-error>
+              <mat-error *ngIf="myForm.get('lastName')?.hasError('minlength')">
+                Nazwisko musi mieć co najmniej 3 znaki
+              </mat-error>
+            </mat-form-field>
 
-          <br/>
-          <button type="submit" mat-stroked-button color="primary" [disabled]="isGettingQuestions">
-            <mat-icon *ngIf="isGettingQuestions"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
-            {{isGettingQuestions ? 'Pobieram pytania' :'Dalej'}}
-          </button>
-        </form>
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" formControlName="email">
+              <mat-error *ngIf="myForm.get('email')?.hasError('required')">
+                Email jest wymagany
+              </mat-error>
+              <mat-error *ngIf="myForm.get('email')?.hasError('email')">
+                Wprowadź poprawny email
+              </mat-error>
+            </mat-form-field>
+
+            <br/>
+            <button type="submit" mat-stroked-button color="primary" [disabled]="isGettingQuestions">
+              <mat-icon *ngIf="isGettingQuestions"><mat-spinner color="primary" diameter="20"></mat-spinner></mat-icon>
+              {{isGettingQuestions ? 'Pobieram pytania' :'Dalej'}}
+            </button>
+          </form>
+        </div>
       </div>
     </div>
     <div *ngIf="isTestPage">
