@@ -1,7 +1,10 @@
 <div *ngIf="!testId">
   <div style="text-align: center">
     <h2>Wybierz test, który chcesz rozwiązać:</h2>
-    <div class="centered-table-wrapper">
+    <div *ngIf="availableTests === undefined || availableTests.length == 0">
+      <h1 style="color:red; font-weight: bold;">Brak aktywnych testów</h1>
+    </div>
+    <div *ngIf="availableTests != undefined && availableTests.length > 0" class="centered-table-wrapper">
       <table mat-table [dataSource]="availableTests"  class="mat-elevation-z8" [style]="isMobile ? 'width: 100%': 'width: 50%'">
         <ng-container matColumnDef="name">
           <th mat-header-cell *matHeaderCellDef> Nazwa </th>
