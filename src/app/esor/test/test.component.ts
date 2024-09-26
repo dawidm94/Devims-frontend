@@ -1,3 +1,5 @@
+import {ActivatedRoute, Router} from "@angular/router";
+
 export interface User {
   id: number;
   firstName: string;
@@ -36,10 +38,11 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 })
 export class TestComponent implements OnInit {
   private subscription: Subscription = new Subscription();
-  public minutes: number = 25;
+  public minutes: number = 0;
   public seconds: number = 0;
   public score: number = 0;
   baseUrl = environment.baseURL
+  isMobile = window.screen.width < 900
   isWelcomePage = true;
   isGettingQuestions = false
   isTestPage = false;
@@ -52,13 +55,18 @@ export class TestComponent implements OnInit {
   fontSizeChangeNo = 0;
   currentQuestionIndex = 0;
   test: any;
-  questionsNo = 25
-  correctAnswersToPass = 17;
+  availableTests: any;
+  userTest: any;
+  testId: any;
   myForm: FormGroup;
+  displayedColumns: string[] = this.isMobile ? ['name'] : ['name', 'activateFrom', 'activateTo'];
+
 
   constructor(
     private http: HttpClient,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router
     ) {
     this.myForm = this.fb.group({
       firstName: ['', [Validators.required, Validators.minLength(3)]],
@@ -68,6 +76,14 @@ export class TestComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const routeParams = this.route.snapshot.paramMap;
+    this.testId = routeParams.get('testId')
+
+    if (this.testId) {
+        this.getTest(this.testId);
+    } else {
+      this.getAvailableTests();
+    }
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -77,24 +93,24 @@ export class TestComponent implements OnInit {
     }
   }
 
-  getTest() {
+  getUserTest() {
     if (this.myForm.valid) {
       this.isGettingQuestions = true
-      this.http.post<any>(this.baseUrl + 'test/questions', this.myForm.value).subscribe({
+      this.http.post<any>(this.baseUrl + 'test/questions/' + this.testId, this.myForm.value).subscribe({
         next: test => {
-          this.test = test;
+          this.userTest = test;
           this.isWelcomePage = false;
 
           this.loadAnswersFromLocalStorage();
 
-          if (this.test.finishedDateTime || this.isTimeExpired()) {
+          if (this.userTest.finishedDateTime || this.isTimeExpired()) {
             this.finishAndSendTest();
             this.isGettingQuestions = false
           } else {
             this.isTestPage = true;
             this.isGettingQuestions = false
 
-            if (this.test.startTestDateTime) {
+            if (this.userTest.startTestDateTime) {
               this.runLeftTimeInTimer();
               this.isTestPreparation = false;
             } else {
@@ -110,7 +126,7 @@ export class TestComponent implements OnInit {
   }
 
   runLeftTimeInTimer() {
-    const createDate = new Date(this.test.startTestDateTime);
+    const createDate = new Date(this.userTest.startTestDateTime);
     const now = new Date();
     const diffInMilliseconds = now.getTime() - createDate.getTime();
     const diffInMinutes = diffInMilliseconds / (1000 * 60);
@@ -125,10 +141,10 @@ export class TestComponent implements OnInit {
   }
 
   isTimeExpired() {
-    if (!this.test.startTestDateTime) {
+    if (!this.userTest.startTestDateTime) {
       return;
     }
-    const createDate = new Date(this.test.startTestDateTime);
+    const createDate = new Date(this.userTest.startTestDateTime);
     const now = new Date();
     const diffInMilliseconds = now.getTime() - createDate.getTime();
     const diffInMinutes = diffInMilliseconds / (1000 * 60);
@@ -149,10 +165,10 @@ export class TestComponent implements OnInit {
 
   startTest() {
     this.isTestPreparation = false;
-    if (!this.test.startTestDateTime) {
+    if (!this.userTest.startTestDateTime) {
       this.startTimer();
 
-      this.http.get<any>(this.baseUrl + 'test/start?email=' + this.test.user.email).subscribe({
+      this.http.get<any>(this.baseUrl + 'test/start/' + this.testId + '?email=' + this.userTest.user.email).subscribe({
         next: () => {
         },
         error: err => {
@@ -172,7 +188,7 @@ export class TestComponent implements OnInit {
   }
 
   finishAndSendTest() {
-    this.http.post<any>(this.baseUrl + 'test/resolve', this.test).subscribe({
+    this.http.post<any>(this.baseUrl + 'test/resolve', this.userTest).subscribe({
       next: () => {
         this.finishTest();
       },
@@ -181,7 +197,6 @@ export class TestComponent implements OnInit {
         this.sentWithError = true
       }
     })
-
   }
 
   startTimer(): void {
@@ -205,11 +220,11 @@ export class TestComponent implements OnInit {
   }
 
   isTestPassed() {
-    return this.score >= this.correctAnswersToPass
+    return this.score >= this.test.questionsNoToPass
   }
 
   private finishTest() {
-    this.test.answers.forEach((answer: Answer) => {
+    this.userTest.answers.forEach((answer: Answer) => {
       if (answer.userAnswer == answer.question.correctAnswer) {
         this.score++;
       }
@@ -221,7 +236,7 @@ export class TestComponent implements OnInit {
   }
 
   saveAnswersToLocalStorage() {
-    const answers = this.test.answers.map((answer: Answer) => ({
+    const answers = this.userTest.answers.map((answer: Answer) => ({
       id: answer.id,
       userAnswer: answer.userAnswer
     }));
@@ -233,11 +248,38 @@ export class TestComponent implements OnInit {
     if (savedAnswers) {
       const parsedAnswers = JSON.parse(savedAnswers);
       parsedAnswers.forEach((savedAnswer: { id: number, userAnswer: boolean }) => {
-        const answer = this.test.answers.find((a: Answer) => a.id === savedAnswer.id);
+        const answer = this.userTest.answers.find((a: Answer) => a.id === savedAnswer.id);
         if (answer) {
           answer.userAnswer = savedAnswer.userAnswer;
         }
       });
     }
+  }
+
+  private getTest(testId: any) {
+    this.http.get<any>(this.baseUrl + 'test/' + testId).subscribe({
+      next: test => {
+        this.test = test;
+        this.minutes = test.minutesToResolve;
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
+  }
+
+  private getAvailableTests() {
+    this.http.get<any>(this.baseUrl + 'test/available').subscribe({
+      next: tests => {
+        this.availableTests = tests;
+      },
+      error: err => {
+        console.log(err)
+      }
+    })
+  }
+
+  chooseTest(row: any) {
+    this.router.navigate(['/test/' + row.id])
   }
 }

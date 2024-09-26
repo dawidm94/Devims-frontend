@@ -27,4 +27,20 @@
   padding-right: 20px;
 }
 
+.centered-table-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
 
+.mat-row .mat-cell {
+  cursor: pointer;
+}
+
+.mat-row:hover {
+  background: whitesmoke;
+}
+
+.mat-header-cell {
+  text-align: center;
+}
