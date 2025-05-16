@@ -87,12 +87,11 @@ export class EsorComponent implements OnInit {
   }
 
   checkIfEsorTokenIsValid(): boolean {
-    let esorToken = sessionStorage.getItem('esorToken') as string
+    let esorToken = localStorage.getItem('jwt') as string
 
     if (esorToken) {
-      let headers = new HttpHeaders({'Esor-Token': esorToken });
 
-      this.http.get<any>(this.baseUrl + 'esor/me', {headers: headers}).subscribe({
+      this.http.get<any>(this.baseUrl + 'esor/me').subscribe({
         next: response => {
           this.loggedIn = true;
           this.username = response.username
@@ -110,19 +109,15 @@ export class EsorComponent implements OnInit {
   }
 
   updateSeasonId(esorToken: string): void {
-    let headers = new HttpHeaders({'Esor-Token': esorToken });
-    this.http.get<any>(this.baseUrl + 'esor/seasons/current', {headers: headers}).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/seasons/current').subscribe({
       next: season => {sessionStorage.setItem('seasonId', season.id)},
       error: err => {console.log(err)}
     })
   }
 
   dontShowMobileIconHint(): void {
-    let esorToken = sessionStorage.getItem('esorToken') as string
     this.temporaryHiddenMobileIcon = true;
-
-    let headers = new HttpHeaders({'Esor-Token': esorToken });
-    this.http.get<any>(this.baseUrl + 'esor/mobile-icon-hint', {headers: headers}).subscribe({})
+    this.http.get<any>(this.baseUrl + 'esor/mobile-icon-hint').subscribe({})
   }
 
   openLoginDialog(): void {
@@ -136,7 +131,7 @@ export class EsorComponent implements OnInit {
   }
 
   logout() {
-    sessionStorage.removeItem('esorToken')
+    localStorage.removeItem('jwt')
     this.router.navigate((['/esor']))
     window.location.reload();
   }
@@ -147,7 +142,7 @@ export class EsorComponent implements OnInit {
 
   downloadBlankDelegation() {
     this.isBlankDelegationDownloading = true;
-    this.http.get<any>(this.baseUrl + 'esor/blankets', this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/blankets').subscribe({
       next: response => {
         let url = this.baseUrl + response[0].blanketLink.replace('/api', 'esor');
         this.fileService.downloadBlankDelegation(url, response[0].name);

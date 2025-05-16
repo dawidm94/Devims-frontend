@@ -68,7 +68,7 @@ export class TimetableGeneralAdvancedComponent implements OnInit {
   }
 
   getSeasons(): void {
-    this.http.get<any>(this.baseUrl + 'esor/seasons', this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/seasons').subscribe({
       next: response => {
         let seasons = response.reverse();
         let firstEsorSeasonIndex = seasons.findIndex((x: { id: number; }) => x.id == this.firstEsorSeasonId)

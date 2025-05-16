@@ -77,7 +77,7 @@ export class PreSeasonSurveyComponent implements OnInit {
   errorMsg: any;
 
   getPreSeasonSurveyData(): void {
-    this.http.get<any>(this.baseUrl + 'esor/pre-season-survey?seasonId=' + environment.currentSeasonId, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/pre-season-survey?seasonId=' + environment.currentSeasonId).subscribe({
       next: (response) => {
         this.surveyData = response;
         this.fillFields(response);
@@ -160,7 +160,7 @@ export class PreSeasonSurveyComponent implements OnInit {
 
     request.seasonId = environment.currentSeasonId;
 
-    this.http.put<any>(this.baseUrl + 'esor/pre-season-survey', request, this.isLoggedIn ? this.httpService.getOptionWithEsorToken() : {}).subscribe({
+    this.http.put<any>(this.baseUrl + 'esor/pre-season-survey', request).subscribe({
       next: () => {
         this.sentSuccessfully = true;
         this.isSending = false;

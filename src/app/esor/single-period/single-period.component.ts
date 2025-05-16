@@ -68,7 +68,7 @@ export class SinglePeriodComponent implements OnInit {
   }
 
   private sendPeriods(request: PeriodRequest) {
-    this.http.post<any>(this.baseUrl + 'esor/periods', request, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.post<any>(this.baseUrl + 'esor/periods', request).subscribe({
       next: () => {
         this.sentSuccessfully = true;
         this.isSending = false;

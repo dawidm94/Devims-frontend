@@ -38,10 +38,10 @@ export class LogInDialogComponent {
 
     setTimeout(() => this.isSlowLogging = true, 4000)
 
-    this.http.post(this.baseUrl + 'esor/login', {login: this.username, password: this.password}, { responseType: 'text' as 'text' })
+    this.http.post(this.baseUrl + 'auth/login', {login: this.username, password: this.password}, { responseType: 'text' as 'text' })
       .subscribe({
         next: token => {
-          sessionStorage.setItem('esorToken', token);
+          localStorage.setItem('jwt', token);
           this.isLoginError = false;
           this.isLogging = false;
           this.dialogRef.close()

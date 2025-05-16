@@ -124,7 +124,7 @@ export class AcceptNominationDialogComponent implements OnInit {
   }
 
   private sendNomination(request: ConfirmedNomination) {
-    this.http.post<any>(this.baseUrl + 'esor/nominations/' + this.matchId + '/confirm', request, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.post<any>(this.baseUrl + 'esor/nominations/' + this.matchId + '/confirm', request).subscribe({
       next: () => {
         this.isAccepted = true;
       },

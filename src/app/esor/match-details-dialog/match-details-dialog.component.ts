@@ -25,7 +25,7 @@ export class MatchDetailsDialogComponent implements OnInit {
   }
 
   showMatchDetails(matchId: number) {
-    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId).subscribe({
       next: response => {
         this.matchDetails = response
 

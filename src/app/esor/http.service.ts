@@ -11,33 +11,16 @@ export class HttpService {
 
   constructor() { }
 
-  getOptionWithEsorToken() {
-    let esorToken = sessionStorage.getItem('esorToken') as string
-    let headers = new HttpHeaders({'Esor-Token': esorToken});
-
-    return {headers: headers};
-  }
-
-  getOptionWithEsorTokenAndContentTypeJson() {
-    let esorToken = sessionStorage.getItem('esorToken') as string
-    let headers = new HttpHeaders({'Esor-Token': esorToken}).set('Content-Type','application/json');
-
-    return {headers: headers};
-  }
-
   getOptionWithEsorTokenWithBlobAsJsonResponseType() {
     let optionsWithSeasonId = this.getOptionsWithSeasonId();
 
-    return {headers: optionsWithSeasonId.headers, params: optionsWithSeasonId.params, responseType: 'blob' as 'json'};
+    return {params: optionsWithSeasonId.params, responseType: 'blob' as 'json'};
   }
 
   getOptionsWithSeasonId() {
-    let esorToken = sessionStorage.getItem('esorToken') as string
-
-    let headers = new HttpHeaders({'Esor-Token': esorToken});
     let params = this.getHttpParamsWithSeasonId();
 
-    return {headers: headers, params: params}
+    return {params: params}
   }
 
   private getHttpParamsWithSeasonId() {
@@ -55,10 +38,7 @@ export class HttpService {
   }
 
   getOptionWithCustomParams(customParams: HttpParams) {
-    let esorToken = sessionStorage.getItem('esorToken') as string
-    let headers = new HttpHeaders({'Esor-Token': esorToken});
-
-    return {headers: headers, params: customParams};
+    return {params: customParams};
   }
 
   getOptionWithSeasonIdAndCustomParams(params: HttpParams) {

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import {BrowserModule, Meta} from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -62,6 +62,8 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatButtonToggleModule} from "@angular/material/button-toggle";
 import {MatRadioModule} from "@angular/material/radio";
 import { TestComponent } from './esor/test/test.component';
+import {JwtInterceptor} from "./config/interceptor/jwt.interceptor";
+import {AuthInterceptor} from "./config/interceptor/auth.interceptor";
 
 
 
@@ -133,6 +135,8 @@ import { TestComponent } from './esor/test/test.component';
     { provide: MAT_DATE_LOCALE, useValue: 'pl-PL' },
     { provide: DateAdapter, useClass: CustomDateAdapter, deps: [MAT_DATE_LOCALE]},
     { provide: MatPaginatorIntl, useValue: getPolishPaginatorIntl()},
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
   ],
   bootstrap: [AppComponent]
 })

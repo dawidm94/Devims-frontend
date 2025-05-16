@@ -32,7 +32,7 @@ export class EarningsComponent implements OnInit {
   }
 
   getSeasons(): void {
-    this.http.get<any>(this.baseUrl + 'esor/seasons', this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/seasons').subscribe({
       next: response => {
         let seasons = response.reverse();
         let firstEsorSeasonIndex = seasons.findIndex((x: { id: number; }) => x.id == this.firstEsorSeasonId)
@@ -45,7 +45,7 @@ export class EarningsComponent implements OnInit {
     this.isLoadingEarnings = true;
     this.isError = false;
 
-    this.http.post<any>(this.baseUrl + 'esor/earnings', this.selectedSeasonId, this.httpService.getOptionWithEsorTokenAndContentTypeJson()).subscribe({
+    this.http.post<any>(this.baseUrl + 'esor/earnings/' + this.selectedSeasonId, {}).subscribe({
       next: response => {
         this.intervalId = setInterval(() => {this.checkEarningsStatus(response.uuid)}, 1000);
       },
@@ -64,7 +64,7 @@ export class EarningsComponent implements OnInit {
   }
 
   private checkEarningsStatus(uuid: string) {
-    this.http.get<any>(this.baseUrl + 'esor/earnings/check/' + uuid, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/earnings/check/' + uuid).subscribe({
       next: response => {
         if (response.status != 'PENDING') {
           clearInterval(this.intervalId);

@@ -13,7 +13,7 @@ export class FileService {
   }
 
   downloadDelegation(matchId: number | undefined) {
-    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId).subscribe({
       next: response => {
         let date = response.date
         let teamHome = response.teamHome
@@ -31,7 +31,7 @@ export class FileService {
     if (!matchId) {
       return
     }
-    let url = this.baseUrl + 'esor/match/' + matchId + '/delegation/';
+    let url = this.baseUrl + 'esor/match/' + matchId + '/delegation';
 
     this.downloadFile(url, 'Delegacja-' + filename);
   }
@@ -45,7 +45,7 @@ export class FileService {
   }
 
   downloadMetric(matchId: number | undefined) {
-    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId).subscribe({
       next: response => {
         let date = response.date
         let teamHome = response.teamHome

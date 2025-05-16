@@ -80,7 +80,7 @@ export class EsorHomeComponent implements OnInit {
   }
 
   goToGoogleMaps(matchId: number) {
-    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId, this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/match/' + matchId).subscribe({
       next: response => {
         let destination = response.hall
         let url = 'https://www.google.com/maps/dir/?api=1&travelmode=driving&destination=' + destination

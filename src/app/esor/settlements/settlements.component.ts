@@ -40,7 +40,7 @@ export class SettlementsComponent implements OnInit {
   seasons: any = []
 
   getSeasons(): void {
-    this.http.get<any>(this.baseUrl + 'esor/seasons', this.httpService.getOptionWithEsorToken()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/seasons').subscribe({
       next: response => {
         let seasons = response.reverse();
         let firstEsorSeasonIndex = seasons.findIndex((x: { id: number; }) => x.id == this.firstEsorSeasonId)
@@ -52,7 +52,7 @@ export class SettlementsComponent implements OnInit {
   getSettlements() {
     this.handleLongLoading();
 
-    this.http.get<any>(this.baseUrl + 'esor/settlement?seasonId=' + this.selectedSeasonId, this.httpService.getOptionWithEsorTokenAndContentTypeJson()).subscribe({
+    this.http.get<any>(this.baseUrl + 'esor/settlement?seasonId=' + this.selectedSeasonId).subscribe({
       next: response => {
         this.timetable = response
       },
@@ -65,7 +65,7 @@ export class SettlementsComponent implements OnInit {
 
   updateSettlements() {
     let settlements = this.timetable.map((src: { settlement: any; }) => src.settlement)
-    this.http.put<any>(this.baseUrl + 'esor/settlement', settlements, this.httpService.getOptionWithEsorToken()).subscribe();
+    this.http.put<any>(this.baseUrl + 'esor/settlement', settlements).subscribe();
   }
 
   private handleLongLoading() {
